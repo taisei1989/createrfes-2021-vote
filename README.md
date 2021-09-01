@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# クリエイター祭り 多数決システム 2021
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+デプロイは firebase tools をグローバルインストールして使ってください。
 
 ## Available Scripts
 
