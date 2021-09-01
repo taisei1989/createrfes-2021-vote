@@ -2,6 +2,10 @@
 
 デプロイは firebase tools をグローバルインストールして使ってください。
 
+### `npm deploy`
+
+ビルドしたあと、firebase Hosting にデプロイする。
+
 ## Available Scripts
 
 In the project directory, you can run:

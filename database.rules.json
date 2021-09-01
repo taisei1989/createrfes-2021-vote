@@ -1,0 +1,36 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "admin": {
+      ".read": true,
+      ".write": true
+    },
+    "current": {
+      ".read": true,
+      ".write": true
+    },
+    "progress": {
+      ".read": true,
+      ".write": true
+    },
+    "topics": {
+      ".read": true,
+      ".write": true
+    },
+    "votes": {
+      ".read": true,
+      ".write": true,
+      "$user_id": {
+        ".validate": "newData.val() == 1 || newData.val() == 2"
+      }
+    },
+    "feedbacks": {
+      ".read": true,
+      ".write": true,
+      "$user_id": {
+        ".validate": "newData.val() == 1 || newData.val() == 2"
+      }
+    }
+  }
+}
