@@ -3,33 +3,35 @@ import { ref, set } from "firebase/database";
 import { db } from "../services/Firebase";
 
 const AdminPage = () => {
-  const [topic, setTopic] = useState({
-    title: "",
-    answerA: "",
-    answerB: "",
-  });
-
+  const [topic, setTopic] = useState("");
+  const [answerA, setAnswerA] = useState("");
+  const [answerB, setAnswerB] = useState("");
+  
   const handleNewTopic = (event) => {
     console.log(event.target.value);
-    setTopic({title: event.target.value});
+    setTopic(event.target.value);
   }
   const handleNewAnswerA = (event) => {
     console.log(event.target.value);
-    setTopic({answerA: event.target.value});
+    setAnswerA(event.target.value);
   }
   const handleNewAnswerB = (event) => {
     console.log(event.target.value);
-    setTopic({answerB: event.target.value});
+    setAnswerB(event.target.value);
   }
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let topicId = 1;
-    if (topic === "") return
+    // topicId は自動生成する
+    let topicId = Math.random().toString(32).substring(2);
+    if (topic === "" || answerA === "" || answerB === "") {
+      console.log("回答されていない箇所があります");
+      return
+    }
     set(ref(db, 'topics/' + topicId), {
-      topicText: topic.title,
-      answerA: topic.answerA,
-      answerB: topic.answerB,
+      topicText: topic,
+      topicAnswerA: answerA,
+      topicAnswerB: answerB,
     });
   }
   
@@ -39,19 +41,20 @@ const AdminPage = () => {
       <form onSubmit={handleSubmit}>
         <label>
           タイトル：
-          <input type="text" value={ topic.title } placeholder="お題のタイトルを記入"
+          <input type="text" value={ topic } placeholder="お題のタイトルを記入"
             onChange={handleNewTopic} />
         </label><br/>
         <label>
-          選択肢A：
-          <input type="text" value={ topic.answerA } placeholder="選択肢Aを記入"
-            onChange={handleNewAnswerA} />
+            回答A：
+            <input type="text" value={ answerA } placeholder="回答Aを記入"
+              onChange={handleNewAnswerA} />
         </label><br/>
         <label>
-          選択肢B：
-          <input type="text" value={ topic.answerB } placeholder="選択肢Bを記入"
-            onChange={handleNewAnswerB} />
-        </label>
+            回答B：
+            <input type="text" value={ answerB } placeholder="回答Bを記入"
+              onChange={handleNewAnswerB} />
+        </label><br/>
+        <button type="submit">送信</button>
       </form>
     </div>
   );
