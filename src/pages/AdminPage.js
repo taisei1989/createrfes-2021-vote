@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { ref, set, onValue } from "firebase/database";
+import { ref, set, onValue, remove } from "firebase/database";
 import { db } from "../services/Firebase";
 
 const AdminPage = () => {
+  
+  // データの追加
   const [topic, setTopic] = useState("");
   const [answerA, setAnswerA] = useState("");
   const [answerB, setAnswerB] = useState("");
-  const [data, setData] = useState([]);
+  const [topics, setTopics] = useState([]);
 
   const handleNewTopic = (event) => {
     setTopic(event.target.value);
@@ -26,6 +28,7 @@ const AdminPage = () => {
       return
     }
     set(ref(db, 'topics/' + topicId), {
+        topicId: topicId,
         topicText: topic,
         topicAnswerA: answerA,
         topicAnswerB: answerB,
@@ -36,13 +39,24 @@ const AdminPage = () => {
     setAnswerB("");
   }
 
+  // データの一覧表示
   useEffect(() => {
     const topicRef = ref(db, 'topics/');
     onValue(topicRef, (snapshot) => {
-      const data = Object.values(snapshot.val());
-      setData(data);
+      if (snapshot.val() === null) {
+        setTopics([]);
+      } else {
+        console.log(snapshot.val());
+        const topics = Object.values(snapshot.val());
+        setTopics(topics);
+      }
     });
   }, []);
+
+  // データの削除
+  const handleRemove = (topicId) => {
+    remove(ref(db, 'topics/' + topicId));
+  }
 
   return (
     <div>
@@ -66,14 +80,22 @@ const AdminPage = () => {
         <button type="submit">送信</button>
       </form>
       <p></p><br/>
-      <h2>お題と回答一覧</h2>
-      {data.map((data) => (
-        <ul>
-          <li>お題：{data.topicText}</li>
-          <li>回答A：{data.topicAnswerA}</li>
-          <li>回答B：{data.topicAnswerB}</li>
-        </ul>
-      ))}
+      <h2>お題と回答一覧</h2><br/>
+      {
+        topics.map((topic) => (
+          <div key={topic.topicId}>
+            <ul>
+              <li>お題：{topic.topicText}</li>
+              <li>回答A：{topic.topicAnswerA}</li>
+              <li>回答B：{topic.topicAnswerB}</li>
+            </ul>
+            <button onClick={() => {
+              handleRemove(topic.topicId);
+            }} type="submit">削除</button>
+            <p></p><br/>
+          </div>
+        ))
+      }
     </div>
   );
 };
