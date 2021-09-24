@@ -9,6 +9,7 @@ const AdminPage = () => {
   const [answerA, setAnswerA] = useState("");
   const [answerB, setAnswerB] = useState("");
   const [topics, setTopics] = useState([]);
+  const [currentTopic, setCurrentTopic] = useState([]);
 
   const handleNewTopic = (event) => {
     setTopic(event.target.value);
@@ -58,9 +59,22 @@ const AdminPage = () => {
     remove(ref(db, 'topics/' + topicId));
   }
 
+  // TODO: 現在のお題へ設定する
+  const handleCurrentTopic = (topic) => {
+    setCurrentTopic(topic);
+    console.log(currentTopic);
+  }
+
   return (
     <div>
-      <h1>Admin Page</h1>
+      <h2>現在のお題</h2>
+      <ul>
+        <li>ID：{currentTopic.topicId}</li>
+        <li>お題：{currentTopic.topicText}</li>
+        <li>投票A：{currentTopic.topicAnswerA}</li>
+        <li>投票B：{currentTopic.topicAnswerB}</li>
+      </ul>
+      <br/><h2>お題設定</h2>
       <form onSubmit={handleSubmit}>
         <label>
           お題：
@@ -68,30 +82,33 @@ const AdminPage = () => {
             onChange={handleNewTopic} />
         </label><br/>
         <label>
-            回答A：
-            <input type="text" value={ answerA } placeholder="回答Aを記入"
+            投票A：
+            <input type="text" value={ answerA } placeholder="投票Aを記入"
               onChange={handleNewAnswerA} />
         </label><br/>
         <label>
-            回答B：
-            <input type="text" value={ answerB } placeholder="回答Bを記入"
+            投票B：
+            <input type="text" value={ answerB } placeholder="投票Bを記入"
               onChange={handleNewAnswerB} />
         </label><br/>
         <button type="submit">送信</button>
       </form>
-      <p></p><br/>
-      <h2>お題と回答一覧</h2><br/>
+      <br/><h2>お題と回答一覧</h2>
       {
         topics.map((topic) => (
           <div key={topic.topicId}>
             <ul>
+              <li>ID：{topic.topicId}</li>
               <li>お題：{topic.topicText}</li>
-              <li>回答A：{topic.topicAnswerA}</li>
-              <li>回答B：{topic.topicAnswerB}</li>
+              <li>投票A：{topic.topicAnswerA}</li>
+              <li>投票B：{topic.topicAnswerB}</li>
             </ul>
             <button onClick={() => {
               handleRemove(topic.topicId);
             }} type="submit">削除</button>
+            <button onClick={() => {
+              handleCurrentTopic(topic);
+            }}>現在のお題に設定</button>
             <p></p><br/>
           </div>
         ))
