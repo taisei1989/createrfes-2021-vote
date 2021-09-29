@@ -8,7 +8,7 @@
     "@testing-library/user-event": "^12.8.3",
     "create-react-app": "^4.0.3",
     "destyle.css": "^2.0.2",
-    "firebase": "^9.0.2",
+    "firebase": "^9.1.0",
     "firebase-tools": "^9.16.6",
     "firebaseui": "^5.0.0",
     "react": "^17.0.2",

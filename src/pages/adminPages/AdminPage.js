@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { ref, set, onValue, remove } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import { db } from "../../services/firebase";
+import { Redirect } from "react-router";
+
 import Logout from "./components/logout";
-import { Redirect, useHistory } from "react-router";
-import { useAuthContext } from "./AuthContext";
+import HandlePhase from "./components/handlePhase";
+import { useAuthContext } from "./components/authContext";
+import { submitTopic } from "./components/handleSubmit";
+import { topicRemove } from "./components/topicRemove";
 
 const AdminPage = () => {
   const { user } = useAuthContext();
-
-  // データの追加
   const [topic, setTopic] = useState("");
   const [answerA, setAnswerA] = useState("");
   const [answerB, setAnswerB] = useState("");
@@ -25,25 +27,6 @@ const AdminPage = () => {
     setAnswerB(event.target.value);
   }
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    let topicId = Math.random().toString(32).substring(2);
-    if (topic === "" || answerA === "" || answerB === "") {
-      console.log("回答されていない箇所があります");
-      return
-    }
-    set(ref(db, 'topics/' + topicId), {
-        topicId: topicId,
-        topicText: topic,
-        topicAnswerA: answerA,
-        topicAnswerB: answerB,
-      },
-    );
-    setTopic("");
-    setAnswerA("");
-    setAnswerB("");
-  }
-
   // データの一覧表示
   useEffect(() => {
     const topicRef = ref(db, 'topics/');
@@ -58,15 +41,9 @@ const AdminPage = () => {
     });
   }, []);
 
-  // データの削除
-  const handleRemove = (topicId) => {
-    remove(ref(db, 'topics/' + topicId));
-  }
-
-  // TODO: 現在のお題へ設定する
+  // 現在のお題へ設定
   const handleCurrentTopic = (topic) => {
     setCurrentTopic(topic);
-    console.log(currentTopic);
   }
 
   if (!user) {
@@ -82,22 +59,29 @@ const AdminPage = () => {
           <li>投票B：{currentTopic.topicAnswerB}</li>
         </ul>
         <br/><h2>お題設定</h2>
-        <form onSubmit={handleSubmit}>
-          <label>
-            お題：
+        <form
+          onSubmit={(event) => {
+            submitTopic(event, topic, answerA, answerB);
+            setTopic("");
+            setAnswerA("");
+            setAnswerB("");
+          }}
+        >
+          <div>
+            <label>お題：</label>
             <input type="text" value={ topic } placeholder="お題を記入"
               onChange={handleChangeTopic} />
-          </label><br/>
-          <label>
-              投票A：
+          </div>
+          <div>
+            <label>投票A：</label>
               <input type="text" value={ answerA } placeholder="投票Aを記入"
                 onChange={handleChangeAnswerA} />
-          </label><br/>
-          <label>
-              投票B：
+          </div>
+          <div>
+            <label>投票B：</label>
               <input type="text" value={ answerB } placeholder="投票Bを記入"
                 onChange={handleChangeAnswerB} />
-          </label><br/>
+          </div>
           <button type="submit">追加する</button>
         </form>
         <br/><h2>お題と回答一覧</h2>
@@ -110,9 +94,7 @@ const AdminPage = () => {
                 <li>投票A：{topic.topicAnswerA}</li>
                 <li>投票B：{topic.topicAnswerB}</li>
               </ul>
-              <button onClick={() => {
-                handleRemove(topic.topicId);
-              }} type="submit">削除</button>
+              {topicRemove(topic)}
               <button onClick={() => {
                 handleCurrentTopic(topic);
               }}>現在のお題に設定</button>
@@ -120,6 +102,7 @@ const AdminPage = () => {
             </div>
           ))
         }
+        <HandlePhase />
         <Logout />
       </div>
     );

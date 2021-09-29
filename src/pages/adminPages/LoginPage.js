@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "@firebase/auth";
 import { auth } from "../../services/firebase";
 import { useState } from "react";
@@ -7,17 +6,13 @@ import { useHistory } from "react-router-dom";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [error, setError] = useState("");
   const history = useHistory();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     await signInWithEmailAndPassword( auth, email, password )
-      .then((userCredential) => {
-        const user = userCredential.user;
-      })
       .catch((error) => {
-        console.log(error);
+        console.log(error.message);
       });
     history.push('/admin');
   }
@@ -56,9 +51,6 @@ const LoginPage = () => {
           <button>ログイン</button>
         </div>
       </form>
-      {/* <div>
-        <p>ユーザー登録は<Link to={'/admin/signup'} >こちら</Link>から</p>
-      </div> */}
     </div>
   );
 };

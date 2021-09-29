@@ -1,10 +1,9 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { AuthProvider } from "./pages/adminPages/AuthContext";
+import { AuthProvider } from "./pages/adminPages/components/authContext";
 
 import AdminPage from "./pages/adminPages/AdminPage";
 import ModeratorPage from "./pages/ModeratorPage";
 import UserPage from "./pages/UserPage";
-//import SignUpPage from "./pages/adminPages/SignUpPage";
 import LoginPage from "./pages/adminPages/LoginPage";
 
 import "./App.css";
@@ -18,7 +17,6 @@ function App() {
           <Route path="/moderator" component={ModeratorPage} />
           <Route exact path="/admin" component={AdminPage} />
           <Route path="/admin/login" component={LoginPage} />
-          {/* <Route path="/admin/signup" component={SignUpPage} /> */}
         </Switch>
       </Router>
     </AuthProvider>
