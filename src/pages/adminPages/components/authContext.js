@@ -1,20 +1,20 @@
-import { createContext, useState, useContext, useEffect } from 'react';
+import { createContext, useState, useContext, useEffect } from "react";
 import { auth } from "../../../services/firebase";
 
 const AuthContext = createContext();
 
 export const useAuthContext = () => {
   return useContext(AuthContext);
-}
+};
 
-export const AuthProvider = ({children}) => {
-  const [user, setUser] = useState('');
+export const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
   const value = {
     user,
     loading,
   };
-  console.log(children)
+  console.log(children);
 
   useEffect(() => {
     // onAuthStateChanged: ユーザーがサインイン、サインアウトを監視するメソッド
@@ -23,9 +23,9 @@ export const AuthProvider = ({children}) => {
       setLoading(false);
       console.log(user);
     });
-    return (() => {
+    return () => {
       unsbscribed();
-    });
+    };
   }, []);
 
   if (loading) {
@@ -33,8 +33,8 @@ export const AuthProvider = ({children}) => {
   } else {
     return (
       <AuthContext.Provider value={value}>
-        { !loading && children }
+        {!loading && children}
       </AuthContext.Provider>
     );
   }
-}
+};

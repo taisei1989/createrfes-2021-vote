@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import { getDatabase } from "firebase/database";
 import { getAuth } from "firebase/auth";
 
@@ -9,7 +9,7 @@ const firebaseConfig = {
   projectId: "creator-fes-2021-vote",
   storageBucket: "creator-fes-2021-vote.appspot.com",
   messagingSenderId: "829880593445",
-  appId: "1:829880593445:web:118f7ec96c506bae6863cc"
+  appId: "1:829880593445:web:118f7ec96c506bae6863cc",
 };
 
 export const app = initializeApp(firebaseConfig);

@@ -7,13 +7,12 @@ export const submitTopic = (event, topic, answerA, answerB) => {
   let topicId = Math.random().toString(32).substring(2);
   if (topic === "" || answerA === "" || answerB === "") {
     console.log("回答されていない箇所があります");
-    return
+    return;
   }
-  set(ref(db, 'topics/' + topicId), {
-      topicId: topicId,
-      topicText: topic,
-      topicAnswerA: answerA,
-      topicAnswerB: answerB,
-    },
-  );
-}
+  set(ref(db, "topics/" + topicId), {
+    topicId: topicId,
+    topicText: topic,
+    topicAnswerA: answerA,
+    topicAnswerB: answerB,
+  });
+};

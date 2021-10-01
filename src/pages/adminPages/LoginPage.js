@@ -10,20 +10,19 @@ const LoginPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await signInWithEmailAndPassword( auth, email, password )
-      .catch((error) => {
-        console.log(error.message);
-      });
-    history.push('/admin');
-  }
+    await signInWithEmailAndPassword(auth, email, password).catch((error) => {
+      console.log(error.message);
+    });
+    history.push("/admin");
+  };
 
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
-  }
+  };
 
   const handleChangePassword = (event) => {
     setPassword(event.target.value);
-  }
+  };
 
   return (
     <div>
@@ -36,7 +35,8 @@ const LoginPage = () => {
             type="email"
             placeholder="email"
             onChange={handleChangeEmail}
-          /><br/>
+          />
+          <br />
         </div>
         <div>
           <label>パスワード：</label>
@@ -45,7 +45,8 @@ const LoginPage = () => {
             type="password"
             placeholder="password"
             onChange={handleChangePassword}
-          /><br/>
+          />
+          <br />
         </div>
         <div>
           <button>ログイン</button>

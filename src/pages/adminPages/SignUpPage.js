@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../services/firebase";
-import { useAuthContext } from './AuthContext';
+import { useAuthContext } from "./AuthContext";
 
 const SignUpPage = () => {
   const [email, setEmail] = useState("");
@@ -19,17 +19,17 @@ const SignUpPage = () => {
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
       });
-  }
+  };
 
   const handleChangeEmail = (event) => {
     setEmail(event.target.value);
     console.log(email);
-  }
+  };
 
   const handleChangePassword = (event) => {
     setPassword(event.target.value);
     console.log(password);
-  }
+  };
 
   return (
     <div>
@@ -40,9 +40,10 @@ const SignUpPage = () => {
           <input
             name="email"
             type="email"
-            placeholder="メールアドレスを入力" 
+            placeholder="メールアドレスを入力"
             onChange={handleChangeEmail}
-          /><br/>
+          />
+          <br />
         </label>
         <label>
           パスワード：
@@ -51,12 +52,13 @@ const SignUpPage = () => {
             type="password"
             placeholder="パスワードを入力"
             onChange={handleChangePassword}
-          /><br/>
+          />
+          <br />
         </label>
         <button>登録</button>
       </form>
     </div>
   );
-}
+};
 
 export default SignUpPage;

@@ -12,47 +12,39 @@ const UserPage = () => {
 
   useEffect(() => {
     const dbRef = ref(getDatabase());
-    const getPhase = async() => {
-      get(child(dbRef, '/progress/')).then((snapshot) => {
-        if (snapshot.exists()) {
-          console.log(snapshot.val());
-          setCurrentPhase(snapshot.val());
-        } else {
-          console.log("No data available");
-        }
-      }).catch((error) => {
-        console.error(error);
-      });
-    }
+    const getPhase = async () => {
+      get(child(dbRef, "/progress/"))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+            setCurrentPhase(snapshot.val());
+          } else {
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    };
   }, []);
 
   const progress = () => {
-    switch(currentPhase) {
-      case 'preparing':
-        return (
-          <PreparationPage />
-        );
-      case 'voting':
-        return (
-          <VotePage />
-        );
-      case 'counting':
-        return (
-          <CountPage />
-        );
-      case 'tallying':
-        return (
-          <TallyPage />
-        );
-      case 'resulting':
-        return (
-          <ResultPage />
-        );
+    switch (currentPhase) {
+      case "preparing":
+        return <PreparationPage />;
+      case "voting":
+        return <VotePage />;
+      case "counting":
+        return <CountPage />;
+      case "tallying":
+        return <TallyPage />;
+      case "resulting":
+        return <ResultPage />;
       default:
         return null;
-      }
     }
-    return(<p>ページが存在しないよ！</p>);
+  };
+  return <p>ページが存在しないよ！</p>;
 };
 
 export default UserPage;

@@ -17,6 +17,10 @@
 
 In the project directory, you can run:
 
+### `npm run format`
+
+全てのファイルをフォーマットする
+
 ### `npm start`
 
 Runs the app in the development mode.\

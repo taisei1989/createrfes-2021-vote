@@ -4,16 +4,16 @@ import { db } from "../../../services/firebase";
 
 const HandlePhase = () => {
   const [currentPhase, setCurrentPhase] = useState("");
-  
+
   const handleCurrentPhase = (phase) => {
     setCurrentPhase(phase);
     const phaseData = {
-      "phase": currentPhase
+      phase: currentPhase,
     };
     const updates = {};
-    updates['/progress/'] = phaseData;
+    updates["/progress/"] = phaseData;
     update(ref(db), updates);
-  }
+  };
 
   return (
     <div>
@@ -40,6 +40,6 @@ const HandlePhase = () => {
       </div>
     </div>
   );
-}
+};
 
 export default HandlePhase;

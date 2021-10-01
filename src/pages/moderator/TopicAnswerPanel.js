@@ -1,4 +1,4 @@
-import styles from './TopicAnswerPanel.module.scss';
+import styles from "./TopicAnswerPanel.module.scss";
 
 /**
  * お題と答えを表示するパネル
