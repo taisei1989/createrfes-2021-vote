@@ -49,9 +49,10 @@ const UserPage = () => {
           <ResultPage />
         );
       default:
-        return(<p>ページが存在しないよ！</p>);
+        return null;
+      }
     }
-  }
+    return(<p>ページが存在しないよ！</p>);
 };
 
 export default UserPage;
