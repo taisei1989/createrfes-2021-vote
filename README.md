@@ -6,9 +6,20 @@
 
 ビルドしたあと、firebase Hosting にデプロイする。
 
+## ブランチについて
+
+`main`ブランチは、常に動作する状態。
+`develop`ブランチは、開発ブランチ。
+作業する時は、`develop`ブランチから、新しくブランチを切って作業。
+作業終了後、`develop`に対して、プルリクエストを投げること。
+
 ## Available Scripts
 
 In the project directory, you can run:
+
+### `npm run format`
+
+全てのファイルをフォーマットする
 
 ### `npm start`
 
