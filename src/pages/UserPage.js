@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { getDatabase, ref, onDisconnect, onValue } from "firebase/database";
+import { ref, onDisconnect, onValue } from "firebase/database";
 
-import PreparationPage from "./userPages/PreparationPage";
-import VotePage from "./userPages/VotePage";
-import CountPage from "./userPages/CountPage";
-import TallyPage from "./userPages/TallyPage";
-import ResultPage from "./userPages/ResultPage";
 import { db } from "../services/firebase";
 import { PHASES } from "../interfaces";
 import * as CONF from "../config";
+import { display } from "./userPages/components/paseChange";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
-
 
 /**
  * ユーザーページ
@@ -40,12 +35,9 @@ const UserPage = () => {
     return () => {
       onDisconnect(refProgress);
     };
-
   }, []);
 
-  // const pregress
-
-  return <p>ページが存在しないよ！</p>;
+  return <div>{display(phase)}</div>;
 };
 
 export default UserPage;
