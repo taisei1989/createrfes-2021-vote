@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ref, onValue } from "firebase/database";
+import { ref, onValue, onDisconnect } from "firebase/database";
 import { db } from "../../services/firebase";
 import { Redirect } from "react-router";
 
@@ -8,6 +8,7 @@ import HandlePhase from "./components/handlePhase";
 import { useAuthContext } from "./components/authContext";
 import { submitTopic } from "./components/handleSubmit";
 import { topicRemove } from "./components/topicRemove";
+import { handleCurrentTopic } from "./components/handleCurrentTopic";
 
 const AdminPage = () => {
   const { user } = useAuthContext();
@@ -27,24 +28,33 @@ const AdminPage = () => {
     setAnswerB(event.target.value);
   };
 
-  // データの一覧表示
   useEffect(() => {
     const topicRef = ref(db, "topics/");
+    const currentTopicRef = ref(db, "current/");
+    
+    // お題データの取得と保存
     onValue(topicRef, (snapshot) => {
-      if (snapshot.val() === null) {
-        setTopics([]);
-      } else {
-        console.log(snapshot.val());
-        const topics = Object.values(snapshot.val());
-        setTopics(topics);
+      const topicsUpdated = Object.values(snapshot.val());
+      if(topicsUpdated){
+        setTopics(topicsUpdated);
+      }      
+    });
+
+    // 現在のお題データの取得と保存
+    onValue(currentTopicRef, (snapshot) => {
+      const currentTopicUpdated = Object.values(snapshot.val());
+      // nullチェック
+      console.log(currentTopicUpdated)
+      if (currentTopicUpdated) {
+        setCurrentTopic(currentTopicUpdated);
       }
     });
-  }, []);
 
-  // 現在のお題へ設定
-  const handleCurrentTopic = (topic) => {
-    setCurrentTopic(topic);
-  };
+    // コンポーネントがアクティブでなくなったらクリーンナップとして接続を解除する
+    return () => {
+      onDisconnect(topicRef, currentTopicRef);
+    };
+  }, []);
 
   if (!user) {
     return <Redirect to="/admin/login" />;
@@ -53,10 +63,10 @@ const AdminPage = () => {
       <div>
         <h2>現在のお題</h2>
         <ul>
-          <li>ID：{currentTopic.topicId}</li>
-          <li>お題：{currentTopic.topicText}</li>
-          <li>投票A：{currentTopic.topicAnswerA}</li>
-          <li>投票B：{currentTopic.topicAnswerB}</li>
+          <li>ID：{currentTopic[2]}</li>
+          <li>お題：{currentTopic[3]}</li>
+          <li>投票A：{currentTopic[0]}</li>
+          <li>投票B：{currentTopic[1]}</li>
         </ul>
         <br />
         <h2>お題設定</h2>
@@ -110,7 +120,13 @@ const AdminPage = () => {
             {topicRemove(topic)}
             <button
               onClick={() => {
-                handleCurrentTopic(topic);
+                setCurrentTopic(topic);
+                handleCurrentTopic(
+                  topic.topicId,
+                  topic.topicText,
+                  topic.topicAnswerA,
+                  topic.topicAnswerB
+                );
               }}
             >
               現在のお題に設定
