@@ -8,17 +8,17 @@ import { PHASES } from "../../../interfaces";
 export const display = (phase) => {
   switch (phase) {
     case PHASES.PREPARE:
-      return <PreparationPage />;
+      return <PreparationPage phase={phase}/>;
     case PHASES.VOTE:
-      return <VotePage />;
+      return <VotePage phase={phase}/>;
     case PHASES.COUNT:
-      return <CountPage />;
+      return <VotePage phase={phase}/>;
     case PHASES.TALLY:
-      return <TallyPage />;
+      return <TallyPage phase={phase}/>;
     case PHASES.RESULT:
-      return <ResultPage />;
+      return <ResultPage phase={phase}/>;
     case PHASES.GUIDE:
-      return <PreparationPage />;
+      return <PreparationPage phase={phase}/>;
     default:
       return <p>ページが存在しないよ！</p>;
   }
