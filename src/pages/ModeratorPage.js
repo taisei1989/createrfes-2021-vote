@@ -7,13 +7,16 @@ import TopicAnswerPanel from "./moderator/TopicAnswerPanel";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
+const isDebugPhase = CONF.IS_DEBUG && true;
+const isNotDebugPhase = !isDebugPhase;
+const phaseInitial = isDebugPhase ? PHASES.COUNT : PHASES.GUIDE;
 
 /**
  * 司会者ページ
  * データベースからデータを取得する責務を負う
  */
 const ModeratorPage = () => {
-  const [phase, setPhase] = useState(PHASES.GUIDE);
+  const [phase, setPhase] = useState(phaseInitial);
 
   useEffect(() => {
     const db = getDatabase();
@@ -27,7 +30,9 @@ const ModeratorPage = () => {
       // nullチェック
       if (phaseUpdated) {
         // 適応する
-        setPhase(phaseUpdated);
+        if (isNotDebugPhase) {
+          setPhase(phaseUpdated);
+        }
       }
     });
 
