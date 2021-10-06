@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { ref, onValue, onDisconnect, set } from "firebase/database";
-import { db } from "../../services/firebase";
+import React from "react";
 import { PHASES } from "../../interfaces";
-import PreparationPage from "./PreparationPage";
+import { Buttons } from "./components/Buttons";
 
 const VotePage = ({
   phase,
@@ -13,13 +11,15 @@ const VotePage = ({
   if (phase === PHASES.VOTE) {
     return (
       <div>
-        {phase}
-        <br />
-        {currentTopicText}
-        <br />
-        {currentAnswerA}
-        <br />
-        {currentAnswerB}
+        <img
+          src="http://placehold.jp/400x150.png"
+          alt="createrfes-vote-title"
+        />
+        <h2>{currentTopicText}</h2>
+        <Buttons
+          currentAnswerA={currentAnswerA}
+          currentAnswerB={currentAnswerB}
+        />
       </div>
     );
   }
