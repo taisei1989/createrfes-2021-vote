@@ -1,12 +1,12 @@
 import { child, get, push, ref, set, update } from "@firebase/database";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db } from "../../../services/firebase";
 
 export const Buttons = ({ currentAnswerA, currentAnswerB }) => {
   const [choiceAnswer, setChoiceAnswer] = useState("");
   const [answerKey, setAnswerKey] = useState("");
 
-  const changeAnswer = () => {
+  useEffect(() => {
     if (!answerKey) {
       const postData = {
         answer: choiceAnswer,
@@ -29,7 +29,7 @@ export const Buttons = ({ currentAnswerA, currentAnswerB }) => {
 
       return update(ref(db), updates);
     }
-  };
+  }, [choiceAnswer]);
 
   // "$user_id": {
   //".validate": "newData.val() == 1 || newData.val() == 2"
@@ -42,10 +42,7 @@ export const Buttons = ({ currentAnswerA, currentAnswerB }) => {
         name="currentAnswerA"
         value={choiceAnswer}
         checked={choiceAnswer === "A"}
-        onChange={async () => {
-          await changeAnswer();
-          setChoiceAnswer("A");
-        }}
+        onChange={() => setChoiceAnswer("A")}
       />
       <br />
       <label>{currentAnswerB}</label>
@@ -54,10 +51,7 @@ export const Buttons = ({ currentAnswerA, currentAnswerB }) => {
         name="currentAnswerB"
         value={choiceAnswer}
         checked={choiceAnswer === "B"}
-        onChange={async () => {
-          await changeAnswer();
-          setChoiceAnswer("B");
-        }}
+        onChange={() => setChoiceAnswer("B")}
       />
       <br />
     </div>
