@@ -1,59 +1,66 @@
-import { child, get, push, ref, set, update } from "@firebase/database";
+import { child, push, ref, update } from "@firebase/database";
 import React, { useEffect, useState } from "react";
 import { db } from "../../../services/firebase";
+import { PHASES } from "../../../interfaces";
 
-export const Buttons = ({ currentAnswerA, currentAnswerB }) => {
+export const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
   const [choiceAnswer, setChoiceAnswer] = useState("");
-  const [answerKey, setAnswerKey] = useState("");
+  const [choiceAnswerKey, setchoiceAnswerKey] = useState("");
 
   useEffect(() => {
-    if (!answerKey) {
+    if (!choiceAnswerKey) {
       const postData = {
         answer: choiceAnswer,
       };
 
       const newPostKey = push(child(ref(db), "votes")).key;
-      setAnswerKey(newPostKey);
+      setchoiceAnswerKey(newPostKey);
 
       const updates = {};
       updates["/votes/" + newPostKey] = postData;
 
       return update(ref(db), updates);
-    } else if (answerKey) {
+    } else if (choiceAnswerKey) {
       const postData = {
         answer: choiceAnswer,
       };
 
       const updates = {};
-      updates["/votes/" + answerKey] = postData;
+      updates["/votes/" + choiceAnswerKey] = postData;
 
       return update(ref(db), updates);
     }
-  }, [choiceAnswer]);
+    return () => {
+      console.log("コンポーネントがアンマウントしました");
+    };
+  }, [choiceAnswer, choiceAnswerKey]);
 
   // "$user_id": {
   //".validate": "newData.val() == 1 || newData.val() == 2"
   //}
-  return (
-    <div>
-      <label>{currentAnswerA}</label>
-      <input
-        type="radio"
-        name="currentAnswerA"
-        value={choiceAnswer}
-        checked={choiceAnswer === "A"}
-        onChange={() => setChoiceAnswer("A")}
-      />
-      <br />
-      <label>{currentAnswerB}</label>
-      <input
-        type="radio"
-        name="currentAnswerB"
-        value={choiceAnswer}
-        checked={choiceAnswer === "B"}
-        onChange={() => setChoiceAnswer("B")}
-      />
-      <br />
-    </div>
-  );
+  if (phase === PHASES.VOTE || phase === PHASES.COUNT) {
+    return (
+      <div>
+        <label>{currentAnswerA}</label>
+        <input
+          type="radio"
+          name="currentAnswerA"
+          value={choiceAnswer}
+          checked={choiceAnswer === "A"}
+          onChange={() => setChoiceAnswer("A")}
+        />
+        <br />
+        <label>{currentAnswerB}</label>
+        <input
+          type="radio"
+          name="currentAnswerB"
+          value={choiceAnswer}
+          checked={choiceAnswer === "B"}
+          onChange={() => setChoiceAnswer("B")}
+        />
+        <br />
+      </div>
+    );
+  }
+  return null;
 };
