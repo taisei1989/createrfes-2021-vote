@@ -7,6 +7,8 @@ export const display = (phase) => {
   switch (phase) {
     case PHASES.PREPARE:
       return <PreparationPage phase={phase} />;
+    case PHASES.GUIDE:
+      return <PreparationPage phase={phase} />;
     case PHASES.VOTE:
       return <VotePage phase={phase} />;
     case PHASES.COUNT:
@@ -14,9 +16,7 @@ export const display = (phase) => {
     case PHASES.TALLY:
       return <VotePage phase={phase} />;
     case PHASES.RESULT:
-      return <ResultPage phase={phase} />;
-    case PHASES.GUIDE:
-      return <PreparationPage phase={phase} />;
+      return <VotePage phase={phase} />;
     default:
       return <p>ページが存在しないよ！</p>;
   }

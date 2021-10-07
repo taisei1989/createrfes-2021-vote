@@ -37,6 +37,8 @@ const ModeratorPage = () => {
     };
   }, []);
 
+  console.log(phase);
+
   // Render
   return (
     <div>

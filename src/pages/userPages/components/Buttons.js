@@ -7,7 +7,7 @@ export const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
   const [choiceAnswer, setChoiceAnswer] = useState("");
   const [choiceAnswerKey, setchoiceAnswerKey] = useState("");
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (!choiceAnswerKey) {
       const postData = {
         answer: choiceAnswer,
@@ -33,7 +33,7 @@ export const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
     return () => {
       console.log("コンポーネントがアンマウントしました");
     };
-  }, [choiceAnswer, choiceAnswerKey]);
+  }, [choiceAnswer, choiceAnswerKey]); */
 
   // "$user_id": {
   //".validate": "newData.val() == 1 || newData.val() == 2"
