@@ -1,18 +1,70 @@
+import { useState, useEffect } from "react";
+import { db } from "../../services/firebase";
+import { ref, onValue, onDisconnect } from "@firebase/database";
 import styles from "./TopicAnswerPanel.module.scss";
+import { PHASES } from "../../interfaces";
 
 /**
  * お題と答えを表示するパネル
  */
-const TopicAnswerPanel = () => {
+const TopicAnswerPanel = ({ phase }) => {
   // ここでお題と答えを取得する処理
+  const [currentTopic, setCurrentTopicText] = useState({
+    text: "",
+    answerA: "",
+    answerB: "",
+  });
 
-  return (
-    <div className={styles.topicAnswerPanel}>
-      <div className={styles.topic}>お題</div>
-      <div className={styles.answerA}>答えA</div>
-      <div className={styles.answerB}>答えB</div>
-    </div>
-  );
+  useEffect(() => {
+    const currentTopicRef = ref(db, "current/");
+
+    onValue(currentTopicRef, (snapshot) => {
+      const currentTopicUpdated = {
+        text: snapshot.val().currentTopicText,
+        answerA: snapshot.val().currentAnswerA,
+        answerB: snapshot.val().currentAnswerB,
+      };
+
+      // nullチェック
+      if (currentTopicUpdated) {
+        setCurrentTopicText({
+          text: currentTopicUpdated.text,
+          answerA: currentTopicUpdated.answerA,
+          answerB: currentTopicUpdated.answerB,
+        });
+      }
+    });
+
+    return () => {
+      onDisconnect(currentTopicRef);
+    };
+  }, []);
+
+  if (phase === PHASES.TALLY) {
+    return (
+      <div className={styles.topicAnswerPanel}>
+        <div className={styles.topic}>{currentTopic.text}</div>
+        <div className={styles.answerA}>
+          {currentTopic.answerA}
+          <br />
+          ?? %
+        </div>
+        <div className={styles.answerB}>
+          {currentTopic.answerB}
+          <br />
+          ?? %
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className={styles.topicAnswerPanel}>
+        <div className={styles.topic}>{currentTopic.text}</div>
+        <div className={styles.answerA}>{currentTopic.answerA}</div>
+        <div className={styles.answerB}>{currentTopic.answerB}</div>
+      </div>
+    );
+  }
 };
 
 export default TopicAnswerPanel;

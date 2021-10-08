@@ -17,9 +17,11 @@ const isDebug = CONF.IS_DEBUG && true;
 
 const UserPage = () => {
   const [phase, setPhase] = useState(PHASES.GUIDE);
-  const [currentTopicText, setCurrentTopicText] = useState("");
-  const [currentAnswerA, setCurrentAnswerA] = useState("");
-  const [currentAnswerB, setCurrentAnswerB] = useState("");
+  const [currentTopic, setCurrentTopicText] = useState({
+    text: "",
+    answerA: "",
+    answerB: "",
+  });
 
   useEffect(() => {
     const refProgress = ref(db, "progress/");
@@ -35,19 +37,19 @@ const UserPage = () => {
     });
 
     onValue(currentTopicRef, (snapshot) => {
-      const currentTopicTextUpdated = snapshot.val().currentTopicText;
-      const currentAnswerAUpdated = snapshot.val().currentAnswerA;
-      const currentAnswerBUpdated = snapshot.val().currentAnswerB;
+      const currentTopicUpdated = {
+        text: snapshot.val().currentTopicText,
+        answerA: snapshot.val().currentAnswerA,
+        answerB: snapshot.val().currentAnswerB,
+      };
 
       // nullチェック
-      if (
-        currentTopicTextUpdated &&
-        currentAnswerAUpdated &&
-        currentAnswerBUpdated
-      ) {
-        setCurrentTopicText(currentTopicTextUpdated);
-        setCurrentAnswerA(currentAnswerAUpdated);
-        setCurrentAnswerB(currentAnswerBUpdated);
+      if (currentTopicUpdated) {
+        setCurrentTopicText({
+          text: currentTopicUpdated.text,
+          answerA: currentTopicUpdated.answerA,
+          answerB: currentTopicUpdated.answerB,
+        });
       }
     });
 
@@ -61,9 +63,9 @@ const UserPage = () => {
       <PreparationPage phase={phase} />
       <VotePage
         phase={phase}
-        currentTopicText={currentTopicText}
-        currentAnswerA={currentAnswerA}
-        currentAnswerB={currentAnswerB}
+        currentTopicText={currentTopic.text}
+        currentAnswerA={currentTopic.answerA}
+        currentAnswerB={currentTopic.answerB}
       />
     </div>
   );
