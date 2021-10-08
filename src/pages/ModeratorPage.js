@@ -44,7 +44,7 @@ const ModeratorPage = () => {
     <div>
       <h1>Moderator Page</h1>
       {phase}
-      <TopicAnswerPanel />
+      <TopicAnswerPanel phase={phase} />
       <div>回転するwakayamaくん</div>
       <GoodBadPanel phase={phase} />
     </div>

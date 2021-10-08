@@ -8,36 +8,51 @@ import { db } from "../../../services/firebase";
  *
  */
 const ResultDisplay = ({ currentAnswerA, currentAnswerB, phase }) => {
-  const [allAnswers, setAllAnswers] = useState([]);
-  const [countA, setCountA] = useState(0);
-  const [countB, setCountB] = useState(0);
-  const [answerA, setAnswerA] = useState([]);
+  const [numOfAnswers, setNumOfAnswers] = useState({ a: 0, b: 0 });
 
   // TODO: Firebase から集計のデータを受け取る
   useEffect(() => {
     const voteRef = ref(db, "votes/");
+
     onValue(voteRef, (snapshot) => {
-      const data = Object.values(snapshot.val());
-      console.log(data);
-      if (data) {
-        setAllAnswers(data);
-      }
-      data.map((vote) => {
-        console.log(vote.answer);
-        setCountA(countA + 1);
-        if (vote.answer === "A") {
-          setCountA(countA + 1);
+      const votesUpdated = Object.values(snapshot.val());
+
+      // 集計結果
+      let numOfVoteA = 0;
+      let numOfVoteB = 0;
+
+      for (let i = 0; i < votesUpdated.length; i++) {
+        const answer = votesUpdated[i].answer;
+
+        // undefinedチェック
+        if (answer) {
+          if (answer === "A") {
+            numOfVoteA++;
+          } else if (answer === "B") {
+            numOfVoteB++;
+          } else {
+            console.log("不明な投票を検知しました", answer);
+          }
         }
-      });
+      }
+
+      const PercentOfVoteA = Math.round(
+        (numOfVoteA / (numOfVoteA + numOfVoteB)) * 100
+      );
+      const PercentOfVoteB = Math.round(
+        (numOfVoteB / (numOfVoteA + numOfVoteB)) * 100
+      );
+
+      // 反映する
+      setNumOfAnswers({ a: PercentOfVoteA, b: PercentOfVoteB });
     });
+
     return () => {
       onDisconnect(voteRef);
     };
   }, []);
-  console.log(allAnswers);
-  console.log(countA);
-  console.log(countB);
-  console.log(answerA);
+
+  console.log(numOfAnswers);
 
   // TODO: 受け取ったデータからA, Bそれぞれの集計を行いデータをこのコンポーネント内で保持する
 
@@ -45,9 +60,11 @@ const ResultDisplay = ({ currentAnswerA, currentAnswerB, phase }) => {
     return (
       <div>
         <p>
-          {currentAnswerA}: {countA}
+          {currentAnswerA}: {numOfAnswers.a} %
         </p>
-        <p>{currentAnswerB}: 70%</p>
+        <p>
+          {currentAnswerB}: {numOfAnswers.b} %
+        </p>
         <button>Good</button>
         <button>Bad</button>
         <br />
