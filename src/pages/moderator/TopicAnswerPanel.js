@@ -8,7 +8,6 @@ import { PHASES } from "../../interfaces";
  * お題と答えを表示するパネル
  */
 const TopicAnswerPanel = ({ phase }) => {
-  // ここでお題と答えを取得する処理
   const [currentTopic, setCurrentTopicText] = useState({
     text: "",
     answerA: "",
@@ -18,6 +17,7 @@ const TopicAnswerPanel = ({ phase }) => {
   useEffect(() => {
     const currentTopicRef = ref(db, "current/");
 
+    // ここでお題と答えを取得する処理
     onValue(currentTopicRef, (snapshot) => {
       const currentTopicUpdated = {
         text: snapshot.val().currentTopicText,
@@ -25,7 +25,6 @@ const TopicAnswerPanel = ({ phase }) => {
         answerB: snapshot.val().currentAnswerB,
       };
 
-      // nullチェック
       if (currentTopicUpdated) {
         setCurrentTopicText({
           text: currentTopicUpdated.text,

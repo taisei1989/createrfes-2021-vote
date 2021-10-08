@@ -4,6 +4,7 @@ import { PHASES } from "../interfaces";
 import GoodBadPanel from "./moderator/GoodBadPanel";
 import * as CONF from "../config";
 import TopicAnswerPanel from "./moderator/TopicAnswerPanel";
+import Timer from "./moderator/Timer";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
@@ -45,6 +46,7 @@ const ModeratorPage = () => {
       <h1>Moderator Page</h1>
       {phase}
       <TopicAnswerPanel phase={phase} />
+      <Timer phase={phase} />
       <div>回転するwakayamaくん</div>
       <GoodBadPanel phase={phase} />
     </div>
