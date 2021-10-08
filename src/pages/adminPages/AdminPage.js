@@ -15,6 +15,7 @@ const AdminPage = () => {
   const [topic, setTopic] = useState("");
   const [answerA, setAnswerA] = useState("");
   const [answerB, setAnswerB] = useState("");
+  const [numOfAnswers, setNumOfAnswers] = useState({a: 0, b: 0});
   const [topics, setTopics] = useState([]);
   const [currentTopic, setCurrentTopic] = useState([]);
 
@@ -30,6 +31,7 @@ const AdminPage = () => {
 
   useEffect(() => {
     const topicRef = ref(db, "topics/");
+    const voteRef = ref(db, "votes/");
     const currentTopicRef = ref(db, "current/");
 
     // お題データの取得と保存
@@ -38,6 +40,33 @@ const AdminPage = () => {
       if (topicsUpdated) {
         setTopics(topicsUpdated);
       }
+    });
+
+    // 集計結果を取得する
+    onValue(voteRef, (snapshot) => {
+      const votesUpdated = Object.values(snapshot.val());
+
+      // 集計結果
+      let numOfVoteA = 0
+      let numOfVoteB = 0
+
+      for(let i = 0; i < votesUpdated.length; i++) {
+        const answer  = votesUpdated[i].answer
+
+        // undefinedチェック
+        if ( answer ) {
+          if (answer === "A") {
+            numOfVoteA++
+          } else if (answer === "B") {
+            numOfVoteB++
+          } else {
+            console.log("不明な投票を検知しました", answer)
+          }
+        }
+      }
+
+      // 反映する
+      setNumOfAnswers({a:numOfVoteA, b:numOfVoteB});
     });
 
     // 現在のお題データの取得と保存
@@ -68,6 +97,8 @@ const AdminPage = () => {
           <li>お題：{currentTopic[3]}</li>
           <li>投票A：{currentTopic[0]}</li>
           <li>投票B：{currentTopic[1]}</li>
+          <li>投票数A：{ numOfAnswers.a}</li>
+          <li>投票数B：{ numOfAnswers.b}</li>
         </ul>
         <br />
         <h2>お題設定</h2>
