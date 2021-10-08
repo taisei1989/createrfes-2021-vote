@@ -31,20 +31,20 @@ const AdminPage = () => {
   useEffect(() => {
     const topicRef = ref(db, "topics/");
     const currentTopicRef = ref(db, "current/");
-    
+
     // お題データの取得と保存
     onValue(topicRef, (snapshot) => {
       const topicsUpdated = Object.values(snapshot.val());
-      if(topicsUpdated){
+      if (topicsUpdated) {
         setTopics(topicsUpdated);
-      }      
+      }
     });
 
     // 現在のお題データの取得と保存
     onValue(currentTopicRef, (snapshot) => {
       const currentTopicUpdated = Object.values(snapshot.val());
       // nullチェック
-      console.log(currentTopicUpdated)
+      console.log(currentTopicUpdated);
       if (currentTopicUpdated) {
         setCurrentTopic(currentTopicUpdated);
       }
@@ -52,7 +52,8 @@ const AdminPage = () => {
 
     // コンポーネントがアクティブでなくなったらクリーンナップとして接続を解除する
     return () => {
-      onDisconnect(topicRef, currentTopicRef);
+      onDisconnect(topicRef);
+      onDisconnect(currentTopicRef);
     };
   }, []);
 
