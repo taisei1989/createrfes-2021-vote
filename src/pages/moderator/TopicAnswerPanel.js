@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { db } from "../../services/firebase";
 import { ref, onValue, onDisconnect } from "@firebase/database";
 import styles from "./TopicAnswerPanel.module.scss";
-import { PHASES } from "../../interfaces";
 import { VotesResultA, VotesResultB } from "./VotesResult";
+import { PHASES } from "../../interfaces";
 
 /**
  * お題と答えを表示するパネル

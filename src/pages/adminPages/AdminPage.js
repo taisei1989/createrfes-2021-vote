@@ -15,9 +15,14 @@ const AdminPage = () => {
   const [topic, setTopic] = useState("");
   const [answerA, setAnswerA] = useState("");
   const [answerB, setAnswerB] = useState("");
-  const [numOfAnswers, setNumOfAnswers] = useState({a: 0, b: 0});
+  const [numOfAnswers, setNumOfAnswers] = useState({ a: 0, b: 0 });
   const [topics, setTopics] = useState([]);
-  const [currentTopic, setCurrentTopic] = useState([]);
+  const [currentTopic, setCurrentTopic] = useState({
+    topicId: "",
+    topicText: "",
+    topicAnswerA: "",
+    topicAnswerB: "",
+  });
 
   const handleChangeTopic = (event) => {
     setTopic(event.target.value);
@@ -47,26 +52,26 @@ const AdminPage = () => {
       const votesUpdated = Object.values(snapshot.val());
 
       // 集計結果
-      let numOfVoteA = 0
-      let numOfVoteB = 0
+      let numOfVoteA = 0;
+      let numOfVoteB = 0;
 
-      for(let i = 0; i < votesUpdated.length; i++) {
-        const answer  = votesUpdated[i].answer
+      for (let i = 0; i < votesUpdated.length; i++) {
+        const answer = votesUpdated[i].answer;
 
         // undefinedチェック
-        if ( answer ) {
+        if (answer) {
           if (answer === "A") {
-            numOfVoteA++
+            numOfVoteA++;
           } else if (answer === "B") {
-            numOfVoteB++
+            numOfVoteB++;
           } else {
-            console.log("不明な投票を検知しました", answer)
+            console.log("不明な投票を検知しました", answer);
           }
         }
       }
 
       // 反映する
-      setNumOfAnswers({a:numOfVoteA, b:numOfVoteB});
+      setNumOfAnswers({ a: numOfVoteA, b: numOfVoteB });
     });
 
     // 現在のお題データの取得と保存
@@ -75,7 +80,12 @@ const AdminPage = () => {
       // nullチェック
       console.log(currentTopicUpdated);
       if (currentTopicUpdated) {
-        setCurrentTopic(currentTopicUpdated);
+        setCurrentTopic({
+          topicId: currentTopicUpdated[2],
+          topicText: currentTopicUpdated[3],
+          topicAnswerA: currentTopicUpdated[0],
+          topicAnswerB: currentTopicUpdated[1],
+        });
       }
     });
 
@@ -93,12 +103,12 @@ const AdminPage = () => {
       <div>
         <h2>現在のお題</h2>
         <ul>
-          <li>ID：{currentTopic[2]}</li>
-          <li>お題：{currentTopic[3]}</li>
-          <li>投票A：{currentTopic[0]}</li>
-          <li>投票B：{currentTopic[1]}</li>
-          <li>投票数A：{ numOfAnswers.a}</li>
-          <li>投票数B：{ numOfAnswers.b}</li>
+          <li>ID：{currentTopic.topicId}</li>
+          <li>お題：{currentTopic.topicText}</li>
+          <li>投票A：{currentTopic.topicAnswerA}</li>
+          <li>投票B：{currentTopic.topicAnswerB}</li>
+          <li>投票数A：{numOfAnswers.a}</li>
+          <li>投票数B：{numOfAnswers.b}</li>
         </ul>
         <br />
         <h2>お題設定</h2>

@@ -1,7 +1,7 @@
 import { PHASES } from "../../interfaces";
 
 const PreparationPage = ({ phase }) => {
-  if (phase === PHASES.PREPARE) {
+  if (phase === PHASES.GUIDE || phase === PHASES.PREPARE) {
     return (
       <div>
         <img
