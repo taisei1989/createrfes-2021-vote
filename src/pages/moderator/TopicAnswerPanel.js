@@ -3,6 +3,7 @@ import { db } from "../../services/firebase";
 import { ref, onValue, onDisconnect } from "@firebase/database";
 import styles from "./TopicAnswerPanel.module.scss";
 import { PHASES } from "../../interfaces";
+import { VotesResultA, VotesResultB } from "./VotesResult";
 
 /**
  * お題と答えを表示するパネル
@@ -39,31 +40,21 @@ const TopicAnswerPanel = ({ phase }) => {
     };
   }, []);
 
-  if (phase === PHASES.TALLY) {
-    return (
-      <div className={styles.topicAnswerPanel}>
-        <div className={styles.topic}>{currentTopic.text}</div>
-        <div className={styles.answerA}>
-          {currentTopic.answerA}
-          <br />
-          ?? %
-        </div>
-        <div className={styles.answerB}>
-          {currentTopic.answerB}
-          <br />
-          ?? %
-        </div>
+  return (
+    <div className={styles.topicAnswerPanel}>
+      <div className={styles.topic}>{currentTopic.text}</div>
+      <div className={styles.answerA}>
+        {currentTopic.answerA}
+        <br />
+        {VotesResultA({ phase })}
       </div>
-    );
-  } else {
-    return (
-      <div className={styles.topicAnswerPanel}>
-        <div className={styles.topic}>{currentTopic.text}</div>
-        <div className={styles.answerA}>{currentTopic.answerA}</div>
-        <div className={styles.answerB}>{currentTopic.answerB}</div>
+      <div className={styles.answerB}>
+        {currentTopic.answerB}
+        <br />
+        {VotesResultB({ phase })}
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default TopicAnswerPanel;
