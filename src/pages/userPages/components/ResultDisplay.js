@@ -63,15 +63,15 @@ const ResultDisplay = ({ currentAnswerA, currentAnswerB, phase }) => {
         <div className={styles.topicAnswerResult}>
           <p className={styles.topicAnswer}>{currentAnswerA}</p>
           <p className={styles.voteResult}>{numOfAnswers.a} %</p>
-          <button>Good</button>
+          <button className={styles.goodPanel}>Good</button>
         </div>
         <div className={styles.topicAnswerResult}>
           <p className={styles.topicAnswer}> {currentAnswerB} </p>
           <p className={styles.voteResult}>{numOfAnswers.b} %</p>
-          <button>Bad</button>
+          <button className={styles.badPanel}>Bad</button>
         </div>
-        <button>結果をつぶやく</button>
-        <p>感想をシェアしよう！</p>
+        <button className={styles.twitterShare}>結果をつぶやく</button>
+        <p className={styles.commentShare}>感想をシェアしよう！</p>
       </div>
     );
   }

@@ -1,12 +1,15 @@
 .timer {
   position: relative;
-  margin: 25px 0px;
+  margin: 40px 0px;
 }
 
 .countdown {
-  padding: 10px 20px;
-  background-color: white;
+  padding: 15px;
   font-size: 16px;
+  width: 120px;
   font-weight: bold;
+  background-color: white;
   color: black;
+  border-radius: 8px;
+  border: solid 2px black;
 }

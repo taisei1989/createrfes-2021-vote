@@ -19,7 +19,7 @@ const VotePage = ({
     phase === PHASES.RESULT
   ) {
     return (
-      <div>
+      <div className={styles.display}>
         <div className={styles.topicAnswerPanel}>
           <img
             src={`${process.env.PUBLIC_URL}/main-visual.jpg`}

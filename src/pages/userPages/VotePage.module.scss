@@ -1,3 +1,9 @@
+.display {
+  width: 100vw;
+  height: 120vh;
+  background-color: #2842db;
+}
+
 .topicAnswerPanel {
   margin: 0 auto;
   width: 50vw;
@@ -35,5 +41,6 @@
 
 .mainVisual {
   position: relative;
+  padding: 0px 20px;
   width: 100%;
 }
