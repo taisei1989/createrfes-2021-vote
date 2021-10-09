@@ -66,7 +66,7 @@ export const VotesResultB = ({ phase }) => {
     const voteRef = ref(db, "votes/");
 
     onValue(voteRef, (snapshot) => {
-      const votesUpdated = Object.values(snapshot.val());
+      const votesUpdated = snapshot.val();
 
       // 集計結果
       let numOfVoteA = 0;

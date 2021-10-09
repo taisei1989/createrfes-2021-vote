@@ -9,13 +9,14 @@ import { useAuthContext } from "./components/authContext";
 import { submitTopic } from "./components/handleSubmit";
 import { topicRemove } from "./components/topicRemove";
 import { handleCurrentTopic } from "./components/handleCurrentTopic";
+import { newVotes } from "./components/newVotes";
 
 const AdminPage = () => {
   const { user } = useAuthContext();
   const [topic, setTopic] = useState("");
   const [answerA, setAnswerA] = useState("");
   const [answerB, setAnswerB] = useState("");
-  const [numOfAnswers, setNumOfAnswers] = useState({ a: 0, b: 0 });
+  const [numOfVote, setnumOfVote] = useState({ a: 0, b: 0 });
   const [topics, setTopics] = useState([]);
   const [currentTopic, setCurrentTopic] = useState({
     topicId: "",
@@ -36,18 +37,9 @@ const AdminPage = () => {
 
   useEffect(() => {
     const topicRef = ref(db, "topics/");
-    const voteRef = ref(db, "votes/");
     const currentTopicRef = ref(db, "current/");
+    const voteRef = ref(db, "votes/");
 
-    // お題データの取得と保存
-    onValue(topicRef, (snapshot) => {
-      const topicsUpdated = Object.values(snapshot.val());
-      if (topicsUpdated) {
-        setTopics(topicsUpdated);
-      }
-    });
-
-    // 集計結果を取得する
     onValue(voteRef, (snapshot) => {
       const votesUpdated = Object.values(snapshot.val());
 
@@ -71,7 +63,15 @@ const AdminPage = () => {
       }
 
       // 反映する
-      setNumOfAnswers({ a: numOfVoteA, b: numOfVoteB });
+      setnumOfVote({ a: numOfVoteA, b: numOfVoteB });
+    });
+
+    // お題データの取得と保存
+    onValue(topicRef, (snapshot) => {
+      const topicsUpdated = Object.values(snapshot.val());
+      if (topicsUpdated) {
+        setTopics(topicsUpdated);
+      }
     });
 
     // 現在のお題データの取得と保存
@@ -107,8 +107,8 @@ const AdminPage = () => {
           <li>お題：{currentTopic.topicText}</li>
           <li>投票A：{currentTopic.topicAnswerA}</li>
           <li>投票B：{currentTopic.topicAnswerB}</li>
-          <li>投票数A：{numOfAnswers.a}</li>
-          <li>投票数B：{numOfAnswers.b}</li>
+          <li>投票結果A: {numOfVote.a}</li>
+          <li>投票結果B: {numOfVote.b}</li>
         </ul>
         <br />
         <h2>お題設定</h2>
@@ -169,6 +169,7 @@ const AdminPage = () => {
                   topic.topicAnswerA,
                   topic.topicAnswerB
                 );
+                newVotes();
               }}
             >
               現在のお題に設定
