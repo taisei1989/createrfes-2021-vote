@@ -68,3 +68,12 @@
   height: 80%;
   background-color: #2842db;
 }
+
+.readyVisual {
+  z-index: 3;
+  position: absolute;
+  margin: 0 auto;
+  width: 60vw;
+  height: 60vh;
+  left: 20%;
+}

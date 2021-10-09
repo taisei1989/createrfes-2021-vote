@@ -8,6 +8,7 @@ import Timer from "./moderator/Timer";
 import styles from "./ModeratorPage.module.scss";
 import TopicResult from "./moderator/TopicResult";
 import GuidePage from "./moderator/GuidePage";
+import PreparePage from "./moderator/PreparePage";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
@@ -57,13 +58,13 @@ const ModeratorPage = () => {
   } else {
     return (
       <div className={styles.display}>
+        <PreparePage phase={phase} />
         <TopicAnswerPanel phase={phase} />
         <div>回転するwakayamaくん</div>
         <GoodBadPanel phase={phase} />
       </div>
     );
   }
-  return null;
 };
 
 export default ModeratorPage;
