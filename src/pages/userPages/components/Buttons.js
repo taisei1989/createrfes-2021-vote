@@ -41,7 +41,7 @@ export const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
   //}
   if (phase === PHASES.VOTE || phase === PHASES.COUNT) {
     return (
-      <div className={styles.buttonDisplay}>
+      <div>
         <div className={styles.topicAnswer}>
           <label for="topicAnswerA" className={styles.topicAnswerText}>
             {currentAnswerA}
