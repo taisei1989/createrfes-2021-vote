@@ -1,58 +1,54 @@
-import { useState, useEffect } from "react";
-import { db } from "../../services/firebase";
-import { ref, onValue, onDisconnect } from "@firebase/database";
+import { getDatabase, onValue, onDisconnect, ref } from "@firebase/database";
+import { useEffect, useState } from "react";
 import styles from "./TopicAnswerPanel.module.scss";
 import { VotesResultA, VotesResultB } from "./VotesResult";
 import { PHASES } from "../../interfaces";
 
+import * as CONF from "../../config";
+
 /**
  * お題と答えを表示するパネル
  */
-const TopicAnswerPanel = ({ phase }) => {
-  const [currentTopic, setCurrentTopicText] = useState({
-    text: "",
-    answerA: "",
-    answerB: "",
-  });
+const TopicAnswerPanel = () => {
+  const [topic, setTopic] = useState("");
+  const [answerA, setAnswerA] = useState("");
+  const [answerB, setAnswerB] = useState("");
 
   useEffect(() => {
-    const currentTopicRef = ref(db, "current/");
+    const db = getDatabase();
+    const refCurrent = ref(db, "current/");
 
-    // ここでお題と答えを取得する処理
-    onValue(currentTopicRef, (snapshot) => {
-      const currentTopicUpdated = {
-        text: snapshot.val().currentTopicText,
-        answerA: snapshot.val().currentAnswerA,
-        answerB: snapshot.val().currentAnswerB,
-      };
+    onValue(refCurrent, (snapshot) => {
+      const topic = snapshot.val().currentTopicText;
+      const answerA = snapshot.val().currentAnswerA;
+      const answerB = snapshot.val().currentAnswerB;
 
-      if (currentTopicUpdated) {
-        setCurrentTopicText({
-          text: currentTopicUpdated.text,
-          answerA: currentTopicUpdated.answerA,
-          answerB: currentTopicUpdated.answerB,
+      if (CONF.IS_DEBUG)
+        console.log("トピックの変更を検知しました", {
+          topic: topic,
+          answerA: answerA,
+          answerB: answerB,
         });
+
+      if (topic && answerA && answerB) {
+        // 適応する
+        setTopic(topic);
+        setAnswerA(answerA);
+        setAnswerB(answerB);
       }
     });
 
+    // コンポーネントがアクティブでなくなったらクリーンナップとして接続を解除する
     return () => {
-      onDisconnect(currentTopicRef);
+      onDisconnect(refCurrent);
     };
   }, []);
 
   return (
     <div className={styles.topicAnswerPanel}>
-      <div className={styles.topic}>{currentTopic.text}</div>
-      <div className={styles.answerA}>
-        {currentTopic.answerA}
-        <br />
-        {VotesResultA({ phase })}
-      </div>
-      <div className={styles.answerB}>
-        {currentTopic.answerB}
-        <br />
-        {VotesResultB({ phase })}
-      </div>
+      <div className={styles.topic}>{topic}</div>
+      <div className={styles.answerA}>{answerA}</div>
+      <div className={styles.answerB}>{answerB}</div>
     </div>
   );
 };
