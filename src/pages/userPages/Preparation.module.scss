@@ -1,0 +1,38 @@
+.topicAnswerPanel {
+  margin: 0 auto;
+  width: 50vw;
+  height: 100vh;
+  background-color: #fe48c6;
+  text-align: center;
+}
+
+.topic {
+  position: relative;
+  font-size: 16px;
+  font-weight: bold;
+  margin: 30px 50px;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 16px;
+  border: solid 2px black;
+  background-color: #ffffff;
+}
+
+.comment {
+  position: relative;
+  font-size: 24px;
+  width: 300px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0 auto;
+  padding: 15px 5px;
+  border-radius: 16px;
+  border: solid 2px black;
+  background-color: #ffffff;
+}
+
+.mainVisual {
+  position: relative;
+  width: 100%;
+}

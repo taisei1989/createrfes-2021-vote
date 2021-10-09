@@ -1,7 +1,8 @@
 import React from "react";
 import { PHASES } from "../../interfaces";
+import styles from "./VotePage.module.scss";
 import { Buttons } from "./components/Buttons";
-import CountVotes from "./components/CountVotes";
+import TallyVotes from "./components/TallyVotes";
 import ResultDisplay from "./components/ResultDisplay";
 import Timer from "./components/Timer";
 
@@ -19,27 +20,30 @@ const VotePage = ({
   ) {
     return (
       <div>
-        <img
-          src="http://placehold.jp/400x150.png"
-          alt="createrfes-vote-title"
-        />
-        <h2>お題：{currentTopicText}</h2>
-        <Buttons
-          currentAnswerA={currentAnswerA}
-          currentAnswerB={currentAnswerB}
-          phase={phase}
-        />
-        <Timer phase={phase} />
-        <CountVotes
-          currentAnswerA={currentAnswerA}
-          currentAnswerB={currentAnswerB}
-          phase={phase}
-        />
-        <ResultDisplay
-          currentAnswerA={currentAnswerA}
-          currentAnswerB={currentAnswerB}
-          phase={phase}
-        />
+        <div className={styles.topicAnswerPanel}>
+          <img
+            src={`${process.env.PUBLIC_URL}/main-visual.jpg`}
+            className={styles.mainVisual}
+            alt="createrfes-vote-title"
+          />
+          <h2 className={styles.topic}>お題：{currentTopicText}</h2>
+          <Buttons
+            currentAnswerA={currentAnswerA}
+            currentAnswerB={currentAnswerB}
+            phase={phase}
+          />
+          <Timer phase={phase} />
+          <TallyVotes
+            currentAnswerA={currentAnswerA}
+            currentAnswerB={currentAnswerB}
+            phase={phase}
+          />
+          <ResultDisplay
+            currentAnswerA={currentAnswerA}
+            currentAnswerB={currentAnswerB}
+            phase={phase}
+          />
+        </div>
       </div>
     );
   }

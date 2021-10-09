@@ -1,0 +1,39 @@
+.topicAnswerPanel {
+  margin: 0 auto;
+  width: 50vw;
+  height: 100vh;
+  background-color: #fe48c6;
+  text-align: center;
+}
+
+.topic {
+  position: relative;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 30px 50px;
+  text-align: center;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-radius: 16px;
+  border: solid 2px black;
+  background-color: #ffffff;
+}
+
+.answerA {
+  position: relative;
+  background-color: #ccffcc;
+}
+
+.answerB {
+  position: relative;
+  top: 10%;
+  right: 5%;
+  width: 40%;
+  height: 80%;
+  background-color: #ffcccc;
+}
+
+.mainVisual {
+  position: relative;
+  width: 100%;
+}

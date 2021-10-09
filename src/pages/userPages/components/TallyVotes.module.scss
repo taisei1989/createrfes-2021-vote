@@ -1,0 +1,41 @@
+.topicAnswerResult {
+  display: inline-block;
+  width: 25vw;
+  padding: 0px 50px;
+}
+
+.topicAnswerResult button {
+  color: white;
+  background-color: #0074ff;
+}
+
+.voteResult {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.topicAnswer {
+  font-size: 16px;
+  font-weight: bold;
+  width: auto;
+  padding: 7px;
+  color: black;
+  background-color: white;
+  border: double 5px #0074ff;
+  border-radius: 8px;
+}
+
+.tally {
+  padding: 15px;
+  font-size: 16px;
+  width: 120px;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  margin: 0 auto;
+  border-radius: 8px;
+  border: solid 2px black;
+}

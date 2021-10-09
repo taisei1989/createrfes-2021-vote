@@ -111,6 +111,8 @@ const AdminPage = () => {
           <li>投票結果B: {numOfVote.b}</li>
         </ul>
         <br />
+        <HandlePhase />
+        <br />
         <h2>お題設定</h2>
         <form
           onSubmit={(event) => {
@@ -178,7 +180,6 @@ const AdminPage = () => {
             <br />
           </div>
         ))}
-        <HandlePhase />
         <Logout />
       </div>
     );

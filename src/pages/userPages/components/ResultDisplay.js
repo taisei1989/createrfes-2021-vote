@@ -2,6 +2,7 @@ import { onDisconnect, onValue, ref } from "@firebase/database";
 import { useState, useEffect } from "react";
 import { PHASES } from "../../../interfaces";
 import { db } from "../../../services/firebase";
+import styles from "./ResultDisplay.module.scss";
 
 /**
  * ユーザーの回答を集計する
@@ -59,18 +60,18 @@ const ResultDisplay = ({ currentAnswerA, currentAnswerB, phase }) => {
   if (phase === PHASES.RESULT) {
     return (
       <div>
-        <p>
-          {currentAnswerA}: {numOfAnswers.a} %
-        </p>
-        <p>
-          {currentAnswerB}: {numOfAnswers.b} %
-        </p>
-        <button>Good</button>
-        <button>Bad</button>
-        <br />
+        <div className={styles.topicAnswerResult}>
+          <p className={styles.topicAnswer}>{currentAnswerA}</p>
+          <p className={styles.voteResult}>{numOfAnswers.a} %</p>
+          <button>Good</button>
+        </div>
+        <div className={styles.topicAnswerResult}>
+          <p className={styles.topicAnswer}> {currentAnswerB} </p>
+          <p className={styles.voteResult}>{numOfAnswers.b} %</p>
+          <button>Bad</button>
+        </div>
         <button>結果をつぶやく</button>
         <p>感想をシェアしよう！</p>
-        {}
       </div>
     );
   }

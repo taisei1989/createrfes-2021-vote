@@ -2,6 +2,7 @@ import { child, push, ref, update } from "@firebase/database";
 import React, { useEffect, useState } from "react";
 import { db } from "../../../services/firebase";
 import { PHASES } from "../../../interfaces";
+import styles from "./Button.module.scss";
 
 export const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
   const [choiceAnswer, setChoiceAnswer] = useState("");
@@ -40,25 +41,35 @@ export const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
   //}
   if (phase === PHASES.VOTE || phase === PHASES.COUNT) {
     return (
-      <div>
-        <label>{currentAnswerA}</label>
-        <input
-          type="radio"
-          name="currentAnswerA"
-          value={choiceAnswer}
-          checked={choiceAnswer === "A"}
-          onChange={() => setChoiceAnswer("A")}
-        />
-        <br />
-        <label>{currentAnswerB}</label>
-        <input
-          type="radio"
-          name="currentAnswerB"
-          value={choiceAnswer}
-          checked={choiceAnswer === "B"}
-          onChange={() => setChoiceAnswer("B")}
-        />
-        <br />
+      <div className={styles.buttonDisplay}>
+        <div className={styles.topicAnswer}>
+          <label for="topicAnswerA" className={styles.topicAnswerText}>
+            {currentAnswerA}
+            <input
+              type="radio"
+              name="topicAnswer"
+              id="topicAnswerA"
+              className={styles.topicAnswerButton}
+              value={choiceAnswer}
+              checked={choiceAnswer === "A"}
+              onChange={() => setChoiceAnswer("A")}
+            />
+          </label>
+        </div>
+        <div className={styles.topicAnswer}>
+          <label for="topicAnswerB" className={styles.topicAnswerText}>
+            {currentAnswerB}
+            <input
+              type="radio"
+              name="topicAnswer"
+              id="topicAnswerB"
+              className={styles.topicAnswerButton}
+              value={choiceAnswer}
+              checked={choiceAnswer === "B"}
+              onChange={() => setChoiceAnswer("B")}
+            />
+          </label>
+        </div>
       </div>
     );
   }

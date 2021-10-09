@@ -1,15 +1,17 @@
 import { PHASES } from "../../interfaces";
+import styles from "./Preparation.module.scss";
 
 const PreparationPage = ({ phase }) => {
   if (phase === PHASES.GUIDE || phase === PHASES.PREPARE) {
     return (
-      <div>
+      <div className={styles.topicAnswerPanel}>
         <img
-          src="http://placehold.jp/400x150.png"
+          className={styles.mainVisual}
+          src={`${process.env.PUBLIC_URL}/main-visual.jpg`}
           alt="createrfes-vote-title"
         />
-        <p>ただいま準備中…</p>
-        <p>お題を用意しているよ！</p>
+        <p className={styles.topic}>ただいま準備中…</p>
+        <p className={styles.comment}>お題を用意しているよ！</p>
       </div>
     );
   }
