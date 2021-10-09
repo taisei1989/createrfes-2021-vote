@@ -2,6 +2,7 @@ import { onDisconnect, onValue, ref } from "@firebase/database";
 import { useState, useEffect } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
+import styles from "./TopicAnswerPanel.module.scss";
 
 /**
  * ユーザーの回答を集計する
@@ -50,10 +51,10 @@ export const VotesResultA = ({ phase }) => {
     };
   }, []);
 
-  if (phase === PHASES.TALLY) {
-    return <p>???%</p>;
-  } else if (phase === PHASES.RESULT) {
-    return <p>{numOfAnswer}%</p>;
+  const numOfAnswerUpdated = numOfAnswer;
+
+  if (phase === PHASES.RESULT) {
+    return <p className={styles.voteResult}>{numOfAnswerUpdated} %</p>;
   }
   return null;
 };
@@ -66,7 +67,7 @@ export const VotesResultB = ({ phase }) => {
     const voteRef = ref(db, "votes/");
 
     onValue(voteRef, (snapshot) => {
-      const votesUpdated = snapshot.val();
+      const votesUpdated = Object.values(snapshot.val());
 
       // 集計結果
       let numOfVoteA = 0;
@@ -100,10 +101,17 @@ export const VotesResultB = ({ phase }) => {
     };
   }, []);
 
+  const numOfAnswerUpdated = numOfAnswer;
+
+  if (phase === PHASES.RESULT) {
+    return <p className={styles.voteResult}>{numOfAnswerUpdated} %</p>;
+  }
+  return null;
+};
+
+export const VotesTally = ({ phase }) => {
   if (phase === PHASES.TALLY) {
-    return <p>???%</p>;
-  } else if (phase === PHASES.RESULT) {
-    return <p>{numOfAnswer}%</p>;
+    return "?? %";
   }
   return null;
 };

@@ -1,5 +1,6 @@
 import Countdown from "react-countdown";
 import { PHASES } from "../../interfaces";
+import styles from "./Timer.module.scss";
 
 /**
  * ユーザーから寄せられたGoodとBadを表示するパネル
@@ -8,8 +9,8 @@ import { PHASES } from "../../interfaces";
 const Timer = ({ phase }) => {
   if (phase === PHASES.COUNT) {
     return (
-      <div className="good-bad-panel">
-        <Countdown date={Date.now() + 60000} />
+      <div className={styles.timer}>
+        <Countdown className={styles.countdown} date={Date.now() + 30000} />
       </div>
     );
   }

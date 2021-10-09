@@ -1,16 +1,15 @@
 import { getDatabase, onValue, onDisconnect, ref } from "@firebase/database";
 import { useEffect, useState } from "react";
 import styles from "./TopicAnswerPanel.module.scss";
-import { VotesResultA, VotesResultB } from "./VotesResult";
+import { VotesResultA, VotesResultB, VotesTally } from "./VotesResult";
 import { PHASES } from "../../interfaces";
-import Timer from "./Timer";
 
 import * as CONF from "../../config";
 
 /**
  * お題と答えを表示するパネル
  */
-const TopicAnswerPanel = ({ phase }) => {
+const TopicResult = ({ phase }) => {
   const [topic, setTopic] = useState({
     text: "",
     answerA: "",
@@ -33,7 +32,7 @@ const TopicAnswerPanel = ({ phase }) => {
           answerB: answerB,
         });
 
-      if (topicText && answerA && answerB) {
+      if (topic && answerA && answerB) {
         // 適応する
         setTopic({
           text: topicText,
@@ -55,14 +54,17 @@ const TopicAnswerPanel = ({ phase }) => {
       <div className={styles.answerAPanel}>
         <p className={styles.choiceA}>A</p>
         <p className={styles.answerA}>{topic.answerA}</p>
+        {VotesResultA({ phase })}
+        <p className={styles.voteResult}>{VotesTally({ phase })}</p>
       </div>
       <div className={styles.answerBPanel}>
         <p className={styles.choiceA}>B</p>
         <p className={styles.answerA}>{topic.answerB}</p>
+        {VotesResultB({ phase })}
+        <p className={styles.voteResult}>{VotesTally({ phase })}</p>
       </div>
-      <Timer phase={phase} />
     </div>
   );
 };
 
-export default TopicAnswerPanel;
+export default TopicResult;

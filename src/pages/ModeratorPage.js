@@ -5,6 +5,8 @@ import GoodBadPanel from "./moderator/GoodBadPanel";
 import * as CONF from "../config";
 import TopicAnswerPanel from "./moderator/TopicAnswerPanel";
 import Timer from "./moderator/Timer";
+import styles from "./ModeratorPage.module.scss";
+import TopicResult from "./moderator/TopicResult";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
@@ -41,16 +43,24 @@ const ModeratorPage = () => {
   console.log(phase);
 
   // Render
-  return (
-    <div>
-      <h1>Moderator Page</h1>
-      {phase}
-      <TopicAnswerPanel phase={phase} />
-      <Timer phase={phase} />
-      <div>回転するwakayamaくん</div>
-      <GoodBadPanel phase={phase} />
-    </div>
-  );
+  if (!(phase === PHASES.TALLY || phase === PHASES.RESULT)) {
+    return (
+      <div className={styles.display}>
+        <TopicAnswerPanel phase={phase} />
+        <div>回転するwakayamaくん</div>
+        <GoodBadPanel phase={phase} />
+      </div>
+    );
+  } else if (phase === PHASES.TALLY || phase === PHASES.RESULT) {
+    return (
+      <div className={styles.display}>
+        <TopicResult phase={phase} />
+        <div>回転するwakayamaくん</div>
+        <GoodBadPanel phase={phase} />
+      </div>
+    );
+  }
+  return null;
 };
 
 export default ModeratorPage;
