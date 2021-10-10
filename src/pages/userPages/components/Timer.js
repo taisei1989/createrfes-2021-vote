@@ -10,7 +10,7 @@ const Timer = ({ phase }) => {
   if (phase === PHASES.COUNT) {
     return (
       <div className={styles.timer}>
-        <Countdown className={styles.countdown} date={Date.now() + 30000} />
+        <Countdown className={styles.countdown} date={Date.now() + 60000} />
       </div>
     );
   }
