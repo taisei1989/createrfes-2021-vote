@@ -12,35 +12,35 @@
   text-align: center;
 }
 
-.topic {
-  position: relative;
-  font-size: 24px;
-  font-weight: bold;
-  margin: 30px 50px;
-  text-align: center;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  border-radius: 16px;
-  border: solid 2px black;
-  background-color: #ffffff;
-}
+@media only screen and (max-width: 750px) {
+  .display {
+    width: 100vw;
+    height: 100vh;
+    background-color: #2842db;
+  }
 
-.answerA {
-  position: relative;
-  background-color: #ccffcc;
-}
-
-.answerB {
-  position: relative;
-  top: 10%;
-  right: 5%;
-  width: 40%;
-  height: 80%;
-  background-color: #ffcccc;
+  .topicAnswerPanel {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: #fe48c6;
+    margin: 0 auto;
+  }
 }
 
 .mainVisual {
   position: relative;
-  padding: 0px 20px;
   width: 100%;
+}
+
+.topic {
+  position: relative;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px;
+  margin: 10px 20px;
+  border-radius: 8px;
+  border: solid 2px black;
+  background-color: #ffffff;
 }

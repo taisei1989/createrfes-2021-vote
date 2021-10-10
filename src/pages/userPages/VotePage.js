@@ -26,7 +26,7 @@ const VotePage = ({
             className={styles.mainVisual}
             alt="createrfes-vote-title"
           />
-          <h2 className={styles.topic}>お題：{currentTopicText}</h2>
+          <h2 className={styles.topic}>{currentTopicText}</h2>
           <Buttons
             currentAnswerA={currentAnswerA}
             currentAnswerB={currentAnswerB}

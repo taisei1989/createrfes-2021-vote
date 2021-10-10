@@ -1,12 +1,14 @@
 .topicAnswerResult {
   display: inline-block;
   width: 25vw;
-  padding: 0px 50px;
 }
 
-.topicAnswerResult button {
-  color: white;
-  background-color: #0074ff;
+@media only screen and (max-width: 750px) {
+  .topicAnswerResult {
+    position: relative;
+    display: inline-block;
+    width: 50vw;
+  }
 }
 
 .voteResult {
@@ -14,13 +16,14 @@
   font-weight: bold;
   color: white;
   margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .topicAnswer {
-  font-size: 16px;
+  display: inline-block;
+  width: 40vw;
+  font-size: 12px;
   font-weight: bold;
-  width: auto;
   padding: 7px;
   color: black;
   background-color: white;
@@ -29,9 +32,9 @@
 }
 
 .tally {
-  padding: 15px;
-  font-size: 16px;
-  width: 120px;
+  padding: 10px;
+  font-size: 12px;
+  width: 100px;
   font-weight: bold;
   background-color: white;
   color: black;

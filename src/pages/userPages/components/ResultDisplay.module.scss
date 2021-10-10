@@ -1,21 +1,29 @@
 .topicAnswerResult {
   display: inline-block;
   width: 25vw;
-  padding: 0px 50px;
+}
+
+@media only screen and (max-width: 750px) {
+  .topicAnswerResult {
+    position: relative;
+    display: inline-block;
+    width: 50vw;
+  }
 }
 
 .voteResult {
-  padding: 10px;
   font-size: 40px;
   font-weight: bold;
   color: white;
-  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .topicAnswer {
-  font-size: 16px;
+  display: inline-block;
+  width: 40vw;
+  font-size: 12px;
   font-weight: bold;
-  width: auto;
   padding: 7px;
   color: black;
   background-color: white;
@@ -24,11 +32,11 @@
 }
 
 .topicAnswerResult button {
-  padding: 10px 20px;
-  border: solid 2px white;
-  font-weight: bold;
+  padding: 5px 10px;
+  border: solid 1px white;
+  font-weight: medium;
   color: white;
-  border-radius: 16px;
+  border-radius: 8px;
 }
 
 .goodPanel {
@@ -40,18 +48,19 @@
 }
 
 .twitterShare {
-  padding: 15px;
+  padding: 10px;
   color: white;
+  font-size: 10px;
   font-weight: bold;
   background-color: #1da1f1;
-  border-radius: 16px;
+  border-radius: 8px;
   margin-top: 15px;
   margin-bottom: 10px;
 }
 
 .commentShare {
-  padding: 15px;
-  font-size: 16px;
+  padding: 10px;
+  font-size: 12px;
   width: 200px;
   font-weight: bold;
   background-color: white;
