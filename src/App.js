@@ -6,8 +6,6 @@ import ModeratorPage from "./pages/ModeratorPage";
 import UserPage from "./pages/UserPage";
 import LoginPage from "./pages/LoginPage";
 
-import "./App.css";
-
 function App() {
   return (
     <AuthContextProvider>
