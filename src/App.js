@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { AuthContextProvider } from "./components/admin/authContext";
+import { AuthContextProvider } from "./contexts/AuthContext";
 
 import AdminPage from "./pages/AdminPage";
 import ModeratorPage from "./pages/ModeratorPage";

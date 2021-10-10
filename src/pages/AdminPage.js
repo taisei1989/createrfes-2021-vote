@@ -5,7 +5,7 @@ import { Redirect } from "react-router";
 
 import Logout from "../components/admin/logout";
 import HandlePhase from "../components/admin/handlePhase";
-import { AuthContext } from "../components/admin/authContext";
+import { AuthContext } from "../contexts/AuthContext";
 import { submitTopic } from "../components/admin/handleSubmit";
 import { topicRemove } from "../components/admin/topicRemove";
 import { handleCurrentTopic } from "../components/admin/handleCurrentTopic";
