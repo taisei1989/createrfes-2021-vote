@@ -3,7 +3,7 @@ import { ref, onDisconnect, onValue } from "firebase/database";
 
 import { db } from "../services/firebase";
 import { PHASES } from "../interfaces";
-import * as CONF from "../config";
+import * as CONF from "../configs";
 import PreparationPage from "../components/user/PreparationPage";
 import VotePage from "../components/user/VotePage";
 

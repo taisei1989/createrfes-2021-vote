@@ -5,7 +5,7 @@ import { VotesResultA, VotesResultB } from "./VotesResult";
 import { PHASES } from "../../interfaces";
 import Timer from "./Timer";
 
-import * as CONF from "../../config";
+import * as CONF from "../../configs";
 
 /**
  * お題と答えを表示するパネル
