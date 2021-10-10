@@ -1,14 +1,16 @@
+@use "src/index";
+
 .display {
   width: 100vw;
   height: 120vh;
-  background-color: #2842db;
+  background-color: index.$blue;
 }
 
 .topicAnswerPanel {
   position: relative;
   width: 60vw;
   height: 120vh;
-  background-color: #fe48c6;
+  background-color: index.$pink;
   margin: 0 auto;
 }
 
@@ -17,14 +19,14 @@
   .display {
     width: 100vw;
     height: 100vh;
-    background-color: #2842db;
+    background-color: index.$blue;
   }
 
   .topicAnswerPanel {
     position: relative;
     width: 100vw;
     height: 100vh;
-    background-color: #fe48c6;
+    background-color: index.$pink;
     margin: 0 auto;
   }
 }
@@ -42,8 +44,8 @@
   padding: 15px;
   margin: 10px 20px;
   border-radius: 8px;
-  border: solid 2px black;
-  background-color: #ffffff;
+  border: solid 2px index.$black;
+  background-color: index.$white;
 }
 
 .comment {
@@ -55,6 +57,6 @@
   margin: 5px 40px;
   padding: 10px 5px;
   border-radius: 8px;
-  border: solid 2px black;
-  background-color: #ffffff;
+  border: solid 2px index.$black;
+  background-color: index.$white;
 }

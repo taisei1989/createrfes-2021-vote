@@ -1,3 +1,8 @@
+$black: #111111;
+$white: #fafafa;
+$blue: #2842db;
+$pink: #fe48c6;
+
 :root {
   font-size: 16px;
 }
@@ -11,4 +16,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: $black;
+  background-color: $white;
 }
