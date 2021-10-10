@@ -1,112 +1,53 @@
-import React, { useEffect, useState } from "react";
-import { ref, onValue, onDisconnect, set} from "firebase/database";
-import { db } from "../../services/firebase";
+import React from "react";
 import { PHASES } from "../../interfaces";
-import PreparationPage from "./PreparationPage";
+import styles from "./VotePage.module.scss";
+import { Buttons } from "./components/Buttons";
+import TallyVotes from "./components/TallyVotes";
+import ResultDisplay from "./components/ResultDisplay";
+import Timer from "./components/Timer";
 
-const VotePage = (phase) => {
-  const [currentTopic, setCurrentTopic] = useState([]);
-  const [choiceA, setchoiceA] = useState(false);
-  const [choiceB, setchoiceB] = useState(false);
-  const answerA = currentTopic[0];
-  const answerB = currentTopic[1];
-  const topicText = currentTopic[3];
-
-  useEffect(() => {
-    const currentTopicRef = ref(db, "current/");
-    onValue(currentTopicRef, (snapshot) => {
-      const currentTopicUpdated = Object.values(snapshot.val());
-      // nullチェック
-      if (currentTopicUpdated) {
-        setCurrentTopic(currentTopicUpdated);
-      }
-    });
-    setchoiceA(false);
-    setchoiceB(false);
+const VotePage = ({
+  phase,
+  currentTopicText,
+  currentAnswerA,
+  currentAnswerB,
+}) => {
+  if (
+    phase === PHASES.VOTE ||
+    phase === PHASES.COUNT ||
+    phase === PHASES.TALLY ||
+    phase === PHASES.RESULT
+  ) {
     return (
-      onDisconnect(currentTopicRef)
-    );
-  }, []);
-
-  const notChoice = () => {
-    if (!choiceA && !choiceB){
-      return(
-        <div>
-          <div>
-            <label>{answerA}</label>
-            <button onClick={() => setchoiceA(true)}>Aを選択する</button>
-          </div>
-          <div>
-            <label>{answerB}</label>
-            <button onClick={() => setchoiceB(true)}>Bを選択する</button>
-          </div>
+      <div className={styles.display}>
+        <div className={styles.topicAnswerPanel}>
+          <img
+            src={`${process.env.PUBLIC_URL}/main-visual.jpg`}
+            className={styles.mainVisual}
+            alt="createrfes-vote-title"
+          />
+          <h2 className={styles.topic}>{currentTopicText}</h2>
+          <Buttons
+            currentAnswerA={currentAnswerA}
+            currentAnswerB={currentAnswerB}
+            phase={phase}
+          />
+          <Timer phase={phase} />
+          <TallyVotes
+            currentAnswerA={currentAnswerA}
+            currentAnswerB={currentAnswerB}
+            phase={phase}
+          />
+          <ResultDisplay
+            currentAnswerA={currentAnswerA}
+            currentAnswerB={currentAnswerB}
+            phase={phase}
+          />
         </div>
-      )
-    }
-  }
-
-  const choiceAnswerA = () => {
-    if (choiceA && !choiceB){
-      return(
-        <div>
-          <div>
-            <label>現在選択肢Aを選択しています：{answerA}</label>
-          </div>
-          <div>
-            <label>{answerB}</label>
-            <button onClick={() => {
-              setchoiceB(true);
-              setchoiceA(false);
-            }}>Bに変更する</button>
-          </div>
-        </div>
-      )
-    }
-  }
-
-  const choiceAnswerB = () => {
-    if (!choiceA && choiceB){
-      return(
-        <div>
-          <div>
-            <label>現在選択肢Bを選択しています：{answerB}</label>
-          </div>
-          <div>
-            <label>{answerA}</label>
-            <button onClick={() => {
-              setchoiceB(false);
-              setchoiceA(true);
-            }}>Aに変更する</button>
-          </div>
-        </div>
-      )
-    }
-  }
-
-  if(phase.phase === PHASES.VOTE) {
-    return (
-      <div>
-        <h1>VotePage</h1>
-        <p>お題：{topicText}</p>
-        {notChoice()}
-        {choiceAnswerA()}
-        {choiceAnswerB()}
-        <p>投票してね！</p>
       </div>
     );
-  } else if(phase.phase === PHASES.COUNT) {
-      return (
-        <div>
-          <h1>VotePage</h1>
-          <p>お題：{topicText}</p>
-          {notChoice()}
-          {choiceAnswerA()}
-          {choiceAnswerB()}
-        </div>
-      );
-  } else {
-    return <PreparationPage phase={phase}/>
   }
+  return null;
 };
 
 export default VotePage;

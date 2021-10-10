@@ -11,7 +11,7 @@ export const handleCurrentTopic = (id, topic, answerA, answerB) => {
   };
 
   const updates = {};
-  updates['/current/'] = postData;
+  updates["/current/"] = postData;
 
   return update(ref(db), updates);
-}
+};
