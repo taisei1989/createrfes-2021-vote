@@ -1,5 +1,5 @@
 import { ref, push, child, update } from "firebase/database";
-import { db } from "../../../services/firebase";
+import { db } from "../../services/firebase";
 
 export const submitTopic = (event, topic, answerA, answerB) => {
   event.preventDefault();

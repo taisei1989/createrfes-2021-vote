@@ -1,5 +1,5 @@
 import Countdown from "react-countdown";
-import { PHASES } from "../../../interfaces";
+import { PHASES } from "../../interfaces";
 import styles from "./Timer.module.scss";
 
 /**

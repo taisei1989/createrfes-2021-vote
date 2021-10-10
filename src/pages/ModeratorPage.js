@@ -1,14 +1,14 @@
 import { getDatabase, onDisconnect, onValue, ref } from "@firebase/database";
 import { useEffect, useState } from "react";
 import { PHASES } from "../interfaces";
-import GoodBadPanel from "./moderator/GoodBadPanel";
+import GoodBadPanel from "../components/moderator/GoodBadPanel";
 import * as CONF from "../config";
-import TopicAnswerPanel from "./moderator/TopicAnswerPanel";
-import Timer from "./moderator/Timer";
+import TopicAnswerPanel from "../components/moderator/TopicAnswerPanel";
+import Timer from "../components/moderator/Timer";
 import styles from "./ModeratorPage.module.scss";
-import TopicResult from "./moderator/TopicResult";
-import GuidePage from "./moderator/GuidePage";
-import PreparePage from "./moderator/PreparePage";
+import TopicResult from "../components/moderator/TopicResult";
+import GuidePage from "../components/moderator/GuidePage";
+import PreparePage from "../components/moderator/PreparePage";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;

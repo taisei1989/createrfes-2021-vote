@@ -1,4 +1,4 @@
-import { PHASES } from "../../../interfaces";
+import { PHASES } from "../../interfaces";
 import styles from "./TallyVotes.module.scss";
 
 /**

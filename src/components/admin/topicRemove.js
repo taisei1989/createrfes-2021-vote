@@ -1,5 +1,5 @@
 import { ref, remove } from "firebase/database";
-import { db } from "../../../services/firebase";
+import { db } from "../../services/firebase";
 
 export const topicRemove = (topic) => {
   const handleRemove = () => {

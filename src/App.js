@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { AuthProvider } from "./pages/adminPages/components/authContext";
+import { AuthProvider } from "./components/admin/authContext";
 
-import AdminPage from "./pages/adminPages/AdminPage";
+import AdminPage from "./pages/AdminPage";
 import ModeratorPage from "./pages/ModeratorPage";
 import UserPage from "./pages/UserPage";
-import LoginPage from "./pages/adminPages/LoginPage";
+import LoginPage from "./pages/LoginPage";
 
 import "./App.css";
 

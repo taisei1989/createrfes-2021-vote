@@ -1,7 +1,7 @@
 import { child, push, ref, update } from "@firebase/database";
 import React, { useEffect, useState } from "react";
-import { db } from "../../../services/firebase";
-import { PHASES } from "../../../interfaces";
+import { db } from "../../services/firebase";
+import { PHASES } from "../../interfaces";
 import styles from "./Button.module.scss";
 
 export const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {

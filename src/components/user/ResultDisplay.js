@@ -1,7 +1,7 @@
 import { onDisconnect, onValue, ref } from "@firebase/database";
 import { useState, useEffect } from "react";
-import { PHASES } from "../../../interfaces";
-import { db } from "../../../services/firebase";
+import { PHASES } from "../../interfaces";
+import { db } from "../../services/firebase";
 import styles from "./ResultDisplay.module.scss";
 
 /**

@@ -1,7 +1,7 @@
 import { ref, update } from "firebase/database";
 import { useEffect, useState } from "react";
-import { PHASES } from "../../../interfaces";
-import { db } from "../../../services/firebase";
+import { PHASES } from "../../interfaces";
+import { db } from "../../services/firebase";
 
 const HandlePhase = () => {
   const [currentPhase, setCurrentPhase] = useState(PHASES.GUIDE);

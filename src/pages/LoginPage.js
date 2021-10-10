@@ -1,5 +1,5 @@
 import { signInWithEmailAndPassword } from "@firebase/auth";
-import { auth } from "../../services/firebase";
+import { auth } from "../services/firebase";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 

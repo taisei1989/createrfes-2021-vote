@@ -4,8 +4,8 @@ import { ref, onDisconnect, onValue } from "firebase/database";
 import { db } from "../services/firebase";
 import { PHASES } from "../interfaces";
 import * as CONF from "../config";
-import PreparationPage from "./userPages/PreparationPage";
-import VotePage from "./userPages/VotePage";
+import PreparationPage from "../components/user/PreparationPage";
+import VotePage from "../components/user/VotePage";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;

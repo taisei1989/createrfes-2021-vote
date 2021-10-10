@@ -1,5 +1,5 @@
 import { update, ref } from "@firebase/database";
-import { db } from "../../../services/firebase";
+import { db } from "../../services/firebase";
 
 export const handleCurrentTopic = (id, topic, answerA, answerB) => {
   // A post entry
