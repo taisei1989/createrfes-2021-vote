@@ -1,0 +1,26 @@
+.topicAnswer {
+  position: relative;
+  display: inline-block;
+  width: 25vw;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+@media only screen and (max-width: 750px) {
+  .topicAnswer {
+    position: relative;
+    display: inline-block;
+    width: 50vw;
+    //margin: 0 auto;
+  }
+}
+
+.topicAnswerText {
+  position: relative;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background-color: #2842db;
+  border-radius: 8px;
+  padding: 10px;
+}

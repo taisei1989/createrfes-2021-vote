@@ -9,14 +9,21 @@ import { useAuthContext } from "./components/authContext";
 import { submitTopic } from "./components/handleSubmit";
 import { topicRemove } from "./components/topicRemove";
 import { handleCurrentTopic } from "./components/handleCurrentTopic";
+import { newVotes } from "./components/newVotes";
 
 const AdminPage = () => {
   const { user } = useAuthContext();
   const [topic, setTopic] = useState("");
   const [answerA, setAnswerA] = useState("");
   const [answerB, setAnswerB] = useState("");
+  const [numOfVote, setnumOfVote] = useState({ a: 0, b: 0 });
   const [topics, setTopics] = useState([]);
-  const [currentTopic, setCurrentTopic] = useState([]);
+  const [currentTopic, setCurrentTopic] = useState({
+    topicId: "",
+    topicText: "",
+    topicAnswerA: "",
+    topicAnswerB: "",
+  });
 
   const handleChangeTopic = (event) => {
     setTopic(event.target.value);
@@ -31,28 +38,61 @@ const AdminPage = () => {
   useEffect(() => {
     const topicRef = ref(db, "topics/");
     const currentTopicRef = ref(db, "current/");
-    
+    const voteRef = ref(db, "votes/");
+
+    onValue(voteRef, (snapshot) => {
+      const votesUpdated = Object.values(snapshot.val());
+
+      // 集計結果
+      let numOfVoteA = 0;
+      let numOfVoteB = 0;
+
+      for (let i = 0; i < votesUpdated.length; i++) {
+        const answer = votesUpdated[i].answer;
+
+        // undefinedチェック
+        if (answer) {
+          if (answer === "A") {
+            numOfVoteA++;
+          } else if (answer === "B") {
+            numOfVoteB++;
+          } else {
+            console.log("不明な投票を検知しました", answer);
+          }
+        }
+      }
+
+      // 反映する
+      setnumOfVote({ a: numOfVoteA, b: numOfVoteB });
+    });
+
     // お題データの取得と保存
     onValue(topicRef, (snapshot) => {
       const topicsUpdated = Object.values(snapshot.val());
-      if(topicsUpdated){
+      if (topicsUpdated) {
         setTopics(topicsUpdated);
-      }      
+      }
     });
 
     // 現在のお題データの取得と保存
     onValue(currentTopicRef, (snapshot) => {
       const currentTopicUpdated = Object.values(snapshot.val());
       // nullチェック
-      console.log(currentTopicUpdated)
+      console.log(currentTopicUpdated);
       if (currentTopicUpdated) {
-        setCurrentTopic(currentTopicUpdated);
+        setCurrentTopic({
+          topicId: currentTopicUpdated[2],
+          topicText: currentTopicUpdated[3],
+          topicAnswerA: currentTopicUpdated[0],
+          topicAnswerB: currentTopicUpdated[1],
+        });
       }
     });
 
     // コンポーネントがアクティブでなくなったらクリーンナップとして接続を解除する
     return () => {
-      onDisconnect(topicRef, currentTopicRef);
+      onDisconnect(topicRef);
+      onDisconnect(currentTopicRef);
     };
   }, []);
 
@@ -63,11 +103,15 @@ const AdminPage = () => {
       <div>
         <h2>現在のお題</h2>
         <ul>
-          <li>ID：{currentTopic[2]}</li>
-          <li>お題：{currentTopic[3]}</li>
-          <li>投票A：{currentTopic[0]}</li>
-          <li>投票B：{currentTopic[1]}</li>
+          <li>ID：{currentTopic.topicId}</li>
+          <li>お題：{currentTopic.topicText}</li>
+          <li>投票A：{currentTopic.topicAnswerA}</li>
+          <li>投票B：{currentTopic.topicAnswerB}</li>
+          <li>投票結果A: {numOfVote.a}</li>
+          <li>投票結果B: {numOfVote.b}</li>
         </ul>
+        <br />
+        <HandlePhase />
         <br />
         <h2>お題設定</h2>
         <form
@@ -127,6 +171,7 @@ const AdminPage = () => {
                   topic.topicAnswerA,
                   topic.topicAnswerB
                 );
+                newVotes();
               }}
             >
               現在のお題に設定
@@ -135,7 +180,6 @@ const AdminPage = () => {
             <br />
           </div>
         ))}
-        <HandlePhase />
         <Logout />
       </div>
     );

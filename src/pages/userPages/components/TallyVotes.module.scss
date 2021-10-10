@@ -1,0 +1,44 @@
+.topicAnswerResult {
+  display: inline-block;
+  width: 25vw;
+}
+
+@media only screen and (max-width: 750px) {
+  .topicAnswerResult {
+    position: relative;
+    display: inline-block;
+    width: 50vw;
+  }
+}
+
+.voteResult {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.topicAnswer {
+  display: inline-block;
+  width: 40vw;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 7px;
+  color: black;
+  background-color: white;
+  border: double 5px #0074ff;
+  border-radius: 8px;
+}
+
+.tally {
+  padding: 10px;
+  font-size: 12px;
+  width: 100px;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  margin: 0 auto;
+  border-radius: 8px;
+  border: solid 2px black;
+}
