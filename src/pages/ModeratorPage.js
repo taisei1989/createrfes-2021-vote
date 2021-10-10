@@ -51,8 +51,13 @@ const ModeratorPage = () => {
     return (
       <div className={styles.display}>
         <TopicResult phase={phase} />
-        <div>回転するwakayamaくん</div>
-        <GoodBadPanel phase={phase} />
+        {/* <div>回転するwakayamaくん</div>
+        <GoodBadPanel phase={phase} /> */}
+        <p>投票画面はこちら↓</p>
+        <img
+          src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
+          alt="createrfes-vote-QR"
+        />
       </div>
     );
   } else {
@@ -60,8 +65,13 @@ const ModeratorPage = () => {
       <div className={styles.display}>
         <PreparePage phase={phase} />
         <TopicAnswerPanel phase={phase} />
-        <div>回転するwakayamaくん</div>
-        <GoodBadPanel phase={phase} />
+        {/* <div>回転するwakayamaくん</div>
+        <GoodBadPanel phase={phase} /> */}
+        <p>投票画面はこちら↓</p>
+        <img
+          src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
+          alt="createrfes-vote-QR"
+        />
       </div>
     );
   }
