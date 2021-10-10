@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ref, onValue, onDisconnect } from "firebase/database";
 import { db } from "../services/firebase";
 import { Redirect } from "react-router";
 
 import Logout from "../components/admin/logout";
 import HandlePhase from "../components/admin/handlePhase";
-import { useAuthContext } from "../components/admin/authContext";
+import { AuthContext } from "../components/admin/authContext";
 import { submitTopic } from "../components/admin/handleSubmit";
 import { topicRemove } from "../components/admin/topicRemove";
 import { handleCurrentTopic } from "../components/admin/handleCurrentTopic";
 import { newVotes } from "../components/admin/newVotes";
 
 const AdminPage = () => {
-  const { user } = useAuthContext();
+  const user = useContext(AuthContext);
   const [topic, setTopic] = useState("");
   const [answerA, setAnswerA] = useState("");
   const [answerB, setAnswerB] = useState("");

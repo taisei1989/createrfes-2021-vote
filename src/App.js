@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { AuthProvider } from "./components/admin/authContext";
+import { AuthContextProvider } from "./components/admin/authContext";
 
 import AdminPage from "./pages/AdminPage";
 import ModeratorPage from "./pages/ModeratorPage";
@@ -10,7 +10,7 @@ import "./App.css";
 
 function App() {
   return (
-    <AuthProvider>
+    <AuthContextProvider>
       <Router>
         <Switch>
           <Route exact path="/" component={UserPage} />
@@ -19,7 +19,7 @@ function App() {
           <Route path="/admin/login" component={LoginPage} />
         </Switch>
       </Router>
-    </AuthProvider>
+    </AuthContextProvider>
   );
 }
 
