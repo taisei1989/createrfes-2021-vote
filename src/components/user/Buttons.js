@@ -4,7 +4,7 @@ import { db } from "../../services/firebase";
 import { PHASES } from "../../interfaces";
 import styles from "./Button.module.scss";
 
-export const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
+const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
   const [choiceAnswer, setChoiceAnswer] = useState("");
   const [choiceAnswerKey, setchoiceAnswerKey] = useState("");
 
@@ -43,7 +43,7 @@ export const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
     return (
       <div>
         <div className={styles.topicAnswer}>
-          <label for="topicAnswerA" className={styles.topicAnswerText}>
+          <label htmlFor="topicAnswerA" className={styles.topicAnswerText}>
             {currentAnswerA}
             <input
               type="radio"
@@ -57,7 +57,7 @@ export const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
           </label>
         </div>
         <div className={styles.topicAnswer}>
-          <label for="topicAnswerB" className={styles.topicAnswerText}>
+          <label htmlFor="topicAnswerB" className={styles.topicAnswerText}>
             {currentAnswerB}
             <input
               type="radio"
@@ -75,3 +75,5 @@ export const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
   }
   return null;
 };
+
+export default Buttons;

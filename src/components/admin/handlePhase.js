@@ -6,16 +6,6 @@ import { db } from "../../services/firebase";
 const HandlePhase = () => {
   const [currentPhase, setCurrentPhase] = useState(PHASES.GUIDE);
 
-  /* const handleCurrentPhase = (phase) => {
-    setCurrentPhase(phase);
-    const phaseData = {
-      phase: currentPhase,
-    };
-    const updates = {};
-    updates["/progress/"] = phaseData;
-    update(ref(db), updates);
-  }; */
-
   useEffect(() => {
     const phaseData = {
       phase: currentPhase,
