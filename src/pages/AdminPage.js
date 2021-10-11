@@ -3,7 +3,7 @@ import { ref, onValue, onDisconnect } from "firebase/database";
 import { db } from "../services/firebase";
 import { Redirect } from "react-router";
 
-import Logout from "../components/admin/logout";
+import Logout from "../components/admin/Logout";
 import HandlePhase from "../components/admin/handlePhase";
 import { AuthContext } from "../contexts/AuthContext";
 import { submitTopic } from "../components/admin/handleSubmit";
