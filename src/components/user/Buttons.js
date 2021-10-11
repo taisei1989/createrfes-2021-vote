@@ -43,7 +43,7 @@ const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
     return (
       <div>
         <div className={styles.topicAnswer}>
-          <label for="topicAnswerA" className={styles.topicAnswerText}>
+          <label htmlFor="topicAnswerA" className={styles.topicAnswerText}>
             {currentAnswerA}
             <input
               type="radio"
@@ -57,7 +57,7 @@ const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
           </label>
         </div>
         <div className={styles.topicAnswer}>
-          <label for="topicAnswerB" className={styles.topicAnswerText}>
+          <label htmlFor="topicAnswerB" className={styles.topicAnswerText}>
             {currentAnswerB}
             <input
               type="radio"
