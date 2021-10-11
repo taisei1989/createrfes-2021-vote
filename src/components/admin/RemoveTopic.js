@@ -1,7 +1,7 @@
 import { ref, remove } from "firebase/database";
 import { db } from "../../services/firebase";
 
-export const topicRemove = (topic) => {
+const RemoveTopic = ({ topic }) => {
   const handleRemove = () => {
     remove(ref(db, "topics/" + topic.topicId));
   };
@@ -16,3 +16,5 @@ export const topicRemove = (topic) => {
     </button>
   );
 };
+
+export default RemoveTopic;

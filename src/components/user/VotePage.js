@@ -1,7 +1,7 @@
 import React from "react";
 import { PHASES } from "../../interfaces";
 import styles from "./VotePage.module.scss";
-import { Buttons } from "./Buttons";
+import Buttons from "./Buttons";
 import TallyVotes from "./TallyVotes";
 import ResultDisplay from "./ResultDisplay";
 import Timer from "./Timer";
