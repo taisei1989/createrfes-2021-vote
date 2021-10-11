@@ -1,8 +1,6 @@
 import { getDatabase, onValue, onDisconnect, ref } from "@firebase/database";
 import { useEffect, useState } from "react";
 import styles from "./TopicAnswerPanel.module.scss";
-import { VotesResultA, VotesResultB } from "./votesResult";
-import { PHASES } from "../../interfaces";
 import Timer from "./Timer";
 
 import * as CONF from "../../configs";

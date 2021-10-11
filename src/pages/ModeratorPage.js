@@ -1,10 +1,8 @@
 import { getDatabase, onDisconnect, onValue, ref } from "@firebase/database";
 import { useEffect, useState } from "react";
 import { PHASES } from "../interfaces";
-import GoodBadPanel from "../components/moderator/GoodBadPanel";
 import * as CONF from "../configs";
 import TopicAnswerPanel from "../components/moderator/TopicAnswerPanel";
-import Timer from "../components/moderator/Timer";
 import styles from "./ModeratorPage.module.scss";
 import TopicResult from "../components/moderator/TopicResult";
 import GuidePage from "../components/moderator/GuidePage";

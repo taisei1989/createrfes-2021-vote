@@ -2,7 +2,6 @@ import { getDatabase, onValue, onDisconnect, ref } from "@firebase/database";
 import { useEffect, useState } from "react";
 import styles from "./TopicAnswerPanel.module.scss";
 import { VotesResultA, VotesResultB, VotesTally } from "./votesResult";
-import { PHASES } from "../../interfaces";
 
 import * as CONF from "../../configs";
 
@@ -46,7 +45,7 @@ const TopicResult = ({ phase }) => {
     return () => {
       onDisconnect(refCurrent);
     };
-  }, []);
+  }, [topic]);
 
   return (
     <div className={styles.topicAnswerPanel}>
