@@ -4,12 +4,12 @@ import { db } from "../services/firebase";
 import { Redirect } from "react-router";
 
 import Logout from "../components/admin/Logout";
-import HandlePhase from "../components/admin/handlePhase";
+import HandlePhase from "../components/admin/HandlePhase";
 import { AuthContext } from "../contexts/AuthContext";
-import { submitTopic } from "../components/admin/handleSubmit";
-import { topicRemove } from "../components/admin/topicRemove";
-import { handleCurrentTopic } from "../components/admin/handleCurrentTopic";
-import { newVotes } from "../components/admin/newVotes";
+import HandleSubmit from "../components/admin/HandleSubmit";
+import RemoveTopic from "../components/admin/RemoveTopic";
+import HandleCurrentTopic from "../components/admin/HandleCurrentTopic";
+import NewChildNode from "../components/admin/CreateNewChildNode";
 
 const AdminPage = () => {
   const user = useContext(AuthContext);
@@ -116,7 +116,12 @@ const AdminPage = () => {
         <h2>お題設定</h2>
         <form
           onSubmit={(event) => {
-            submitTopic(event, topic, answerA, answerB);
+            <HandleSubmit
+              event={event}
+              topic={topic}
+              answerA={answerA}
+              answerB={answerB}
+            />;
             setTopic("");
             setAnswerA("");
             setAnswerB("");
@@ -161,17 +166,17 @@ const AdminPage = () => {
               <li>投票A：{topic.topicAnswerA}</li>
               <li>投票B：{topic.topicAnswerB}</li>
             </ul>
-            {topicRemove(topic)}
+            <RemoveTopic topic={topic} />
             <button
               onClick={() => {
                 setCurrentTopic(topic);
-                handleCurrentTopic(
-                  topic.topicId,
-                  topic.topicText,
-                  topic.topicAnswerA,
-                  topic.topicAnswerB
-                );
-                newVotes();
+                <HandleCurrentTopic
+                  id={topic.topicId}
+                  topic={topic.topicText}
+                  answerA={topic.topicAnswerA}
+                  answerB={topic.topicAnswerB}
+                />;
+                <NewChildNode />;
               }}
             >
               現在のお題に設定

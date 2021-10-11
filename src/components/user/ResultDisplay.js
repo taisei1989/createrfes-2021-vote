@@ -6,12 +6,13 @@ import styles from "./ResultDisplay.module.scss";
 
 /**
  * ユーザーの回答を集計する
- *
+ * 回答集計後、集計結果を表示する責務を負う
  */
+
 const ResultDisplay = ({ currentAnswerA, currentAnswerB, phase }) => {
   const [numOfAnswers, setNumOfAnswers] = useState({ a: 0, b: 0 });
 
-  // TODO: Firebase から集計のデータを受け取る
+  // Firebase から集計のデータを受け取る
   useEffect(() => {
     const voteRef = ref(db, "votes/");
 
@@ -54,8 +55,6 @@ const ResultDisplay = ({ currentAnswerA, currentAnswerB, phase }) => {
   }, []);
 
   console.log(numOfAnswers);
-
-  // TODO: 受け取ったデータからA, Bそれぞれの集計を行いデータをこのコンポーネント内で保持する
 
   if (phase === PHASES.RESULT) {
     return (
