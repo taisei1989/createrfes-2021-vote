@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../services/firebase";
 import { PHASES } from "../../interfaces";
 import styles from "./Button.module.scss";
+import Countdown from "react-countdown";
 
 const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
   const [choiceAnswer, setChoiceAnswer] = useState("");
@@ -69,6 +70,9 @@ const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
               onChange={() => setChoiceAnswer("B")}
             />
           </label>
+        </div>
+        <div className={styles.timer}>
+          <Countdown className={styles.countdown} date={Date.now() + 60000} />
         </div>
       </div>
     );

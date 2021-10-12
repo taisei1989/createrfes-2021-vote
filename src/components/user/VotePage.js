@@ -4,7 +4,6 @@ import styles from "./VotePage.module.scss";
 import Buttons from "./Buttons";
 import TallyVotes from "./TallyVotes";
 import ResultDisplay from "./ResultDisplay";
-import Timer from "./Timer";
 
 const VotePage = ({
   phase,
@@ -32,7 +31,6 @@ const VotePage = ({
             currentAnswerB={currentAnswerB}
             phase={phase}
           />
-          <Timer phase={phase} />
           <TallyVotes
             currentAnswerA={currentAnswerA}
             currentAnswerB={currentAnswerB}

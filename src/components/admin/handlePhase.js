@@ -28,10 +28,6 @@ const HandlePhase = () => {
         <button onClick={() => setCurrentPhase(PHASES.VOTE)}>変更</button>
       </div>
       <div>
-        <label>カウントダウンフェーズ(counting) </label>
-        <button onClick={() => setCurrentPhase(PHASES.COUNT)}>変更</button>
-      </div>
-      <div>
         <label>集計フェーズ(tallying) </label>
         <button onClick={() => setCurrentPhase(PHASES.TALLY)}>変更</button>
       </div>

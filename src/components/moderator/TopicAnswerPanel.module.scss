@@ -77,3 +77,20 @@
   height: 60vh;
   left: 20%;
 }
+
+.timer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.countdown {
+  padding: 15px;
+  font-size: 22px;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  border: solid 2px black;
+}

@@ -7,10 +7,11 @@ import styles from "./ModeratorPage.module.scss";
 import TopicResult from "../components/moderator/TopicResult";
 import GuidePage from "../components/moderator/GuidePage";
 import PreparePage from "../components/moderator/PreparePage";
+import GoodBadPanel from "../components/moderator/GoodBadPanel";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
-const isDebugPhase = CONF.IS_DEBUG && true;
+const isDebugPhase = CONF.IS_DEBUG && false;
 const isNotDebugPhase = !isDebugPhase;
 const phaseInitial = isDebugPhase ? PHASES.COUNT : PHASES.GUIDE;
 
@@ -54,8 +55,8 @@ const ModeratorPage = () => {
     return (
       <div className={styles.display}>
         <TopicResult phase={phase} />
-        {/* <div>回転するwakayamaくん</div>
-        <GoodBadPanel phase={phase} /> */}
+        <div>回転するwakayamaくん</div>
+        <GoodBadPanel phase={phase} />
         <p>投票画面はこちら↓</p>
         <img
           src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
@@ -68,8 +69,8 @@ const ModeratorPage = () => {
       <div className={styles.display}>
         <PreparePage phase={phase} />
         <TopicAnswerPanel phase={phase} />
-        {/* <div>回転するwakayamaくん</div>
-        <GoodBadPanel phase={phase} /> */}
+        <div>回転するwakayamaくん</div>
+        <GoodBadPanel phase={phase} />
         <p>投票画面はこちら↓</p>
         <img
           src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
