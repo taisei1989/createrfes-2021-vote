@@ -9,7 +9,7 @@ import { AuthContext } from "../contexts/AuthContext";
 import HandleSubmit from "../components/admin/HandleSubmit";
 import RemoveTopic from "../components/admin/RemoveTopic";
 import HandleCurrentTopic from "../components/admin/HandleCurrentTopic";
-import NewChildNode from "../components/admin/CreateNewChildNode";
+import { createNewChildNode } from "../components/admin/createNewChildNode";
 
 const AdminPage = () => {
   const user = useContext(AuthContext);
@@ -176,7 +176,7 @@ const AdminPage = () => {
                   answerA={topic.topicAnswerA}
                   answerB={topic.topicAnswerB}
                 />;
-                <NewChildNode />;
+                createNewChildNode();
               }}
             >
               現在のお題に設定

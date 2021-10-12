@@ -1,11 +1,9 @@
 import { getDatabase, onValue, onDisconnect, ref } from "@firebase/database";
 import { useEffect, useState } from "react";
 import styles from "./TopicAnswerPanel.module.scss";
-import { VotesResultA, VotesResultB } from "./votesResult";
-import { PHASES } from "../../interfaces";
-import Timer from "./Timer";
 
 import * as CONF from "../../configs";
+import Countdown from "react-countdown";
 
 /**
  * お題と答えを表示するパネル
@@ -60,7 +58,9 @@ const TopicAnswerPanel = ({ phase }) => {
         <p className={styles.choiceA}>B</p>
         <p className={styles.answerA}>{topic.answerB}</p>
       </div>
-      <Timer phase={phase} />
+      <div className={styles.timer}>
+        <Countdown className={styles.countdown} date={Date.now() + 60000} />
+      </div>
     </div>
   );
 };
