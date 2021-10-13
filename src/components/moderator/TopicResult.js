@@ -4,6 +4,7 @@ import styles from "./TopicAnswerPanel.module.scss";
 import { VotesResultA, VotesResultB, VotesTally } from "./votesResult";
 
 import * as CONF from "../../configs";
+import { PHASES } from "../../interfaces";
 
 /**
  * お題と答えを表示するパネル
