@@ -3,13 +3,19 @@ import { useState, useEffect } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
 import styles from "./ResultDisplay.module.scss";
+import ShareToTwitter from "./ShareToTwitter";
 
 /**
  * ユーザーの回答を集計する
  * 回答集計後、集計結果を表示する責務を負う
  */
 
-const ResultDisplay = ({ currentAnswerA, currentAnswerB, phase }) => {
+const ResultDisplay = ({
+  currentTopicText,
+  currentAnswerA,
+  currentAnswerB,
+  phase,
+}) => {
   const [numOfAnswers, setNumOfAnswers] = useState({ a: 0, b: 0 });
 
   // Firebase から集計のデータを受け取る
@@ -69,7 +75,13 @@ const ResultDisplay = ({ currentAnswerA, currentAnswerB, phase }) => {
           <p className={styles.voteResult}>{numOfAnswers.b} %</p>
           <button className={styles.badPanel}>Bad</button>
         </div>
-        <button className={styles.twitterShare}>結果をつぶやく</button>
+        <ShareToTwitter
+          currentTopicText={currentTopicText}
+          currentAnswerA={currentAnswerA}
+          currentAnswerB={currentAnswerB}
+          voteResultA={numOfAnswers.a}
+          voteResultB={numOfAnswers.b}
+        />
         <p className={styles.commentShare}>感想をシェアしよう！</p>
       </div>
     );
