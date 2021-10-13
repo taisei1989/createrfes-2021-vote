@@ -46,7 +46,6 @@ const TopicAnswerPanel = ({ phase }) => {
     };
   }, []);
 
-  //if (phase !== PHASES.RESULT) {
   return (
     <div className={styles.topicAnswerPanel}>
       <div className={styles.topic}>{topic.text}</div>
@@ -60,8 +59,6 @@ const TopicAnswerPanel = ({ phase }) => {
       </div>
     </div>
   );
-  //}
-  //return null;
 };
 
 export default TopicAnswerPanel;

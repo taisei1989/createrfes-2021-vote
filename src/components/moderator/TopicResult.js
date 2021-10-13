@@ -4,7 +4,6 @@ import styles from "./TopicAnswerPanel.module.scss";
 import { VotesResultA, VotesResultB, VotesTally } from "./votesResult";
 
 import * as CONF from "../../configs";
-import { PHASES } from "../../interfaces";
 
 /**
  * お題と答えを表示するパネル
@@ -32,7 +31,7 @@ const TopicResult = ({ phase }) => {
           answerB: answerB,
         });
 
-      if (topic && answerA && answerB) {
+      if (topicText && answerA && answerB) {
         // 適応する
         setTopic({
           text: topicText,
@@ -46,7 +45,7 @@ const TopicResult = ({ phase }) => {
     return () => {
       onDisconnect(refCurrent);
     };
-  }, [topic]);
+  }, []);
 
   return (
     <div className={styles.topicAnswerPanel}>

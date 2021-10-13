@@ -6,7 +6,6 @@ import { PHASES } from "../interfaces";
 import * as CONF from "../configs";
 import PreparationPage from "../components/user/PreparationPage";
 import VotePage from "../components/user/VotePage";
-import Timer from "../components/user/UserTimer";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
@@ -69,7 +68,6 @@ const UserPage = () => {
           currentAnswerA={currentTopic.answerA}
           currentAnswerB={currentTopic.answerB}
         />
-        <Timer phase={phase} />
       </div>
     );
   }

@@ -4,6 +4,7 @@ import styles from "./VotePage.module.scss";
 import Buttons from "./Buttons";
 import TallyVotes from "./TallyVotes";
 import ResultDisplay from "./ResultDisplay";
+import UserTimer from "./UserTimer";
 
 const VotePage = ({
   phase,
@@ -13,7 +14,6 @@ const VotePage = ({
 }) => {
   if (
     phase === PHASES.VOTE ||
-    phase === PHASES.COUNT ||
     phase === PHASES.TALLY ||
     phase === PHASES.RESULT
   ) {
@@ -31,6 +31,7 @@ const VotePage = ({
             currentAnswerB={currentAnswerB}
             phase={phase}
           />
+          <UserTimer phase={phase} />
           <TallyVotes
             currentAnswerA={currentAnswerA}
             currentAnswerB={currentAnswerB}

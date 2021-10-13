@@ -1,4 +1,4 @@
-import { update, onValue, ref, off } from "@firebase/database";
+import { onValue, ref, off } from "@firebase/database";
 import { useEffect, useState } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
