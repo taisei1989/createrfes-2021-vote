@@ -51,7 +51,7 @@ const ModeratorPage = () => {
   // Render
   if (phase === PHASES.GUIDE) {
     return <GuidePage />;
-  } else if (phase === PHASES.TALLY || phase === PHASES.RESULT) {
+  } else if (phase === PHASES.RESULT) {
     return (
       <div className={styles.display}>
         <TopicResult phase={phase} />
