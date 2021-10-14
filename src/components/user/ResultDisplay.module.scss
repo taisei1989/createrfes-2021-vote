@@ -47,17 +47,6 @@
   background-color: #0074ff;
 }
 
-.twitterShare {
-  padding: 10px;
-  color: white;
-  font-size: 10px;
-  font-weight: bold;
-  background-color: #1da1f1;
-  border-radius: 8px;
-  margin-top: 15px;
-  margin-bottom: 10px;
-}
-
 .commentShare {
   padding: 10px;
   font-size: 12px;
@@ -68,4 +57,15 @@
   margin: 0 auto;
   border-radius: 8px;
   border: solid 2px black;
+}
+
+.shareButton {
+  padding: 10px;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  background-color: #1da1f1;
+  border-radius: 8px;
+  margin-top: 15px;
+  margin-bottom: 10px;
 }

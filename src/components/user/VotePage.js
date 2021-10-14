@@ -38,6 +38,7 @@ const VotePage = ({
             phase={phase}
           />
           <ResultDisplay
+            currentTopicText={currentTopicText}
             currentAnswerA={currentAnswerA}
             currentAnswerB={currentAnswerB}
             phase={phase}
