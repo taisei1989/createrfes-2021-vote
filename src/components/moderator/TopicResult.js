@@ -31,7 +31,7 @@ const TopicResult = ({ phase }) => {
           answerB: answerB,
         });
 
-      if (topic && answerA && answerB) {
+      if (topicText && answerA && answerB) {
         // 適応する
         setTopic({
           text: topicText,
@@ -45,7 +45,7 @@ const TopicResult = ({ phase }) => {
     return () => {
       onDisconnect(refCurrent);
     };
-  }, [topic]);
+  }, []);
 
   return (
     <div className={styles.topicAnswerPanel}>

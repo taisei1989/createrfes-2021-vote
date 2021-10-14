@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import styles from "./TopicAnswerPanel.module.scss";
 
 import * as CONF from "../../configs";
-import Countdown from "react-countdown";
 
 /**
  * お題と答えを表示するパネル
@@ -57,9 +56,6 @@ const TopicAnswerPanel = ({ phase }) => {
       <div className={styles.answerBPanel}>
         <p className={styles.choiceA}>B</p>
         <p className={styles.answerA}>{topic.answerB}</p>
-      </div>
-      <div className={styles.timer}>
-        <Countdown className={styles.countdown} date={Date.now() + 60000} />
       </div>
     </div>
   );

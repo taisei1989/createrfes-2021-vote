@@ -58,6 +58,19 @@ const UserPage = () => {
     };
   }, []);
 
+  if (phase === PHASES.VOTE) {
+    return (
+      <div>
+        <PreparationPage phase={phase} />
+        <VotePage
+          phase={phase}
+          currentTopicText={currentTopic.text}
+          currentAnswerA={currentTopic.answerA}
+          currentAnswerB={currentTopic.answerB}
+        />
+      </div>
+    );
+  }
   return (
     <div>
       <PreparationPage phase={phase} />
