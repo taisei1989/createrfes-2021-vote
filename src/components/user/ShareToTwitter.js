@@ -1,4 +1,4 @@
-import { TwitterShareButton, TwitterIcon } from "react-share";
+import { TwitterShareButton } from "react-share";
 import styles from "./ResultDisplay.module.scss";
 
 const ShareToTwitter = ({
@@ -24,10 +24,8 @@ const ShareToTwitter = ({
           "%",
       ]}
       hashtags={["クリエイター祭り"]}
-      className={styles.share}
     >
-      <TwitterIcon id="shereToTwitter" size={32} round={false} />
-      <label htmlFor="shereToTwitter">結果をつぶやく</label>
+      <p className={styles.shareButton}>🕊 結果をつぶやく</p>
     </TwitterShareButton>
   );
 };
