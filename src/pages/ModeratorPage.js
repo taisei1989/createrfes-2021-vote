@@ -5,7 +5,7 @@ import * as CONF from "../configs";
 import TopicAnswerPanel from "../components/moderator/TopicAnswerPanel";
 import styles from "./ModeratorPage.module.scss";
 import TopicResult from "../components/moderator/TopicResult";
-import GuidePage from "../components/moderator/GuidePage";
+import GuideView from "../components/moderator/GuideView";
 import PreparePage from "../components/moderator/PreparePage";
 import GoodBadPanel from "../components/moderator/GoodBadPanel";
 import ModeratorTimer from "../components/moderator/ModeratorTimer";
@@ -48,7 +48,7 @@ const ModeratorPage = () => {
 
   // Render
   if (phase === PHASES.GUIDE) {
-    return <GuidePage />;
+    return <GuideView phase={phase} />;
   } else if (phase === PHASES.TALLY || phase === PHASES.RESULT) {
     return (
       <div className={styles.display}>
