@@ -9,21 +9,22 @@ import GuideView from "../components/moderator/GuideView";
 import PreparePage from "../components/moderator/PreparePage";
 import GoodBadPanel from "../components/moderator/GoodBadPanel";
 import ModeratorTimer from "../components/moderator/ModeratorTimer";
+import DebugModerator from "../components/moderator/DebugModerator";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
 const isDebugPhase = CONF.IS_DEBUG && true;
-const isNotDebugPhase = !isDebugPhase;
-const phaseInitial = isDebugPhase ? PHASES.GUIDE : PHASES.GUIDE;
 
 /**
  * 司会者ページ
  * データベースからデータを取得する責務を負う
  */
 const ModeratorPage = () => {
-  const [phase, setPhase] = useState(phaseInitial);
+  const [phase, setPhase] = useState(PHASES.GUIDE);
 
   useEffect(() => {
+    if (isDebugPhase) return;
+
     const db = getDatabase();
     const refProgress = ref(db, "progress/");
 
@@ -34,9 +35,7 @@ const ModeratorPage = () => {
       // nullチェック
       if (phaseUpdated) {
         // 適応する
-        if (isNotDebugPhase) {
-          setPhase(phaseUpdated);
-        }
+        setPhase(phaseUpdated);
       }
     });
 
@@ -49,6 +48,10 @@ const ModeratorPage = () => {
   // Render
   return (
     <div className={styles.moderatorPage}>
+      {isDebug && isDebugPhase && (
+        <DebugModerator phase={phase} setPhase={setPhase} />
+      )}
+
       <GuideView phase={phase} />
 
       <div className={styles.display}>
