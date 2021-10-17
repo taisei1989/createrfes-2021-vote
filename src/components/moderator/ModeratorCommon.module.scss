@@ -10,3 +10,21 @@
     border: 1px solid #000;
   }
 }
+
+.moderatorTimer {
+  position: absolute;
+  z-index: 400;
+  top: 5vh;
+  right: 5vw;
+  padding: 2vw;
+  background-color: #aaa;
+
+  p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vw;
+    width: 8vw;
+    height: 8vw;
+  }
+}

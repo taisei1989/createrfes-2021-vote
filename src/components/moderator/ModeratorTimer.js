@@ -2,6 +2,8 @@ import { update, onValue, ref, off } from "@firebase/database";
 import { useEffect, useState } from "react";
 import { db } from "../../services/firebase";
 
+import styles from "./ModeratorCommon.module.scss";
+
 const ModeratorTimer = ({ phase }) => {
   const [count, setCount] = useState(60);
 
@@ -36,7 +38,11 @@ const ModeratorTimer = ({ phase }) => {
 
   console.log(count);
 
-  return <div>{count}</div>;
+  return (
+    <div className={styles.moderatorTimer}>
+      <p>{count}</p>
+    </div>
+  );
 };
 
 export default ModeratorTimer;
