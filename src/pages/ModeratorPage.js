@@ -5,8 +5,8 @@ import * as CONF from "../configs";
 import TopicAnswerPanel from "../components/moderator/TopicAnswerPanel";
 import styles from "./ModeratorPage.module.scss";
 import TopicResult from "../components/moderator/TopicResult";
-import GuidePage from "../components/moderator/GuidePage";
-import PreparePage from "../components/moderator/PreparePage";
+import GuidePanel from "../components/moderator/GuidePanel";
+import ModeratorPreparePanel from "../components/moderator/ModeratorPreparePanel";
 import GoodBadPanel from "../components/moderator/GoodBadPanel";
 import ModeratorTimer from "../components/moderator/ModeratorTimer";
 
@@ -51,7 +51,7 @@ const ModeratorPage = () => {
 
   // Render
   if (phase === PHASES.GUIDE) {
-    return <GuidePage />;
+    return <GuidePanel />;
   } else if (phase === PHASES.TALLY || phase === PHASES.RESULT) {
     return (
       <div className={styles.display}>
@@ -68,7 +68,7 @@ const ModeratorPage = () => {
   } else if (phase === PHASES.VOTE) {
     return (
       <div className={styles.display}>
-        <PreparePage phase={phase} />
+        <ModeratorPreparePanel phase={phase} />
         <TopicAnswerPanel phase={phase} />
         <ModeratorTimer phase={phase} />
         <div>回転するwakayamaくん</div>
@@ -83,7 +83,7 @@ const ModeratorPage = () => {
   } else {
     return (
       <div className={styles.display}>
-        <PreparePage phase={phase} />
+        <ModeratorPreparePanel phase={phase} />
         <TopicAnswerPanel phase={phase} />
         <div>回転するwakayamaくん</div>
         <GoodBadPanel phase={phase} />

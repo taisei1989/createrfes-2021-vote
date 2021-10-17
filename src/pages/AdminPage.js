@@ -4,11 +4,11 @@ import { db } from "../services/firebase";
 import { Redirect } from "react-router";
 
 import Logout from "../components/admin/Logout";
-import HandlePhase from "../components/admin/HandlePhase";
+import PhaseOperation from "../components/admin/PhaseOperation";
 import { AuthContext } from "../contexts/AuthContext";
-import HandleSubmit from "../components/admin/HandleSubmit";
+import AddTopic from "../components/admin/AddTopic";
 import RemoveTopic from "../components/admin/RemoveTopic";
-import HandleCurrentTopic from "../components/admin/HandleCurrentTopic";
+import SetCurrentTopic from "../components/admin/SetCurrentTopic";
 import { createVotesNode } from "../components/admin/createNewChildNode";
 
 const AdminPage = () => {
@@ -111,12 +111,12 @@ const AdminPage = () => {
           <li>投票結果B: {numOfVote.b}</li>
         </ul>
         <br />
-        <HandlePhase />
+        <PhaseOperation />
         <br />
         <h2>お題設定</h2>
         <form
           onSubmit={(event) => {
-            <HandleSubmit
+            <AddTopic
               event={event}
               topic={topic}
               answerA={answerA}
@@ -170,7 +170,7 @@ const AdminPage = () => {
             <button
               onClick={() => {
                 setCurrentTopic(topic);
-                <HandleCurrentTopic
+                <SetCurrentTopic
                   id={topic.topicId}
                   topic={topic.topicText}
                   answerA={topic.topicAnswerA}

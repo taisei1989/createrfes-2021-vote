@@ -1,6 +1,6 @@
-import styles from "./GuidePage.module.scss";
+import styles from "./GuidePanel.module.scss";
 
-const GuidePage = () => {
+const GuidePanel = () => {
   return (
     <div className={styles.guidePage}>
       <h1>クリエイター多数決のご参加方法</h1>
@@ -18,4 +18,4 @@ const GuidePage = () => {
   );
 };
 
-export default GuidePage;
+export default GuidePanel;

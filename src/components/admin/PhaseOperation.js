@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
 
-const HandlePhase = () => {
+const PhaseOperation = () => {
   const [currentPhase, setCurrentPhase] = useState(PHASES.GUIDE);
 
   useEffect(() => {
@@ -43,4 +43,4 @@ const HandlePhase = () => {
   );
 };
 
-export default HandlePhase;
+export default PhaseOperation;
