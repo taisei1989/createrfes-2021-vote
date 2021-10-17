@@ -1,7 +1,7 @@
 import { update, ref } from "@firebase/database";
 import { db } from "../../services/firebase";
 
-const HandleCurrentTopic = ({ id, topic, answerA, answerB }) => {
+const SetCurrentTopic = ({ id, topic, answerA, answerB }) => {
   // A post entry
   const postData = {
     currentTopicId: id,
@@ -16,4 +16,4 @@ const HandleCurrentTopic = ({ id, topic, answerA, answerB }) => {
   return update(ref(db), updates);
 };
 
-export default HandleCurrentTopic;
+export default SetCurrentTopic;

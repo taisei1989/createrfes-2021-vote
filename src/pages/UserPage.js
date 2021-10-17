@@ -4,8 +4,8 @@ import { ref, onDisconnect, onValue } from "firebase/database";
 import { db } from "../services/firebase";
 import { PHASES } from "../interfaces";
 import * as CONF from "../configs";
-import PreparationPage from "../components/user/PreparationPage";
-import VotePage from "../components/user/VotePage";
+import UserPreparationPanel from "../components/user/UserPreparationPanel";
+import VotePanel from "../components/user/VotePanel";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
@@ -61,8 +61,8 @@ const UserPage = () => {
   if (phase === PHASES.VOTE) {
     return (
       <div>
-        <PreparationPage phase={phase} />
-        <VotePage
+        <UserPreparationPanel phase={phase} />
+        <VotePanel
           phase={phase}
           currentTopicText={currentTopic.text}
           currentAnswerA={currentTopic.answerA}
@@ -73,8 +73,8 @@ const UserPage = () => {
   }
   return (
     <div>
-      <PreparationPage phase={phase} />
-      <VotePage
+      <UserPreparationPanel phase={phase} />
+      <VotePanel
         phase={phase}
         currentTopicText={currentTopic.text}
         currentAnswerA={currentTopic.answerA}
