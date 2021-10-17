@@ -1,4 +1,4 @@
-import { getDatabase, onValue, onDisconnect, ref } from "@firebase/database";
+import { getDatabase, onValue, ref } from "@firebase/database";
 import { useEffect, useState } from "react";
 import styles from "./TopicAnswerPanel.module.scss";
 

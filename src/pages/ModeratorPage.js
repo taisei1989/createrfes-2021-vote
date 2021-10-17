@@ -5,7 +5,7 @@ import * as CONF from "../configs";
 import TopicAnswerPanel from "../components/moderator/TopicAnswerPanel";
 import styles from "./ModeratorPage.module.scss";
 import GuideView from "../components/moderator/GuideView";
-import PreparePage from "../components/moderator/PreparePage";
+import PreparePanel from "../components/moderator/PreparePanel";
 import GoodBadPanel from "../components/moderator/GoodBadPanel";
 import ModeratorTimer from "../components/moderator/ModeratorTimer";
 import DebugModerator from "../components/moderator/DebugModerator";
@@ -52,6 +52,8 @@ const ModeratorPage = () => {
       )}
 
       <GuideView phase={phase} />
+
+      <PreparePanel phase={phase} />
 
       <TopicAnswerPanel phase={phase} />
 

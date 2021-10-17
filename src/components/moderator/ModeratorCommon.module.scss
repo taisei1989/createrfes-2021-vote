@@ -28,3 +28,12 @@
     height: 8vw;
   }
 }
+
+.preparePanel {
+  position: absolute;
+  z-index: 600;
+  top: 20vh;
+  left: 20vw;
+  width: 60vw;
+  height: 60vh;
+}
