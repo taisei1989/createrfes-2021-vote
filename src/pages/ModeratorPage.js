@@ -1,4 +1,4 @@
-import { getDatabase, onDisconnect, onValue, ref } from "@firebase/database";
+import { getDatabase, onValue, ref } from "@firebase/database";
 import { useEffect, useState } from "react";
 import { PHASES } from "../interfaces";
 import * as CONF from "../configs";
@@ -27,10 +27,9 @@ const ModeratorPage = () => {
     const db = getDatabase();
     const refProgress = ref(db, "progress/");
 
-    onValue(refProgress, (snapshot) => {
+    const unsubscribe = onValue(refProgress, (snapshot) => {
       const phaseUpdated = snapshot.val().phase;
-      if (isDebug)
-        console.log("フェーズの切り替えを検知しました", phaseUpdated);
+      if (isDebug) console.log("フェーズの切り替えを検知", { phaseUpdated });
 
       // nullチェック
       if (phaseUpdated) {
@@ -43,11 +42,9 @@ const ModeratorPage = () => {
 
     // コンポーネントがアクティブでなくなったらクリーンナップとして接続を解除する
     return () => {
-      onDisconnect(refProgress);
+      unsubscribe();
     };
   }, []);
-
-  console.log(phase);
 
   // Render
   if (phase === PHASES.GUIDE) {
