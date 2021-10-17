@@ -9,17 +9,21 @@ const UserTimer = ({ phase }) => {
   useEffect(() => {
     const timerRef = ref(db, "timer/count");
     onValue(timerRef, (snapshot) => {
-      const data = snapshot.val();
-      setCount(data);
+      setCount(snapshot.val());
     });
-    const intervalId = setInterval(() => {
-      setCount(count - 1);
-    }, 1000);
     return () => {
       off(timerRef);
-      clearInterval(intervalId);
     };
+  }, []);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCount(count - 1);
+      //console.log("setInterval を実行しました");
+    }, 1000);
+    return clearInterval(intervalId);
   }, [count]);
+
   console.log(count);
 
   if (phase === PHASES.VOTE) {

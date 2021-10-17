@@ -27,6 +27,7 @@ const ModeratorTimer = ({ phase }) => {
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCount(count - 1);
+      console.log("setInterval を実行しました");
     }, 1000);
     return () => {
       clearInterval(intervalId);
