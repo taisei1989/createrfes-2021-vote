@@ -1,0 +1,53 @@
+@use "src/index.scss";
+
+.guideView {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 900;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  background-color: index.$pink;
+}
+
+.isShown {
+  opacity: 1;
+  visibility: visible;
+}
+
+.isHidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.title {
+  margin: 2vh 0;
+  font-size: 4.8vw;
+  font-weight: bold;
+  color: index.$white;
+}
+
+.text {
+  margin: 1vh 0;
+  text-align: center;
+  line-height: 1.8;
+  font-size: 2.4vw;
+  color: index.$white;
+}
+
+.link {
+  margin: 4vh 0 1vh;
+  font-size: 3.6vw;
+  color: index.$white;
+}
+
+.figure {
+  margin: 1vh 0;
+  width: 40vw;
+  max-width: 45vh;
+}

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
 
+import styles from "./ModeratorCommon.module.scss";
+
 const ModeratorTimer = ({ phase }) => {
   const [count, setCount] = useState(10);
 
@@ -45,7 +47,11 @@ const ModeratorTimer = ({ phase }) => {
 
   console.log(count);
 
-  return <div>{count}</div>;
+  return (
+    <div className={styles.moderatorTimer}>
+      <p>{count}</p>
+    </div>
+  );
 };
 
 export default ModeratorTimer;

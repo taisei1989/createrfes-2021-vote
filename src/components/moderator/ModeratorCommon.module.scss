@@ -1,0 +1,39 @@
+.debugModerator {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 9999;
+
+  button {
+    display: block;
+    margin: 2px;
+    border: 1px solid #000;
+  }
+}
+
+.moderatorTimer {
+  position: absolute;
+  z-index: 400;
+  top: 5vh;
+  right: 5vw;
+  padding: 2vw;
+  background-color: #aaa;
+
+  p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 5vw;
+    width: 8vw;
+    height: 8vw;
+  }
+}
+
+.preparePanel {
+  position: absolute;
+  z-index: 600;
+  top: 20vh;
+  left: 20vw;
+  width: 60vw;
+  height: 60vh;
+}
