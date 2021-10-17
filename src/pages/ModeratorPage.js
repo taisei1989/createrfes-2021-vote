@@ -4,7 +4,6 @@ import { PHASES } from "../interfaces";
 import * as CONF from "../configs";
 import TopicAnswerPanel from "../components/moderator/TopicAnswerPanel";
 import styles from "./ModeratorPage.module.scss";
-import TopicResult from "../components/moderator/TopicResult";
 import GuideView from "../components/moderator/GuideView";
 import PreparePage from "../components/moderator/PreparePage";
 import GoodBadPanel from "../components/moderator/GoodBadPanel";
@@ -56,40 +55,15 @@ const ModeratorPage = () => {
 
       <TopicAnswerPanel phase={phase} />
 
+      <ModeratorTimer phase={phase} />
+
       <div>回転するwakayamaくん</div>
+
+      <p>投票画面はこちらQR</p>
+
       <GoodBadPanel phase={phase} />
-      <p>投票画面はこちら↓</p>
     </div>
   );
-  // } else if (phase === PHASES.VOTE) {
-  //   return (
-  //     <div className={styles.display}>
-  //       <PreparePage phase={phase} />
-  //       <ModeratorTimer phase={phase} />
-  //       <div>回転するwakayamaくん</div>
-  //       <GoodBadPanel phase={phase} />
-  //       <p>投票画面はこちら↓</p>
-  //       <img
-  //         src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
-  //         alt="createrfes-vote-QR"
-  //       />
-  //     </div>
-  //   );
-  // } else {
-  //   return (
-  //     <div className={styles.display}>
-  //       <PreparePage phase={phase} />
-  //       <TopicAnswerPanel phase={phase} />
-  //       <div>回転するwakayamaくん</div>
-  //       <GoodBadPanel phase={phase} />
-  //       <p>投票画面はこちら↓</p>
-  //       <img
-  //         src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
-  //         alt="createrfes-vote-QR"
-  //       />
-  //     </div>
-  //   );
-  // }
 };
 
 export default ModeratorPage;
