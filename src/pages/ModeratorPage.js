@@ -54,23 +54,17 @@ const ModeratorPage = () => {
 
       <GuideView phase={phase} />
 
-      <div className={styles.display}>
-        <TopicResult phase={phase} />
-        <div>回転するwakayamaくん</div>
-        <GoodBadPanel phase={phase} />
-        <p>投票画面はこちら↓</p>
-        <img
-          src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
-          alt="createrfes-vote-QR"
-        />
-      </div>
+      <TopicAnswerPanel phase={phase} />
+
+      <div>回転するwakayamaくん</div>
+      <GoodBadPanel phase={phase} />
+      <p>投票画面はこちら↓</p>
     </div>
   );
   // } else if (phase === PHASES.VOTE) {
   //   return (
   //     <div className={styles.display}>
   //       <PreparePage phase={phase} />
-  //       <TopicAnswerPanel phase={phase} />
   //       <ModeratorTimer phase={phase} />
   //       <div>回転するwakayamaくん</div>
   //       <GoodBadPanel phase={phase} />
