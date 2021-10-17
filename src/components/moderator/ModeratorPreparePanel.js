@@ -1,7 +1,7 @@
 import { PHASES } from "../../interfaces";
 import styles from "./TopicAnswerPanel.module.scss";
 
-const PreparePage = ({ phase }) => {
+const ModeratorPreparePanel = ({ phase }) => {
   if (phase === PHASES.PREPARE) {
     return (
       <img
@@ -14,4 +14,4 @@ const PreparePage = ({ phase }) => {
   return null;
 };
 
-export default PreparePage;
+export default ModeratorPreparePanel;
