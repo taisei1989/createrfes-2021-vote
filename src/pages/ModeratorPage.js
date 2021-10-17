@@ -47,51 +47,51 @@ const ModeratorPage = () => {
   }, []);
 
   // Render
-  if (phase === PHASES.GUIDE) {
-    return <GuideView phase={phase} />;
-  } else if (phase === PHASES.TALLY || phase === PHASES.RESULT) {
-    return (
-      <div className={styles.display}>
-        <TopicResult phase={phase} />
-        <div>回転するwakayamaくん</div>
-        <GoodBadPanel phase={phase} />
-        <p>投票画面はこちら↓</p>
-        <img
-          src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
-          alt="createrfes-vote-QR"
-        />
-      </div>
-    );
-  } else if (phase === PHASES.VOTE) {
-    return (
-      <div className={styles.display}>
-        <PreparePage phase={phase} />
-        <TopicAnswerPanel phase={phase} />
-        <ModeratorTimer phase={phase} />
-        <div>回転するwakayamaくん</div>
-        <GoodBadPanel phase={phase} />
-        <p>投票画面はこちら↓</p>
-        <img
-          src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
-          alt="createrfes-vote-QR"
-        />
-      </div>
-    );
-  } else {
-    return (
-      <div className={styles.display}>
-        <PreparePage phase={phase} />
-        <TopicAnswerPanel phase={phase} />
-        <div>回転するwakayamaくん</div>
-        <GoodBadPanel phase={phase} />
-        <p>投票画面はこちら↓</p>
-        <img
-          src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
-          alt="createrfes-vote-QR"
-        />
-      </div>
-    );
-  }
+  return <GuideView phase={phase} />;
+  // if (phase === PHASES.GUIDE) {
+  // } else if (phase === PHASES.TALLY || phase === PHASES.RESULT) {
+  //   return (
+  //     <div className={styles.display}>
+  //       <TopicResult phase={phase} />
+  //       <div>回転するwakayamaくん</div>
+  //       <GoodBadPanel phase={phase} />
+  //       <p>投票画面はこちら↓</p>
+  //       <img
+  //         src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
+  //         alt="createrfes-vote-QR"
+  //       />
+  //     </div>
+  //   );
+  // } else if (phase === PHASES.VOTE) {
+  //   return (
+  //     <div className={styles.display}>
+  //       <PreparePage phase={phase} />
+  //       <TopicAnswerPanel phase={phase} />
+  //       <ModeratorTimer phase={phase} />
+  //       <div>回転するwakayamaくん</div>
+  //       <GoodBadPanel phase={phase} />
+  //       <p>投票画面はこちら↓</p>
+  //       <img
+  //         src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
+  //         alt="createrfes-vote-QR"
+  //       />
+  //     </div>
+  //   );
+  // } else {
+  //   return (
+  //     <div className={styles.display}>
+  //       <PreparePage phase={phase} />
+  //       <TopicAnswerPanel phase={phase} />
+  //       <div>回転するwakayamaくん</div>
+  //       <GoodBadPanel phase={phase} />
+  //       <p>投票画面はこちら↓</p>
+  //       <img
+  //         src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
+  //         alt="createrfes-vote-QR"
+  //       />
+  //     </div>
+  //   );
+  // }
 };
 
 export default ModeratorPage;
