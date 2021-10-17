@@ -57,14 +57,18 @@ const TopicAnswerPanel = ({ phase }) => {
 
   return (
     <div className={styles.topicAnswerPanel}>
-      <div className={styles.topic}>{dispTopic.topicText}</div>
-      <div className={styles.answerAPanel}>
-        <p className={styles.choiceA}>A</p>
-        <p className={styles.answerA}>{dispTopic.answerA}</p>
-      </div>
-      <div className={styles.answerBPanel}>
-        <p className={styles.choiceA}>B</p>
-        <p className={styles.answerA}>{dispTopic.answerB}</p>
+      <div className={styles.topicText}>{dispTopic.topicText}</div>
+
+      <div className={styles.answersWrapper}>
+        <div className={styles.answerA}>
+          <p className={styles.choice}>A</p>
+          <p className={styles.answer}>{dispTopic.answerA}</p>
+        </div>
+
+        <div className={styles.answerB}>
+          <p className={styles.choice}>B</p>
+          <p className={styles.answer}>{dispTopic.answerB}</p>
+        </div>
       </div>
     </div>
   );

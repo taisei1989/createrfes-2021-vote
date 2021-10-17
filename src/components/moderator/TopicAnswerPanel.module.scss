@@ -1,52 +1,61 @@
+@use "src/index.scss";
+
 .topicAnswerPanel {
-  position: relative;
-  margin: 0 auto;
-  width: 60vw;
-  height: 60vh;
-  background-color: #ffffff;
+  position: absolute;
+  z-index: 200;
+  top: 10vh;
+  left: 10%;
+  padding-top: 5vh;
+  width: 80%;
+  height: 80vh;
+  min-height: 80vh;
 }
 
-.topic {
+.topicText {
   position: absolute;
-  font-size: 16px;
+  z-index: 5;
+  top: 0;
+  left: 10%;
+  width: 80%;
+  padding: 1vw 2vw;
+  text-align: center;
+  font-size: 4vw;
   font-weight: bold;
-  top: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: solid 2px black;
-  padding: 5px 15px;
-
-  background-color: #ffffff;
+  background-color: index.$white;
 }
 
-.answerAPanel {
-  position: absolute;
-  top: 15%;
-  left: 5%;
-  width: 40%;
-  height: 80%;
-  background-color: #fe48c6;
+.answersWrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  height: 100%;
+  min-height: 100%;
+  text-align: center;
+  color: index.$white;
 }
 
-.choiceA {
-  position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #ffffff;
-  font-weight: bold;
-  font-size: 22px;
+.answerA,
+.answerB {
+  width: 100%;
+  height: 100%;
+  padding-top: 5vh;
 }
 
 .answerA {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: #ffffff;
+  background-color: index.$pink;
+}
+
+.answerB {
+  background-color: index.$blue;
+}
+
+.choice {
   font-weight: bold;
-  font-size: 22px;
-  text-align: center;
+  font-size: 8vw;
+}
+
+.answer {
+  padding: 0 2vw;
+  font-size: 5vw;
 }
 
 .voteResult {
@@ -58,15 +67,6 @@
   font-weight: bold;
   font-size: 32px;
   text-align: center;
-}
-
-.answerBPanel {
-  position: absolute;
-  top: 15%;
-  right: 5%;
-  width: 40%;
-  height: 80%;
-  background-color: #2842db;
 }
 
 .readyVisual {
