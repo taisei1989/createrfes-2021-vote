@@ -12,9 +12,9 @@ import ModeratorTimer from "../components/moderator/ModeratorTimer";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
-const isDebugPhase = CONF.IS_DEBUG && false;
+const isDebugPhase = CONF.IS_DEBUG && true;
 const isNotDebugPhase = !isDebugPhase;
-const phaseInitial = isDebugPhase ? PHASES.COUNT : PHASES.GUIDE;
+const phaseInitial = isDebugPhase ? PHASES.GUIDE : PHASES.GUIDE;
 
 /**
  * 司会者ページ
