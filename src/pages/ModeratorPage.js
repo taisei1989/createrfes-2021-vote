@@ -47,21 +47,22 @@ const ModeratorPage = () => {
   }, []);
 
   // Render
-  return <GuideView phase={phase} />;
-  // if (phase === PHASES.GUIDE) {
-  // } else if (phase === PHASES.TALLY || phase === PHASES.RESULT) {
-  //   return (
-  //     <div className={styles.display}>
-  //       <TopicResult phase={phase} />
-  //       <div>回転するwakayamaくん</div>
-  //       <GoodBadPanel phase={phase} />
-  //       <p>投票画面はこちら↓</p>
-  //       <img
-  //         src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
-  //         alt="createrfes-vote-QR"
-  //       />
-  //     </div>
-  //   );
+  return (
+    <div className={styles.moderatorPage}>
+      <GuideView phase={phase} />
+
+      <div className={styles.display}>
+        <TopicResult phase={phase} />
+        <div>回転するwakayamaくん</div>
+        <GoodBadPanel phase={phase} />
+        <p>投票画面はこちら↓</p>
+        <img
+          src={`${process.env.PUBLIC_URL}/creater-fes-QR.png`}
+          alt="createrfes-vote-QR"
+        />
+      </div>
+    </div>
+  );
   // } else if (phase === PHASES.VOTE) {
   //   return (
   //     <div className={styles.display}>

@@ -1,36 +1,37 @@
-.guidePage {
+@use "src/index.scss";
+
+.guideView {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: index.$pink;
+}
+
+.title {
+  margin: 2vh 0;
+  font-size: 4.8vw;
+  font-weight: bold;
+  color: index.$white;
+}
+
+.text {
+  margin: 1vh 0;
   text-align: center;
-  padding: 50px;
-  background-color: #fe48c6;
-  width: 100vw;
-  height: 100vh;
+  line-height: 1.8;
+  font-size: 2.4vw;
+  color: index.$white;
 }
 
-.guidePage h1 {
-  position: relative;
-  font-size: 48px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: white;
+.link {
+  margin: 4vh 0 1vh;
+  font-size: 3.6vw;
+  color: index.$white;
 }
 
-.guidePage p {
-  position: relative;
-  font-size: 22px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: white;
-}
-
-.guidePage h3 {
-  position: relative;
-  font-size: 40px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: white;
-}
-
-.guidePage img {
-  width: 300px;
-  height: 300px;
+.figure {
+  margin: 1vh 0;
+  width: 40vw;
+  max-width: 45vh;
 }
