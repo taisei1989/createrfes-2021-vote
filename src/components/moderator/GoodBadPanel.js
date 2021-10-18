@@ -10,7 +10,7 @@ const GoodBadPanel = ({ phase }) => {
   // PhaseがResultの時だけ表示
   if (phase === PHASES.RESULT) {
     return (
-      <div className="good-bad-panel">
+      <div className="good-bad-panel" style={{ display: "none" }}>
         GoodBadPanelを表示しています
         <canvas />
       </div>
