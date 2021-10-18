@@ -9,6 +9,8 @@ import ModeratorPreparePanel from "../components/moderator/ModeratorPreparePanel
 import GoodBadPanel from "../components/moderator/GoodBadPanel";
 import ModeratorTimer from "../components/moderator/ModeratorTimer";
 import DebugModerator from "../components/moderator/DebugModerator";
+import JudgeCharacter from "../components/moderator/JudgeCharacter";
+import QRCodeBoard from "../components/moderator/QRCodeBoard";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
@@ -59,9 +61,9 @@ const ModeratorPage = () => {
 
       <ModeratorTimer phase={phase} />
 
-      <div>回転するwakayamaくん</div>
+      <JudgeCharacter phase={phase} />
 
-      <p>投票画面はこちらQR</p>
+      <QRCodeBoard phase={phase} />
 
       <GoodBadPanel phase={phase} />
     </div>

@@ -1,3 +1,5 @@
+/* 個別にモジュールを作るほどでもないスタイルをここで書く */
+
 .debugModerator {
   position: fixed;
   bottom: 0;
@@ -36,4 +38,18 @@
   left: 20vw;
   width: 60vw;
   height: 60vh;
+}
+
+/* QR Code Board ----------------------------------- */
+.qrCodeBoard {
+  position: absolute;
+  z-index: 700;
+  bottom: 0;
+  left: 0;
+
+  img {
+    display: block;
+    width: 30vw;
+    height: 30vh;
+  }
 }
