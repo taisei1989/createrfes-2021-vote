@@ -1,15 +1,31 @@
+import { useRef } from "react";
+import { CSSTransition } from "react-transition-group";
 import { PHASES } from "../../interfaces";
-import styles from "./ModeratorCommon.module.scss";
+import styles from "./ModeratorPreparePanel.module.scss";
 
 const ModeratorPrepareView = ({ phase }) => {
-  if (phase === PHASES.PREPARE) {
-    return (
-      <div className={styles.preparePanel}>
-        <img src={`ready.jpg`} alt="createrfes-vote-ready" />
+  const isShown = phase === PHASES.PREPARE;
+  const elementRef = useRef(null);
+
+  return (
+    <CSSTransition
+      in={isShown}
+      nodeRef={elementRef}
+      timeout={500}
+      classNames={{
+        enter: styles.enter,
+        enterActive: styles.enterActive,
+        enterDone: styles.enterDone,
+        exit: styles.exit,
+        exitActive: styles.exitActive,
+        exitDone: styles.exitDone,
+      }}
+    >
+      <div className={styles.preparePanel} ref={elementRef}>
+        <img src={`ready.jpg`} alt="準備中のパネル画像" />
       </div>
-    );
-  }
-  return null;
+    </CSSTransition>
+  );
 };
 
 export default ModeratorPrepareView;
