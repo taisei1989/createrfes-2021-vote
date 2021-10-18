@@ -1,7 +1,7 @@
 import { PHASES } from "../../interfaces";
 import styles from "./UserPreparationPanel.module.scss";
 
-const UserPreparationPanel = ({ phase }) => {
+const UserPreparationView = ({ phase }) => {
   if (phase === PHASES.GUIDE || phase === PHASES.PREPARE) {
     return (
       <div className={styles.display}>
@@ -22,4 +22,4 @@ const UserPreparationPanel = ({ phase }) => {
   return null;
 };
 
-export default UserPreparationPanel;
+export default UserPreparationView;

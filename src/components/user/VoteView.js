@@ -1,12 +1,12 @@
 import React from "react";
 import { PHASES } from "../../interfaces";
-import styles from "./VotePanel.module.scss";
+import styles from "./VoteView.module.scss";
 import Buttons from "./Buttons";
 import TallyVotes from "./TallyVotes";
 import ResultDisplay from "./ResultDisplay";
 import UserTimer from "./UserTimer";
 
-const VotePanel = ({
+const VoteView = ({
   phase,
   currentTopicText,
   currentAnswerA,
@@ -50,4 +50,4 @@ const VotePanel = ({
   return null;
 };
 
-export default VotePanel;
+export default VoteView;
