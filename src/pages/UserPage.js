@@ -5,8 +5,11 @@ import { db } from "../services/firebase";
 import { PHASES } from "../interfaces";
 import * as CONF from "../configs";
 import UserPreparationView from "../components/user/UserPreparationView";
-import VoteView from "../components/user/VoteView";
 import styles from "./UserPage.module.scss";
+import Buttons from "../components/user/Buttons";
+import UserTimer from "../components/user/UserTimer";
+import TallyVotes from "../components/user/TallyVotes";
+import ResultDisplay from "../components/user/ResultDisplay";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
@@ -59,28 +62,29 @@ const UserPage = () => {
     };
   }, []);
 
-  // PreparationView がphase===PHASE.PREPAREのときのみ表示されるようにする
-  if (phase === PHASES.VOTE) {
-    return (
-      <div>
-        <UserPreparationView phase={phase} />
-        <VoteView
-          phase={phase}
-          currentTopicText={currentTopic.text}
-          currentAnswerA={currentTopic.answerA}
-          currentAnswerB={currentTopic.answerB}
-        />
-      </div>
-    );
-  }
   return (
     <div className={styles.userPage}>
+      <img
+        src={`${process.env.PUBLIC_URL}/main-visual.jpg`}
+        alt="createrfes-vote-title"
+      />
       <UserPreparationView phase={phase} />
-      <VoteView
+      <Buttons
+        currentAnswerA={currentTopic.answerA}
+        currentAnswerB={currentTopic.answerB}
         phase={phase}
+      />
+      <UserTimer phase={phase} />
+      <TallyVotes
+        currentAnswerA={currentTopic.answerA}
+        currentAnswerB={currentTopic.answerB}
+        phase={phase}
+      />
+      <ResultDisplay
         currentTopicText={currentTopic.text}
         currentAnswerA={currentTopic.answerA}
         currentAnswerB={currentTopic.answerB}
+        phase={phase}
       />
     </div>
   );

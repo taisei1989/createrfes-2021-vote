@@ -36,9 +36,6 @@ const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
     };
   }, [choiceAnswer, choiceAnswerKey]);
 
-  // "$user_id": {
-  //".validate": "newData.val() == 1 || newData.val() == 2"
-  //}
   if (phase === PHASES.VOTE || phase === PHASES.COUNT) {
     return (
       <div>

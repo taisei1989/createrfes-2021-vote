@@ -5,14 +5,8 @@ const UserPreparationView = ({ phase }) => {
   if (phase === PHASES.GUIDE || phase === PHASES.PREPARE) {
     return (
       <div className={styles.preparationPanel}>
-        <img
-          src={`${process.env.PUBLIC_URL}/main-visual.jpg`}
-          alt="createrfes-vote-title"
-        />
-        <div>
-          <p>ただいま準備中…</p>
-          <p>お題を用意しているよ！</p>
-        </div>
+        <p>ただいま準備中…</p>
+        <p>お題を用意しているよ！</p>
       </div>
     );
   }
