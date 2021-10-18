@@ -1,7 +1,7 @@
 import { PHASES } from "../../interfaces";
 import styles from "./ModeratorCommon.module.scss";
 
-const ModeratorPreparePanel = ({ phase }) => {
+const ModeratorPrepareView = ({ phase }) => {
   if (phase === PHASES.PREPARE) {
     return (
       <div className={styles.preparePanel}>
@@ -12,4 +12,4 @@ const ModeratorPreparePanel = ({ phase }) => {
   return null;
 };
 
-export default ModeratorPreparePanel;
+export default ModeratorPrepareView;

@@ -6,6 +6,7 @@ import { PHASES } from "../interfaces";
 import * as CONF from "../configs";
 import UserPreparationView from "../components/user/UserPreparationView";
 import VoteView from "../components/user/VoteView";
+import styles from "./UserPage.module.scss";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
@@ -58,6 +59,7 @@ const UserPage = () => {
     };
   }, []);
 
+  // PreparationView がphase===PHASE.PREPAREのときのみ表示されるようにする
   if (phase === PHASES.VOTE) {
     return (
       <div>
@@ -72,7 +74,7 @@ const UserPage = () => {
     );
   }
   return (
-    <div>
+    <div className={styles.userPage}>
       <UserPreparationView phase={phase} />
       <VoteView
         phase={phase}
