@@ -1,0 +1,42 @@
+.preparePanel {
+  position: absolute;
+  z-index: 600;
+  top: 20vh;
+  left: 20vw;
+  width: 60vw;
+  height: 60vh;
+}
+
+.enter {
+  opacity: 0;
+  transform: rotateZ(0deg);
+}
+
+.enterActive {
+  opacity: 1;
+  transform: rotateZ(360deg);
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+.enterDone {
+  visibility: visible;
+  opacity: 1;
+  transform: rotateZ(360deg);
+}
+
+.exit {
+  opacity: 1;
+  transform: rotateZ(360deg);
+}
+
+.exitActive {
+  opacity: 0;
+  transform: rotateZ(0deg);
+  transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
+}
+
+.exitDone {
+  visibility: hidden;
+  opacity: 0;
+  transform: rotateZ(0deg);
+}
