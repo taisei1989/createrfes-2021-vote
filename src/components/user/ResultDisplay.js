@@ -66,14 +66,24 @@ const ResultDisplay = ({
     return (
       <div>
         <div className={styles.topicAnswerResult}>
-          <p className={styles.topicAnswer}>{currentAnswerA}</p>
-          <p className={styles.voteResult}>{numOfAnswers.a} %</p>
-          <button className={styles.goodPanel}>Good</button>
+          <div className={styles.voteResult}>{numOfAnswers.a} %</div>
         </div>
         <div className={styles.topicAnswerResult}>
-          <p className={styles.topicAnswer}> {currentAnswerB} </p>
-          <p className={styles.voteResult}>{numOfAnswers.b} %</p>
-          <button className={styles.badPanel}>Bad</button>
+          <div className={styles.voteResult}>{numOfAnswers.b} %</div>
+        </div>
+        <div className={styles.feedbackPanel}>
+          <div>
+            <button id="goodPanel"></button>
+            <label htmlFor="goodPanel">
+              <img src="images/user/feedback-good.png" alt="feedback-good" />
+            </label>
+          </div>
+          <div>
+            <button id="badPanel"></button>
+            <label htmlFor="badPanel">
+              <img src="images/user/feedback-bad.png" alt="feedback-bad" />
+            </label>
+          </div>
         </div>
         <ShareToTwitter
           currentTopicText={currentTopicText}
@@ -82,7 +92,9 @@ const ResultDisplay = ({
           voteResultA={numOfAnswers.a}
           voteResultB={numOfAnswers.b}
         />
-        <p className={styles.commentShare}>感想をシェアしよう！</p>
+        <div className={styles.guide}>
+          <div className={styles.innerText}>感想をシェアしよう！</div>
+        </div>
       </div>
     );
   }

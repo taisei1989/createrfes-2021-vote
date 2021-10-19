@@ -23,3 +23,19 @@
   border: 2px solid index.$black;
   border-radius: 6px;
 }
+
+.topicAnswerResult {
+  position: relative;
+  display: inline-block;
+  width: 50%;
+  text-align: center;
+}
+
+.voteResult {
+  display: inline-block;
+  width: 30%;
+  padding: 6px 10px;
+  font-weight: bold;
+  border: 2px solid index.$black;
+  border-radius: 6px;
+}

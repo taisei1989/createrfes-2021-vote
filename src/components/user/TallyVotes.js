@@ -1,5 +1,5 @@
 import { PHASES } from "../../interfaces";
-import styles from "./TallyVotes.module.scss";
+import styles from "./UserCommon.module.scss";
 
 /**
  * ユーザーの回答を集計する

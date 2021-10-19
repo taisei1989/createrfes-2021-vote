@@ -36,7 +36,11 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
     };
   }, [choiceAnswer, choiceAnswerKey]);
 
-  if (phase === PHASES.VOTE || phase === PHASES.TALLY) {
+  if (
+    phase === PHASES.VOTE ||
+    phase === PHASES.TALLY ||
+    phase === PHASES.RESULT
+  ) {
     return (
       <div>
         <p className={styles.title}>{currentTopic}</p>

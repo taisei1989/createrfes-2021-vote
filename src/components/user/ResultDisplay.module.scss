@@ -1,0 +1,16 @@
+@use "src/index.scss";
+@use "UserCommon.module.scss";
+
+.feedbackPanel {
+  width: 100%;
+
+  div {
+    display: inline-block;
+    width: 50%;
+
+    img {
+      width: 50%;
+      margin: 0 auto;
+    }
+  }
+}
