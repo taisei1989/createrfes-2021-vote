@@ -3,8 +3,10 @@
 .userPage {
   position: relative;
   width: 50%;
-  height: 100vh;
+  height: auto;
   min-height: 100vh;
   margin: 0 auto;
+  padding-top: 10px;
+  padding-bottom: 40px;
   align-items: center;
 }

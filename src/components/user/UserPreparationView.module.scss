@@ -1,31 +1,24 @@
 @use "src/index.scss";
 
-.preparationPanel {
-  p {
-    text-align: center;
-  }
-}
-
-.guide {
+.title {
+  text-align: center;
   margin-top: 10px;
   padding: 12px 10px;
-  border: 1px solid index.$black;
+  font-weight: bold;
+  border: 2px solid index.$black;
   border-radius: 6px;
 }
 
-.title {
+.guide {
   text-align: center;
   margin-top: 15px;
 }
 
-.innnerText {
+.innerText {
   display: inline-block;
   padding: 12px 10px;
   font-size: 20px;
-  border: 1px solid index.$black;
+  font-weight: bold;
+  border: 2px solid index.$black;
   border-radius: 6px;
-}
-
-img {
-  padding-top: 10px;
 }

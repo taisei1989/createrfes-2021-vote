@@ -68,6 +68,7 @@ const UserPage = () => {
       <UserPreparationView phase={phase} />
 
       <Buttons
+        currentTopic={currentTopic.text}
         currentAnswerA={currentTopic.answerA}
         currentAnswerB={currentTopic.answerB}
         phase={phase}

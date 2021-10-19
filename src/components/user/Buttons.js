@@ -4,7 +4,7 @@ import { db } from "../../services/firebase";
 import { PHASES } from "../../interfaces";
 import styles from "./Button.module.scss";
 
-const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
+const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
   const [choiceAnswer, setChoiceAnswer] = useState("");
   const [choiceAnswerKey, setchoiceAnswerKey] = useState("");
 
@@ -38,35 +38,44 @@ const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
 
   if (phase === PHASES.VOTE) {
     return (
-      <div className={styles.buttonPanel}>
-        <div className={styles.buttonPanelA}>
-          <input
-            type="radio"
-            name="topicAnswerA"
-            id="topicAnswerA"
-            className={styles.visuallyHidden}
-            value={choiceAnswer}
-            checked={choiceAnswer === "A"}
-            onChange={() => setChoiceAnswer("A")}
-          />
-          <label htmlFor="topicAnswerA">
-            <img src="/images/user/button-a.png" alt="createrfes-vote-title" />
-            <p className={styles.topicAnswer}>{currentAnswerA}</p>
-          </label>
-        </div>
-        <div className={styles.buttonPanelB}>
-          <input
-            type="radio"
-            name="topicAnswer"
-            id="topicAnswerB"
-            value={choiceAnswer}
-            checked={choiceAnswer === "B"}
-            onChange={() => setChoiceAnswer("B")}
-          />
-          <label htmlFor="topicAnswerB">
-            <img src="/images/user/button-b.png" alt="createrfes-vote-title" />
-            <p className={styles.topicAnswer}>{currentAnswerB}</p>
-          </label>
+      <div>
+        <p className={styles.title}>{currentTopic}</p>
+        <div className={styles.buttonPanel}>
+          <div className={styles.buttonPanelA}>
+            <input
+              type="radio"
+              name="topicAnswerA"
+              id="topicAnswerA"
+              className={styles.visuallyHidden}
+              value={choiceAnswer}
+              checked={choiceAnswer === "A"}
+              onChange={() => setChoiceAnswer("A")}
+            />
+            <label htmlFor="topicAnswerA">
+              <img
+                src="/images/user/button-a.png"
+                alt="createrfes-vote-title"
+              />
+              <p className={styles.topicAnswer}>{currentAnswerA}</p>
+            </label>
+          </div>
+          <div className={styles.buttonPanelB}>
+            <input
+              type="radio"
+              name="topicAnswer"
+              id="topicAnswerB"
+              value={choiceAnswer}
+              checked={choiceAnswer === "B"}
+              onChange={() => setChoiceAnswer("B")}
+            />
+            <label htmlFor="topicAnswerB">
+              <img
+                src="/images/user/button-b.png"
+                alt="createrfes-vote-title"
+              />
+              <p className={styles.topicAnswer}>{currentAnswerB}</p>
+            </label>
+          </div>
         </div>
       </div>
     );

@@ -1,4 +1,5 @@
 @use "src/index.scss";
+@use "UserPreparationView.module.scss";
 
 .buttonPanel {
   margin-top: 10px;
@@ -33,7 +34,7 @@ input[type="radio"] {
 
   .topicAnswer {
     position: absolute;
-    top: 80%;
+    top: 78%;
     left: 50%;
     font-weight: bold;
     transform: translate(-50%, -50%);
@@ -61,7 +62,7 @@ input[type="radio"] {
 
   .topicAnswer {
     position: absolute;
-    top: 80%;
+    top: 78%;
     left: 50%;
     font-weight: bold;
     transform: translate(-50%, -50%);
