@@ -1,5 +1,5 @@
 import { PHASES } from "../../interfaces";
-import styles from "./UserPreparationView.module.scss";
+import styles from "./UserCommon.module.scss";
 
 const UserPreparationView = ({ phase }) => {
   if (phase === PHASES.GUIDE || phase === PHASES.PREPARE) {

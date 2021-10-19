@@ -2,7 +2,7 @@ import { onValue, ref, off } from "@firebase/database";
 import { useEffect, useState } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
-import styles from "./UserPreparationView.module.scss";
+import styles from "./UserCommon.module.scss";
 
 const UserTimer = ({ phase }) => {
   const [count, setCount] = useState(0);
