@@ -42,10 +42,10 @@ const PhaseOperation = () => {
         <label>投票フェーズ(voting) </label>
         <button onClick={() => setCurrentPhase(PHASES.VOTE)}>変更</button>
       </div>
-      {/* <div>
+      <div>
         <label>集計フェーズ(tallying) </label>
         <button onClick={() => setCurrentPhase(PHASES.TALLY)}>変更</button>
-      </div> */}
+      </div>
       <div>
         <label>結果発表フェーズ(resulting) </label>
         <button onClick={() => setCurrentPhase(PHASES.RESULT)}>変更</button>

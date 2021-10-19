@@ -1,62 +1,8 @@
-@use "src/index";
+@use "src/index.scss";
 
-.display {
-  width: 100vw;
-  height: 120vh;
-  background-color: index.$blue;
-}
-
-.topicAnswerPanel {
-  position: relative;
-  width: 60vw;
-  height: 120vh;
-  background-color: index.$pink;
-  margin: 0 auto;
-}
-
-/* スマートフォンで見たときは"sp"のclassがついた画像が表示される */
-@media only screen and (max-width: 750px) {
-  .display {
-    width: 100vw;
-    height: 100vh;
-    background-color: index.$blue;
+.preparationPanel {
+  p {
+    margin: 2vh 0;
+    text-align: center;
   }
-
-  .topicAnswerPanel {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    background-color: index.$pink;
-    margin: 0 auto;
-  }
-}
-
-.mainVisual {
-  position: relative;
-  width: 100%;
-}
-
-.topic {
-  position: relative;
-  font-size: 16px;
-  font-weight: bold;
-  text-align: center;
-  padding: 15px;
-  margin: 10px 20px;
-  border-radius: 8px;
-  border: solid 2px index.$black;
-  background-color: index.$white;
-}
-
-.comment {
-  position: relative;
-  font-size: 18px;
-  font-weight: bold;
-
-  text-align: center;
-  margin: 5px 40px;
-  padding: 10px 5px;
-  border-radius: 8px;
-  border: solid 2px index.$black;
-  background-color: index.$white;
 }

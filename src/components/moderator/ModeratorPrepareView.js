@@ -3,7 +3,7 @@ import { CSSTransition } from "react-transition-group";
 import { PHASES } from "../../interfaces";
 import styles from "./ModeratorPreparePanel.module.scss";
 
-const ModeratorPreparePanel = ({ phase }) => {
+const ModeratorPrepareView = ({ phase }) => {
   const isShown = phase === PHASES.PREPARE;
   const elementRef = useRef(null);
 
@@ -28,4 +28,4 @@ const ModeratorPreparePanel = ({ phase }) => {
   );
 };
 
-export default ModeratorPreparePanel;
+export default ModeratorPrepareView;

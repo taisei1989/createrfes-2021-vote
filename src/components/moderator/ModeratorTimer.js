@@ -6,7 +6,7 @@ import { db } from "../../services/firebase";
 import styles from "./ModeratorCommon.module.scss";
 
 const ModeratorTimer = ({ phase }) => {
-  const [count, setCount] = useState(10);
+  const [count, setCount] = useState(60);
 
   useEffect(() => {
     const timerRef = ref(db, "timer/count");
