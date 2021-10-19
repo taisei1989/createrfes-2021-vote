@@ -5,8 +5,10 @@ const UserPreparationView = ({ phase }) => {
   if (phase === PHASES.GUIDE || phase === PHASES.PREPARE) {
     return (
       <div className={styles.preparationPanel}>
-        <p>ただいま準備中…</p>
-        <p>お題を用意しているよ！</p>
+        <p className={styles.guide}>ただいま準備中…</p>
+        <div className={styles.title}>
+          <div className={styles.innnerText}>お題を用意しているよ！</div>
+        </div>
       </div>
     );
   }

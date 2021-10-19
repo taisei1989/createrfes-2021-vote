@@ -2,7 +2,32 @@
 
 .preparationPanel {
   p {
-    margin: 2vh 0;
     text-align: center;
   }
+}
+.guide {
+  margin-top: 10px;
+  padding: 12px 10px;
+  border: 1px solid index.$black;
+  border-radius: 6px;
+}
+
+.title {
+  margin-top: 15px;
+  text-align: center;
+  p {
+    margin: 0;
+    padding: 12px 10px;
+    font-size: 20px;
+  }
+}
+.innnerText {
+  display: inline-block;
+  padding: 12px 10px;
+  border: 1px solid index.$black;
+  border-radius: 6px;
+}
+
+img {
+  padding-top: 10px;
 }
