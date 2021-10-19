@@ -20,7 +20,7 @@ const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
       const updates = {};
       updates["/votes/" + newPostKey] = postData;
 
-      return update(ref(db), updates);
+      update(ref(db), updates);
     } else if (choiceAnswerKey) {
       const postData = {
         answer: choiceAnswer,
@@ -29,42 +29,43 @@ const Buttons = ({ currentAnswerA, currentAnswerB, phase }) => {
       const updates = {};
       updates["/votes/" + choiceAnswerKey] = postData;
 
-      return update(ref(db), updates);
+      update(ref(db), updates);
     }
     return () => {
       console.log("コンポーネントがアンマウントしました");
     };
   }, [choiceAnswer, choiceAnswerKey]);
 
-  if (phase === PHASES.VOTE || phase === PHASES.COUNT) {
+  if (phase === PHASES.VOTE) {
     return (
-      <div>
-        <div className={styles.topicAnswer}>
-          <label htmlFor="topicAnswerA" className={styles.topicAnswerText}>
-            {currentAnswerA}
-            <input
-              type="radio"
-              name="topicAnswer"
-              id="topicAnswerA"
-              className={styles.topicAnswerButton}
-              value={choiceAnswer}
-              checked={choiceAnswer === "A"}
-              onChange={() => setChoiceAnswer("A")}
-            />
+      <div className={styles.buttonPanel}>
+        <div className={styles.buttonPanelA}>
+          <input
+            type="radio"
+            name="topicAnswerA"
+            id="topicAnswerA"
+            className={styles.visuallyHidden}
+            value={choiceAnswer}
+            checked={choiceAnswer === "A"}
+            onChange={() => setChoiceAnswer("A")}
+          />
+          <label htmlFor="topicAnswerA">
+            <img src="/images/user/button-a.png" alt="createrfes-vote-title" />
+            <p className={styles.topicAnswer}>{currentAnswerA}</p>
           </label>
         </div>
-        <div className={styles.topicAnswer}>
-          <label htmlFor="topicAnswerB" className={styles.topicAnswerText}>
-            {currentAnswerB}
-            <input
-              type="radio"
-              name="topicAnswer"
-              id="topicAnswerB"
-              className={styles.topicAnswerButton}
-              value={choiceAnswer}
-              checked={choiceAnswer === "B"}
-              onChange={() => setChoiceAnswer("B")}
-            />
+        <div className={styles.buttonPanelB}>
+          <input
+            type="radio"
+            name="topicAnswer"
+            id="topicAnswerB"
+            value={choiceAnswer}
+            checked={choiceAnswer === "B"}
+            onChange={() => setChoiceAnswer("B")}
+          />
+          <label htmlFor="topicAnswerB">
+            <img src="/images/user/button-b.png" alt="createrfes-vote-title" />
+            <p className={styles.topicAnswer}>{currentAnswerB}</p>
           </label>
         </div>
       </div>

@@ -1,0 +1,72 @@
+@use "src/index.scss";
+
+.buttonPanel {
+  margin-top: 10px;
+  width: 100%;
+
+  div {
+    display: inline-block;
+    width: 50%;
+    text-align: center;
+  }
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+.buttonPanelA {
+  position: relative;
+  input[type="radio"] + label {
+    display: inline-block;
+    background-size: contain;
+    height: 220px;
+    width: 220px;
+  }
+
+  input[type="radio"]:checked + label {
+    background-size: contain;
+    color: index.$white;
+    height: 220px;
+    width: 220px;
+  }
+
+  .topicAnswer {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    color: index.$white;
+  }
+}
+
+.buttonPanelB {
+  position: relative;
+  input[type="radio"] + label {
+    display: inline-block;
+    background-size: contain;
+    height: 220px;
+    width: 220px;
+  }
+
+  input[type="radio"]:checked + label {
+    background-size: contain;
+    color: index.$white;
+    height: 220px;
+    width: 220px;
+  }
+
+  .topicAnswer {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    font-weight: bold;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    color: index.$white;
+  }
+}
