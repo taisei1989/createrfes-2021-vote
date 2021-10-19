@@ -39,3 +39,31 @@
   border: 2px solid index.$black;
   border-radius: 6px;
 }
+
+.shareButtonPanel {
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
+
+  .shareButton {
+    display: inline-block;
+    background-color: #2fa1f2;
+    padding: 8px;
+    color: index.$white;
+    font-weight: bold;
+    border-radius: 32px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
+
+    img {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+    }
+
+    p {
+      display: inline-block;
+      height: 32px;
+      line-height: 32px;
+    }
+  }
+}

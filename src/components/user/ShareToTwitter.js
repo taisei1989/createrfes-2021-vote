@@ -1,5 +1,5 @@
 import { TwitterShareButton } from "react-share";
-import styles from "./ResultDisplay.module.scss";
+import styles from "./UserCommon.module.scss";
 
 const ShareToTwitter = ({
   currentTopicText,
@@ -9,24 +9,20 @@ const ShareToTwitter = ({
   voteResultB,
 }) => {
   return (
-    <TwitterShareButton
-      url={["\nhttps://thecreative.jp/bakuhatsu2021/\n"]}
-      title={[
-        currentTopicText +
-          "\n" +
-          currentAnswerA +
-          " " +
-          voteResultA +
-          "%\n" +
-          currentAnswerB +
-          "" +
-          voteResultB +
-          "%",
-      ]}
-      hashtags={["クリエイター祭り"]}
-    >
-      <p className={styles.shareButton}>🕊 結果をつぶやく</p>
-    </TwitterShareButton>
+    <div className={styles.shareButtonPanel}>
+      <div className={styles.shareButton}>
+        <TwitterShareButton
+          url={["\nhttps://thecreative.jp/bakuhatsu2021/\n"]}
+          title={[
+            `${currentTopicText}\n${currentAnswerA} ${voteResultA}%\n${currentAnswerB}${voteResultB}%`,
+          ]}
+          hashtags={["クリエイター祭り"]}
+        >
+          <img src="/images/user/twitter-logo.svg" alt="twitter-logo" />
+          <p className={styles.buttonText}>結果をつぶやく！</p>
+        </TwitterShareButton>
+      </div>
+    </div>
   );
 };
 
