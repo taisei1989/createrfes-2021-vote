@@ -1,5 +1,5 @@
 import { PHASES } from "../../interfaces";
-import styles from "./TallyVotes.module.scss";
+import styles from "./UserCommon.module.scss";
 
 /**
  * ユーザーの回答を集計する
@@ -11,14 +11,14 @@ const TallyVotes = ({ currentAnswerA, currentAnswerB, phase }) => {
     return (
       <div>
         <div className={styles.topicAnswerResult}>
-          <p className={styles.topicAnswer}>{currentAnswerA}</p>
-          <p className={styles.voteResult}>???</p>
+          <div className={styles.voteResult}>??%</div>
         </div>
         <div className={styles.topicAnswerResult}>
-          <p className={styles.topicAnswer}>{currentAnswerB}</p>
-          <p className={styles.voteResult}>???</p>
+          <div className={styles.voteResult}>??%</div>
         </div>
-        <p className={styles.tally}>集計中…！</p>
+        <div className={styles.guide}>
+          <div className={styles.innerText}>集計中…！</div>
+        </div>
       </div>
     );
   }

@@ -2,6 +2,7 @@ import { onValue, ref, off } from "@firebase/database";
 import { useEffect, useState } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
+import styles from "./UserCommon.module.scss";
 
 const UserTimer = ({ phase }) => {
   const [count, setCount] = useState(0);
@@ -28,7 +29,11 @@ const UserTimer = ({ phase }) => {
   console.log(count);
 
   if (phase === PHASES.VOTE) {
-    return <div>{count}</div>;
+    return (
+      <div className={styles.guide}>
+        <div className={styles.innerText}>あと{count}秒！</div>
+      </div>
+    );
   }
   return null;
 };
