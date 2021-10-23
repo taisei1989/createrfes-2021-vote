@@ -1,25 +1,10 @@
-import { ref, update, onValue, off } from "firebase/database";
+import { ref, update } from "firebase/database";
 import { useEffect, useState } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
 
 const PhaseOperation = () => {
   const [currentPhase, setCurrentPhase] = useState(PHASES.GUIDE);
-  const [count, setCount] = useState(1);
-
-  useEffect(() => {
-    const timerRef = ref(db, "timer/count");
-    onValue(timerRef, (snapshot) => {
-      const data = snapshot.val();
-      setCount(data);
-      if (data === 0) {
-        console.log("0を検知しました");
-        setCurrentPhase(PHASES.TALLY);
-        return off(timerRef);
-      }
-    });
-    return off(timerRef);
-  }, [count]);
 
   useEffect(() => {
     const phaseData = {

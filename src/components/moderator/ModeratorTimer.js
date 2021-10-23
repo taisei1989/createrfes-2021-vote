@@ -1,6 +1,5 @@
 import { update, onValue, ref, off } from "@firebase/database";
 import { useEffect, useState } from "react";
-import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
 
 import styles from "./ModeratorCommon.module.scss";
@@ -28,21 +27,16 @@ const ModeratorTimer = ({ phase }) => {
   }, [count]);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCount(count - 1);
-      console.log("setInterval を実行しました");
-    }, 1000);
-    if (count === 0) {
-      const phaseData = {
-        phase: PHASES.TALLY,
+    if (count > 0) {
+      const intervalId = setInterval(() => {
+        setCount(count - 1);
+        console.log("setInterval を実行しました");
+      }, 1000);
+      return () => {
+        clearInterval(intervalId);
       };
-      const updates = {};
-      updates["/progress/"] = phaseData;
-      update(ref(db), updates);
     }
-    return () => {
-      clearInterval(intervalId);
-    };
+    return null;
   }, [count]);
 
   console.log(count);

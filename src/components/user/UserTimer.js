@@ -18,12 +18,16 @@ const UserTimer = ({ phase }) => {
   }, []);
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCount(count - 1);
-    }, 1000);
-    return () => {
-      clearInterval(intervalId);
-    };
+    if (count > 0) {
+      const intervalId = setInterval(() => {
+        setCount(count - 1);
+        console.log("setInterval を実行しました");
+      }, 1000);
+      return () => {
+        clearInterval(intervalId);
+      };
+    }
+    return null;
   }, [count]);
 
   console.log(count);
