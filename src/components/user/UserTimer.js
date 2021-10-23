@@ -11,24 +11,12 @@ const UserTimer = ({ phase }) => {
     const timerRef = ref(db, "timer/count");
     onValue(timerRef, (snapshot) => {
       setCount(snapshot.val());
+      console.log("カウントを更新しました");
     });
     return () => {
       off(timerRef);
     };
   }, []);
-
-  useEffect(() => {
-    if (count > 0) {
-      const intervalId = setInterval(() => {
-        setCount(count - 1);
-        console.log("setInterval を実行しました");
-      }, 1000);
-      return () => {
-        clearInterval(intervalId);
-      };
-    }
-    return null;
-  }, [count]);
 
   console.log(count);
 
