@@ -1,4 +1,4 @@
-import { child, push, ref, update } from "@firebase/database";
+import { child, off, push, ref, update } from "@firebase/database";
 import React, { useEffect, useState } from "react";
 import { db } from "../../services/firebase";
 import { PHASES } from "../../interfaces";
@@ -32,15 +32,12 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
       update(ref(db), updates);
     }
     return () => {
+      off(ref(db));
       console.log("コンポーネントがアンマウントしました");
     };
   }, [choiceAnswer, choiceAnswerKey]);
 
-  if (
-    phase === PHASES.VOTE ||
-    phase === PHASES.TALLY ||
-    phase === PHASES.RESULT
-  ) {
+  if (phase === PHASES.VOTE) {
     return (
       <div>
         <p className={styles.title}>{currentTopic}</p>
@@ -57,11 +54,6 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
                 onChange={() => setChoiceAnswer("A")}
               />
               <label htmlFor="topicAnswerA">
-                {console.log(document.getElementsByName("topicAnswer"))}
-                <img
-                  src="/images/user/button-a.png"
-                  alt="createrfes-vote-title"
-                />
                 <p className={styles.topicAnswer}>{currentAnswerA}</p>
               </label>
             </div>
@@ -75,10 +67,45 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
                 onChange={() => setChoiceAnswer("B")}
               />
               <label htmlFor="topicAnswerB">
-                <img
-                  src="/images/user/button-b.png"
-                  alt="createrfes-vote-title"
-                />
+                <p className={styles.topicAnswer}>{currentAnswerB}</p>
+              </label>
+            </div>
+          </form>
+        </div>
+      </div>
+    );
+  } else if (phase === PHASES.TALLY || phase === PHASES.RESULT) {
+    return (
+      <div>
+        <p className={styles.title}>{currentTopic}</p>
+        <div className={styles.buttonPanel}>
+          <form name="voteForm" action="">
+            <div className={styles.buttonPanelA}>
+              <input
+                type="radio"
+                name="topicAnswer"
+                id="topicAnswerA"
+                className={styles.visuallyHidden}
+                value={choiceAnswer}
+                disabled="disabled"
+                checked={choiceAnswer === "A"}
+                onChange={() => setChoiceAnswer("A")}
+              />
+              <label htmlFor="topicAnswerA">
+                <p className={styles.topicAnswer}>{currentAnswerA}</p>
+              </label>
+            </div>
+            <div className={styles.buttonPanelB}>
+              <input
+                type="radio"
+                name="topicAnswer"
+                id="topicAnswerB"
+                value={choiceAnswer}
+                disabled="disabled"
+                checked={choiceAnswer === "B"}
+                onChange={() => setChoiceAnswer("B")}
+              />
+              <label htmlFor="topicAnswerB">
                 <p className={styles.topicAnswer}>{currentAnswerB}</p>
               </label>
             </div>
