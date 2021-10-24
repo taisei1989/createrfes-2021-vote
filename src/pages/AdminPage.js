@@ -8,8 +8,8 @@ import PhaseOperation from "../components/admin/PhaseOperation";
 import { AuthContext } from "../contexts/AuthContext";
 import AddTopic from "../components/admin/AddTopic";
 import RemoveTopic from "../components/admin/RemoveTopic";
-import SetCurrentTopic from "../components/admin/SetCurrentTopic";
 import { createVotesNode } from "../components/admin/createNewChildNode";
+import { updatedCurrentTopic } from "../components/admin/updatedCurrentTopic";
 
 const AdminPage = () => {
   const user = useContext(AuthContext);
@@ -169,13 +169,12 @@ const AdminPage = () => {
             <RemoveTopic topic={topic} />
             <button
               onClick={() => {
-                setCurrentTopic(topic);
-                <SetCurrentTopic
-                  id={topic.topicId}
-                  topic={topic.topicText}
-                  answerA={topic.topicAnswerA}
-                  answerB={topic.topicAnswerB}
-                />;
+                updatedCurrentTopic(
+                  topic.topicId,
+                  topic.topicText,
+                  topic.topicAnswerA,
+                  topic.topicAnswerB
+                );
                 createVotesNode();
               }}
             >
