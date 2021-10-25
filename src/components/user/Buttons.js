@@ -5,8 +5,14 @@ import { PHASES } from "../../interfaces";
 import styles from "./Buttons.module.scss";
 
 const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
-  const [choiceAnswer, setChoiceAnswer] = useState("");
+  const [choiceAnswer, setChoiceAnswer] = useState(false);
   const [choiceAnswerKey, setchoiceAnswerKey] = useState("");
+
+  useEffect(() => {
+    if (phase === PHASES.PREPARE) {
+      setChoiceAnswer(0);
+    }
+  }, [phase]);
 
   useEffect(() => {
     if (!choiceAnswerKey) {
@@ -32,7 +38,6 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
       update(ref(db), updates);
     }
     return () => {
-      off(ref(db));
       console.log("コンポーネントがアンマウントしました");
     };
   }, [choiceAnswer, choiceAnswerKey]);
@@ -75,6 +80,7 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
       </div>
     );
   } else if (phase === PHASES.TALLY || phase === PHASES.RESULT) {
+    // 投票した選択肢がわかるよう選択したものを選択済み画像で維持しつつ、投票はできないように記述
     return (
       <div>
         <p className={styles.title}>{currentTopic}</p>
@@ -87,7 +93,7 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
                 id="topicAnswerA"
                 className={styles.visuallyHidden}
                 value={choiceAnswer}
-                disabled="disabled"
+                disabled
                 checked={choiceAnswer === "A"}
                 onChange={() => setChoiceAnswer("A")}
               />
@@ -101,7 +107,7 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
                 name="topicAnswer"
                 id="topicAnswerB"
                 value={choiceAnswer}
-                disabled="disabled"
+                disabled
                 checked={choiceAnswer === "B"}
                 onChange={() => setChoiceAnswer("B")}
               />
