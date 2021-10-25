@@ -1,4 +1,4 @@
-import { child, off, push, ref, update } from "@firebase/database";
+import { child, push, ref, update } from "@firebase/database";
 import React, { useEffect, useState } from "react";
 import { db } from "../../services/firebase";
 import { PHASES } from "../../interfaces";
@@ -44,7 +44,6 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
   }, [choiceAnswer, choiceAnswerKey]);
 
   const buttonCheck = phase === PHASES.TALLY || phase === PHASES.RESULT;
-  console.log(buttonCheck);
 
   if (
     phase === PHASES.VOTE ||
