@@ -6,7 +6,7 @@ import styles from "./UserCommon.module.scss";
  *
  */
 
-const TallyVotes = ({ currentAnswerA, currentAnswerB, phase }) => {
+const TallyVotes = ({ phase }) => {
   if (phase === PHASES.TALLY) {
     return (
       <div>

@@ -76,11 +76,7 @@ const UserPage = () => {
 
       <UserTimer phase={phase} />
 
-      <TallyVotes
-        currentAnswerA={currentTopic.answerA}
-        currentAnswerB={currentTopic.answerB}
-        phase={phase}
-      />
+      <TallyVotes phase={phase} />
 
       <ResultDisplay
         currentTopicText={currentTopic.text}
