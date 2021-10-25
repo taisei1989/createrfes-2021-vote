@@ -23,6 +23,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: $black;
   background-color: $yellow;
+  background-image: url("./images/bg-mesh.png");
+  background-repeat: repeat;
 }
 
 #root {

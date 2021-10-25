@@ -10,6 +10,7 @@ import AddTopic from "../components/admin/AddTopic";
 import RemoveTopic from "../components/admin/RemoveTopic";
 import { createVotesNode } from "../components/admin/createNewChildNode";
 import { updatedCurrentTopic } from "../components/admin/updatedCurrentTopic";
+import styles from "./AdminPage.module.scss";
 
 const AdminPage = () => {
   const user = useContext(AuthContext);
@@ -100,7 +101,7 @@ const AdminPage = () => {
     return <Redirect to="/admin/login" />;
   } else {
     return (
-      <div>
+      <div className={styles.adminPage}>
         <h2>現在のお題</h2>
         <ul>
           <li>ID：{currentTopic.topicId}</li>
