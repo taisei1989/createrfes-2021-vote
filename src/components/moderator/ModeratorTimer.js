@@ -44,6 +44,7 @@ const ModeratorTimer = ({ phase }) => {
   return (
     <div className={styles.moderatorTimer}>
       <p>{count}</p>
+      <img src={"images/moderator/count-bg.png"} alt="カウントダウン用画像" />
     </div>
   );
 };
