@@ -64,7 +64,11 @@ const UserPage = () => {
 
   return (
     <div className={styles.userPage}>
-      <img src="images/user/main-visual.jpg" alt="createrfes-vote-title" />
+      <img
+        className={styles.mainVisual}
+        src="images/user/main-visual.jpg"
+        alt="createrfes-vote-title"
+      />
       <UserPreparationView phase={phase} />
 
       <Buttons
