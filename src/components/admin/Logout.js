@@ -8,7 +8,15 @@ const Logout = () => {
     history.push("/admin/login");
   };
 
-  return <button onClick={handleLogout}>ログアウト</button>;
+  return (
+    <div>
+      <button onClick={handleLogout}>ログアウト</button>
+      <br />
+      <p>
+        ※ログアウトボタンを押すと管理者画面・司会者画面のログアウトが実装されます
+      </p>
+    </div>
+  );
 };
 
 export default Logout;
