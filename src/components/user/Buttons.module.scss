@@ -2,8 +2,10 @@
 @use "UserCommon.module.scss";
 
 .buttonPanel {
-  margin-top: 10px;
-  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  //width: 100%;
 }
 
 input[type="radio"] {
@@ -11,17 +13,24 @@ input[type="radio"] {
 }
 
 .buttonPanelA {
+  display: block;
   position: relative;
-  display: inline-block;
-  width: 50%;
+  width: 220px;
+  height: 220px;
+  max-height: 220px;
+  max-width: 220px;
   text-align: center;
+  flex-basis: 50%;
 
   input[type="radio"] + label {
     display: inline-block;
-    background-image: url("../../images/user/button-a.png");
+    background: url("../../images/user/button-a.png");
     background-size: contain;
-    height: 220px;
-    width: 220px;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: auto;
+    max-height: 220px;
+    max-width: 220px;
   }
 
   input[type="radio"]:checked + label {
@@ -48,14 +57,16 @@ input[type="radio"] {
   position: relative;
   display: inline-block;
   width: 50%;
+  height: 50%;
+  text-align: center;
+  flex-basis: 50%;
+  max-width: 220px;
   text-align: center;
 
   input[type="radio"] + label {
     display: inline-block;
     background-image: url("../../images/user/button-b.png");
-    background-size: contain;
-    height: 220px;
-    width: 220px;
+    background-size: 100%;
   }
 
   input[type="radio"]:checked + label {

@@ -1,5 +1,5 @@
 import { child, push, ref, update } from "@firebase/database";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { db } from "../../services/firebase";
 import { PHASES } from "../../interfaces";
 import styles from "./Buttons.module.scss";
@@ -7,6 +7,8 @@ import styles from "./Buttons.module.scss";
 const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
   const [choiceAnswer, setChoiceAnswer] = useState(false);
   const [choiceAnswerKey, setchoiceAnswerKey] = useState("");
+  const buttonARef = useRef(null);
+  const buttonBRef = useRef(null);
 
   // preparing phase に移った際にボタンの画像が初期化される処理
   useEffect(() => {
@@ -50,41 +52,42 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
     phase === PHASES.TALLY ||
     phase === PHASES.RESULT
   ) {
+    console.log(buttonARef.current.checked);
     return (
       <div>
         <p className={styles.title}>{currentTopic}</p>
         <div className={styles.buttonPanel}>
-          <form name="voteForm" action="">
-            <div className={styles.buttonPanelA}>
-              <input
-                type="radio"
-                name="topicAnswer"
-                id="topicAnswerA"
-                className={styles.visuallyHidden}
-                value={choiceAnswer}
-                checked={choiceAnswer === "A"}
-                onChange={() => setChoiceAnswer("A")}
-                disabled={buttonCheck ? true : false}
-              />
-              <label htmlFor="topicAnswerA">
-                <p className={styles.topicAnswer}>{currentAnswerA}</p>
-              </label>
-            </div>
-            <div className={styles.buttonPanelB}>
-              <input
-                type="radio"
-                name="topicAnswer"
-                id="topicAnswerB"
-                value={choiceAnswer}
-                checked={choiceAnswer === "B"}
-                onChange={() => setChoiceAnswer("B")}
-                disabled={buttonCheck ? true : false}
-              />
-              <label htmlFor="topicAnswerB">
-                <p className={styles.topicAnswer}>{currentAnswerB}</p>
-              </label>
-            </div>
-          </form>
+          <div className={styles.buttonPanelA}>
+            <input
+              type="radio"
+              name="topicAnswer"
+              id="topicAnswerA"
+              ref={buttonARef}
+              className={styles.visuallyHidden}
+              value={choiceAnswer}
+              checked={choiceAnswer === "A"}
+              onChange={() => setChoiceAnswer("A")}
+              disabled={buttonCheck ? true : false}
+            />
+            <label htmlFor="topicAnswerA">
+              {/* {buttonARef.current.checked ? <img src="" /> :} */}
+              <p className={styles.topicAnswer}>{currentAnswerA}</p>
+            </label>
+          </div>
+          <div className={styles.buttonPanelB}>
+            <input
+              type="radio"
+              name="topicAnswer"
+              id="topicAnswerB"
+              value={choiceAnswer}
+              checked={choiceAnswer === "B"}
+              onChange={() => setChoiceAnswer("B")}
+              disabled={buttonCheck ? true : false}
+            />
+            <label htmlFor="topicAnswerB">
+              <p className={styles.topicAnswer}>{currentAnswerB}</p>
+            </label>
+          </div>
         </div>
       </div>
     );
