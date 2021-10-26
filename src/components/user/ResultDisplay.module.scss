@@ -15,5 +15,9 @@
       margin: 0 auto;
       transform: rotate(-10deg);
     }
+
+    &:active {
+      transform: translateY(5px);
+    }
   }
 }
