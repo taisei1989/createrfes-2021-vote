@@ -9,4 +9,9 @@
   padding-top: 10px;
   padding-bottom: 10vh;
   align-items: center;
+
+  .mainVisual {
+    border: 2px solid index.$black;
+    border-radius: 12px;
+  }
 }
