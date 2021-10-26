@@ -13,21 +13,106 @@
   }
 }
 
+/* Moderator Timer ----------------------------------- */
 .moderatorTimer {
   position: absolute;
   z-index: 400;
   top: 5vh;
   right: 5vw;
-  padding: 2vw;
-  background-color: #aaa;
+  //transform: translate(0%, 0%);
+  width: 15vw;
+  height: 15vw;
+  text-align: center;
 
   p {
-    display: flex;
+    position: absolute;
+    display: block;
+    top: 7vw;
+    left: 0px;
+    right: 10px;
+    line-height: 1;
+    color: #fafafa;
+    text-shadow: 0 0 2vw #333;
+    font-size: 5vw;
+  }
+
+  img {
+    position: absolute;
+    display: block;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.countEnter {
+  top: 5vh;
+  right: 5vw;
+  width: 15vw;
+  height: 15vw;
+  p {
+    top: 7vw;
     font-size: 5vw;
-    width: 8vw;
-    height: 8vw;
+  }
+}
+
+.countEnterActive {
+  top: 25vh;
+  right: 40vw;
+  width: 20vw;
+  height: 20vw;
+  transition: top 3s, right 3s, width 3s, height 3s;
+  p {
+    top: 9vw;
+    font-size: 6vw;
+    transition: top 3s, font-size 3s;
+  }
+}
+
+.countEnterDone {
+  top: 25vh;
+  right: 40vw;
+  width: 20vw;
+  height: 20vw;
+  p {
+    top: 9vw;
+    font-size: 6vw;
+  }
+}
+
+.countExit {
+  top: 25vh;
+  right: 40vw;
+  width: 20vw;
+  height: 20vw;
+  p {
+    top: 9vw;
+    font-size: 6vw;
+  }
+}
+
+.countExitActive {
+  top: 5vh;
+  right: 5vw;
+  width: 15vw;
+  height: 15vw;
+  transition: top 3s, right 3s, width 3s, height 3s;
+  p {
+    top: 7vw;
+    font-size: 5vw;
+    transition: top 3s, font-size 3s;
+  }
+}
+
+.countExitDone {
+  top: 5vh;
+  right: 5vw;
+  width: 15vw;
+  height: 15vw;
+  p {
+    top: 7vw;
+    font-size: 5vw;
   }
 }
 
@@ -36,11 +121,63 @@
   position: absolute;
   z-index: 700;
   bottom: 0;
-  left: 0;
+  left: 0px;
 
   img {
     display: block;
     width: 30vw;
+    height: 30vh;
+  }
+}
+
+.qrCodeEnter {
+  left: 0px;
+
+  img {
+    height: 30vh;
+  }
+}
+
+.qrCodeEnterActive {
+  left: 50px;
+  transition: left 1s;
+
+  img {
+    height: 60vh;
+    transition: height 1s;
+  }
+}
+
+.qrCodeEnterDone {
+  left: 50px;
+
+  img {
+    height: 60vh;
+  }
+}
+
+.qrCodeExit {
+  left: 50px;
+
+  img {
+    height: 60vh;
+  }
+}
+
+.qrCodeExitActive {
+  left: 0px;
+  transition: left 1s;
+
+  img {
+    height: 30vh;
+    transition: height 1s;
+  }
+}
+
+.qrCodeExitDone {
+  left: 0px;
+
+  img {
     height: 30vh;
   }
 }
