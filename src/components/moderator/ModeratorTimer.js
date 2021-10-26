@@ -1,11 +1,16 @@
 import { update, onValue, ref, off } from "@firebase/database";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
+import { CSSTransition } from "react-transition-group";
 
 import styles from "./ModeratorCommon.module.scss";
 
 const ModeratorTimer = ({ phase }) => {
   const [count, setCount] = useState(60);
+  const showNum = phase === PHASES.VOTE;
+  const showCount = phase === PHASES.VOTE;
+  const elementRef = useRef(null);
 
   useEffect(() => {
     const timerRef = ref(db, "timer/count");
@@ -42,10 +47,24 @@ const ModeratorTimer = ({ phase }) => {
   console.log(count);
 
   return (
-    <div className={styles.moderatorTimer}>
-      <p>{count}</p>
-      <img src={"images/moderator/count-bg.png"} alt="カウントダウン用画像" />
-    </div>
+    <CSSTransition
+      in={showCount}
+      nodeRef={elementRef}
+      timeout={3000}
+      classNames={{
+        enter: styles.countEnter,
+        enterActive: styles.countEnterActive,
+        enterDone: styles.countEnterDone,
+        exit: styles.countExit,
+        exitActive: styles.countExitActive,
+        exitDone: styles.countExitDone,
+      }}
+    >
+      <div className={styles.moderatorTimer} ref={elementRef}>
+        <img src={"images/moderator/count-bg.png"} alt="カウントダウン用画像" />
+        {showNum && <p>{count}</p>}
+      </div>
+    </CSSTransition>
   );
 };
 
