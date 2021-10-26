@@ -1,5 +1,5 @@
 import { child, push, ref, update } from "@firebase/database";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { db } from "../../services/firebase";
 import { PHASES } from "../../interfaces";
 import styles from "./Buttons.module.scss";
@@ -7,8 +7,6 @@ import styles from "./Buttons.module.scss";
 const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
   const [choiceAnswer, setChoiceAnswer] = useState(false);
   const [choiceAnswerKey, setchoiceAnswerKey] = useState("");
-  const buttonARef = useRef(null);
-  const buttonBRef = useRef(null);
 
   // preparing phase に移った際にボタンの画像が初期化される処理
   useEffect(() => {
@@ -52,7 +50,6 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
     phase === PHASES.TALLY ||
     phase === PHASES.RESULT
   ) {
-    console.log(buttonARef.current.checked);
     return (
       <div>
         <p className={styles.title}>{currentTopic}</p>
@@ -62,7 +59,6 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
               type="radio"
               name="topicAnswer"
               id="topicAnswerA"
-              ref={buttonARef}
               className={styles.visuallyHidden}
               value={choiceAnswer}
               checked={choiceAnswer === "A"}
@@ -70,7 +66,14 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
               disabled={buttonCheck ? true : false}
             />
             <label htmlFor="topicAnswerA">
-              {/* {buttonARef.current.checked ? <img src="" /> :} */}
+              {choiceAnswer === "A" ? (
+                <img
+                  src="images/user/button-a-selected.png"
+                  alt="選択されたボタンA"
+                />
+              ) : (
+                <img src="images/user/button-a.png" alt="ボタンA" />
+              )}
               <p className={styles.topicAnswer}>{currentAnswerA}</p>
             </label>
           </div>
@@ -85,6 +88,14 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
               disabled={buttonCheck ? true : false}
             />
             <label htmlFor="topicAnswerB">
+              {choiceAnswer === "B" ? (
+                <img
+                  src="images/user/button-b-selected.png"
+                  alt="選択されたボタンB"
+                />
+              ) : (
+                <img src="images/user/button-b.png" alt="ボタンB" />
+              )}
               <p className={styles.topicAnswer}>{currentAnswerB}</p>
             </label>
           </div>
