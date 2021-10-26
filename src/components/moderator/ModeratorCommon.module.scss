@@ -36,11 +36,63 @@
   position: absolute;
   z-index: 700;
   bottom: 0;
-  left: 0;
+  left: 0px;
 
   img {
     display: block;
     width: 30vw;
+    height: 30vh;
+  }
+}
+
+.qrCodeEnter {
+  left: 0px;
+
+  img {
+    height: 30vh;
+  }
+}
+
+.qrCodeEnterActive {
+  left: 50px;
+  transition: left 1s;
+
+  img {
+    height: 60vh;
+    transition: height 1s;
+  }
+}
+
+.qrCodeEnterDone {
+  left: 50px;
+
+  img {
+    height: 60vh;
+  }
+}
+
+.qrCodeExit {
+  left: 50px;
+
+  img {
+    height: 60vh;
+  }
+}
+
+.qrCodeExitActive {
+  left: 0px;
+  transition: left 1s;
+
+  img {
+    height: 30vh;
+    transition: height 1s;
+  }
+}
+
+.qrCodeExitDone {
+  left: 0px;
+
+  img {
     height: 30vh;
   }
 }
