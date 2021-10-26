@@ -54,37 +54,51 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
       <div>
         <p className={styles.title}>{currentTopic}</p>
         <div className={styles.buttonPanel}>
-          <form name="voteForm" action="">
-            <div className={styles.buttonPanelA}>
-              <input
-                type="radio"
-                name="topicAnswer"
-                id="topicAnswerA"
-                className={styles.visuallyHidden}
-                value={choiceAnswer}
-                checked={choiceAnswer === "A"}
-                onChange={() => setChoiceAnswer("A")}
-                disabled={buttonCheck ? true : false}
-              />
-              <label htmlFor="topicAnswerA">
-                <p className={styles.topicAnswer}>{currentAnswerA}</p>
-              </label>
-            </div>
-            <div className={styles.buttonPanelB}>
-              <input
-                type="radio"
-                name="topicAnswer"
-                id="topicAnswerB"
-                value={choiceAnswer}
-                checked={choiceAnswer === "B"}
-                onChange={() => setChoiceAnswer("B")}
-                disabled={buttonCheck ? true : false}
-              />
-              <label htmlFor="topicAnswerB">
-                <p className={styles.topicAnswer}>{currentAnswerB}</p>
-              </label>
-            </div>
-          </form>
+          <div className={styles.buttonPanelA}>
+            <input
+              type="radio"
+              name="topicAnswer"
+              id="topicAnswerA"
+              className={styles.visuallyHidden}
+              value={choiceAnswer}
+              checked={choiceAnswer === "A"}
+              onChange={() => setChoiceAnswer("A")}
+              disabled={buttonCheck ? true : false}
+            />
+            <label htmlFor="topicAnswerA">
+              {choiceAnswer === "A" ? (
+                <img
+                  src="images/user/button-a-selected.png"
+                  alt="選択されたボタンA"
+                />
+              ) : (
+                <img src="images/user/button-a.png" alt="ボタンA" />
+              )}
+              <p className={styles.topicAnswer}>{currentAnswerA}</p>
+            </label>
+          </div>
+          <div className={styles.buttonPanelB}>
+            <input
+              type="radio"
+              name="topicAnswer"
+              id="topicAnswerB"
+              value={choiceAnswer}
+              checked={choiceAnswer === "B"}
+              onChange={() => setChoiceAnswer("B")}
+              disabled={buttonCheck ? true : false}
+            />
+            <label htmlFor="topicAnswerB">
+              {choiceAnswer === "B" ? (
+                <img
+                  src="images/user/button-b-selected.png"
+                  alt="選択されたボタンB"
+                />
+              ) : (
+                <img src="images/user/button-b.png" alt="ボタンB" />
+              )}
+              <p className={styles.topicAnswer}>{currentAnswerB}</p>
+            </label>
+          </div>
         </div>
       </div>
     );
