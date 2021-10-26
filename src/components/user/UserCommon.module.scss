@@ -51,11 +51,13 @@
   display: inline-block;
   width: 50%;
   text-align: center;
+  margin-top: 15px;
 }
 
 .voteResult {
   display: inline-block;
-  width: 30%;
+  width: 100%;
+  max-width: 120px;
   padding: 6px 10px;
   font-weight: bold;
   border: 2px solid index.$black;
