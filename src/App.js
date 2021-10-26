@@ -12,7 +12,8 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={UserPage} />
-          <Route path="/moderator" component={ModeratorPage} />
+          <Route exact path="/moderator" component={ModeratorPage} />
+          <Route path="/moderator/login" component={LoginPage} />
           <Route exact path="/admin" component={AdminPage} />
           <Route path="/admin/login" component={LoginPage} />
         </Switch>

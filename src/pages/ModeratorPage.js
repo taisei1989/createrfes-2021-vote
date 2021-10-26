@@ -1,5 +1,5 @@
 import { getDatabase, onValue, ref } from "@firebase/database";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PHASES } from "../interfaces";
 import * as CONF from "../configs";
 import TopicAnswerPanel from "../components/moderator/TopicAnswerPanel";
@@ -11,6 +11,8 @@ import ModeratorTimer from "../components/moderator/ModeratorTimer";
 import DebugModerator from "../components/moderator/DebugModerator";
 import JudgeCharacter from "../components/moderator/JudgeCharacter";
 import QRCodeBoard from "../components/moderator/QRCodeBoard";
+import { AuthContext } from "../contexts/AuthContext";
+import { Redirect } from "react-router";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
 const isDebug = CONF.IS_DEBUG && true;
@@ -22,6 +24,7 @@ const isDebugPhase = CONF.IS_DEBUG && true;
  */
 const ModeratorPage = () => {
   const [phase, setPhase] = useState(PHASES.GUIDE);
+  const user = useContext(AuthContext);
 
   useEffect(() => {
     if (isDebugPhase) return;
@@ -47,6 +50,9 @@ const ModeratorPage = () => {
   }, []);
 
   // Render
+  if (!user) {
+    return <Redirect to="/moderator/login" />;
+  }
   return (
     <div className={styles.moderatorPage}>
       {isDebug && isDebugPhase && (

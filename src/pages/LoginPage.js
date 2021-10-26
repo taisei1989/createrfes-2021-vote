@@ -1,19 +1,24 @@
 import { signInWithEmailAndPassword } from "@firebase/auth";
 import { auth } from "../services/firebase";
 import { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+  const location = useLocation();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     await signInWithEmailAndPassword(auth, email, password).catch((error) => {
       console.log(error.message);
     });
-    history.push("/admin");
+    if (location.pathname === "/moderator/login") {
+      history.push("/moderator");
+    } else if (location.pathname === "/admin/login") {
+      history.push("/admin");
+    }
   };
 
   const handleChangeEmail = (event) => {
