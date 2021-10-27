@@ -1,4 +1,4 @@
-import { onDisconnect, onValue, ref } from "@firebase/database";
+import { onValue, ref } from "@firebase/database";
 import { useState, useEffect } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
@@ -22,7 +22,7 @@ const ResultDisplay = ({
   useEffect(() => {
     const voteRef = ref(db, "votes/");
 
-    onValue(voteRef, (snapshot) => {
+    const unsubscribeVote = onValue(voteRef, (snapshot) => {
       const votesUpdated = Object.values(snapshot.val());
 
       // 集計結果
@@ -56,7 +56,7 @@ const ResultDisplay = ({
     });
 
     return () => {
-      onDisconnect(voteRef);
+      unsubscribeVote();
     };
   }, []);
 

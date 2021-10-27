@@ -1,4 +1,4 @@
-import { onValue, ref, off } from "@firebase/database";
+import { onValue, ref } from "@firebase/database";
 import { useEffect, useState } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
@@ -9,12 +9,12 @@ const UserTimer = ({ phase }) => {
 
   useEffect(() => {
     const timerRef = ref(db, "timer/count");
-    onValue(timerRef, (snapshot) => {
+    const unsubscribeTime = onValue(timerRef, (snapshot) => {
       setCount(snapshot.val());
       console.log("カウントを更新しました");
     });
     return () => {
-      off(timerRef);
+      unsubscribeTime();
     };
   }, []);
 

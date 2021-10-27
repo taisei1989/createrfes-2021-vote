@@ -1,4 +1,4 @@
-import { update, onValue, ref, off } from "@firebase/database";
+import { update, onValue, ref } from "@firebase/database";
 import { useEffect, useRef, useState } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
@@ -14,12 +14,14 @@ const ModeratorTimer = ({ phase }) => {
 
   useEffect(() => {
     const timerRef = ref(db, "timer/count");
-    onValue(timerRef, (snapshot) => {
+    const unsubscribeTime = onValue(timerRef, (snapshot) => {
       const data = snapshot.val();
       setCount(data);
       console.log(data);
     });
-    return off(timerRef);
+    return () => {
+      unsubscribeTime();
+    };
   }, []);
 
   useEffect(() => {
