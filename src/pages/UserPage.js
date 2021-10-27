@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ref, onDisconnect, onValue } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 
 import { db } from "../services/firebase";
 import { PHASES } from "../interfaces";
@@ -31,7 +31,7 @@ const UserPage = () => {
     const refProgress = ref(db, "progress/");
     const currentTopicRef = ref(db, "current/");
 
-    onValue(refProgress, (snapshot) => {
+    const unsubscribePhase = onValue(refProgress, (snapshot) => {
       const phaseUpdated = snapshot.val().phase;
       if (isDebug)
         console.log("フェーズの切り替えを検知しました", phaseUpdated);
@@ -40,7 +40,7 @@ const UserPage = () => {
       }
     });
 
-    onValue(currentTopicRef, (snapshot) => {
+    const unsubscribeCurrent = onValue(currentTopicRef, (snapshot) => {
       const currentTopicUpdated = {
         text: snapshot.val().currentTopicText,
         answerA: snapshot.val().currentAnswerA,
@@ -58,7 +58,8 @@ const UserPage = () => {
     });
 
     return () => {
-      onDisconnect(refProgress);
+      unsubscribePhase();
+      unsubscribeCurrent();
     };
   }, []);
 

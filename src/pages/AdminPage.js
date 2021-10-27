@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ref, onValue, onDisconnect } from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import { db } from "../services/firebase";
 import { Redirect } from "react-router";
 
@@ -41,7 +41,7 @@ const AdminPage = () => {
     const currentTopicRef = ref(db, "current/");
     const voteRef = ref(db, "votes/");
 
-    onValue(voteRef, (snapshot) => {
+    const unsubscribeVote = onValue(voteRef, (snapshot) => {
       const votesUpdated = Object.values(snapshot.val());
 
       // 集計結果
@@ -68,7 +68,7 @@ const AdminPage = () => {
     });
 
     // お題データの取得と保存
-    onValue(topicRef, (snapshot) => {
+    const unsubscribeTopic = onValue(topicRef, (snapshot) => {
       const topicsUpdated = Object.values(snapshot.val());
       if (topicsUpdated) {
         setTopics(topicsUpdated);
@@ -76,7 +76,7 @@ const AdminPage = () => {
     });
 
     // 現在のお題データの取得と保存
-    onValue(currentTopicRef, (snapshot) => {
+    const unsubscribeCurrent = onValue(currentTopicRef, (snapshot) => {
       const currentTopicUpdated = Object.values(snapshot.val());
       // nullチェック
       console.log(currentTopicUpdated);
@@ -92,8 +92,9 @@ const AdminPage = () => {
 
     // コンポーネントがアクティブでなくなったらクリーンナップとして接続を解除する
     return () => {
-      onDisconnect(topicRef);
-      onDisconnect(currentTopicRef);
+      unsubscribeVote();
+      unsubscribeTopic();
+      unsubscribeCurrent();
     };
   }, []);
 
