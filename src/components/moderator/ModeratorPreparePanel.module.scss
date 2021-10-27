@@ -1,3 +1,5 @@
+@use "src/index.scss";
+
 .preparePanel {
   position: absolute;
   z-index: 600;
@@ -5,6 +7,31 @@
   left: 20vw;
   width: 60vw;
   height: 60vh;
+
+  img {
+    border: 4px solid index.$black;
+    border-radius: 24px;
+    transform: rotate(3deg);
+    animation: idleAnime 4s ease-in-out 0.00001s infinite normal;
+  }
+}
+
+@keyframes idleAnime {
+  0% {
+    transform: rotate(3deg);
+  }
+  80% {
+    transform: rotate(3deg);
+  }
+  85% {
+    transform: rotate(-2deg);
+  }
+  95% {
+    transform: rotate(4deg);
+  }
+  100% {
+    transform: rotate(3deg);
+  }
 }
 
 .enter {
