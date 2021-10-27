@@ -44,8 +44,6 @@ const ModeratorTimer = ({ phase }) => {
     return null;
   }, [count]);
 
-  console.log(count);
-
   return (
     <CSSTransition
       in={showCount}
