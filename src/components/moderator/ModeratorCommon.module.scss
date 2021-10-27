@@ -1,3 +1,5 @@
+@use "src/index.scss";
+
 /* 個別にモジュールを作るほどでもないスタイルをここで書く */
 
 .debugModerator {
@@ -17,9 +19,8 @@
 .moderatorTimer {
   position: absolute;
   z-index: 400;
-  top: 5vh;
-  right: 5vw;
-  //transform: translate(0%, 0%);
+  top: 0vh;
+  right: 3vw;
   width: 15vw;
   height: 15vw;
   text-align: center;
@@ -31,8 +32,9 @@
     left: 0px;
     right: 10px;
     line-height: 1;
-    color: #fafafa;
-    text-shadow: 0 0 2vw #333;
+    color: index.$white;
+    text-shadow: 2px 2px 0 index.$pink, -2px 2px 0 index.$pink,
+      2px -2px 0 index.$pink, -2px -2px 0 index.$pink;
     font-size: 5vw;
   }
 
@@ -47,7 +49,7 @@
 }
 
 .countEnter {
-  top: 5vh;
+  top: 2vh;
   right: 5vw;
   width: 15vw;
   height: 15vw;
@@ -58,7 +60,7 @@
 }
 
 .countEnterActive {
-  top: 25vh;
+  top: 10vh;
   right: 40vw;
   width: 20vw;
   height: 20vw;
@@ -71,7 +73,7 @@
 }
 
 .countEnterDone {
-  top: 25vh;
+  top: 10vh;
   right: 40vw;
   width: 20vw;
   height: 20vw;
@@ -82,7 +84,7 @@
 }
 
 .countExit {
-  top: 25vh;
+  top: 10vh;
   right: 40vw;
   width: 20vw;
   height: 20vw;
@@ -93,7 +95,7 @@
 }
 
 .countExitActive {
-  top: 5vh;
+  top: 2vh;
   right: 5vw;
   width: 15vw;
   height: 15vw;
@@ -106,7 +108,7 @@
 }
 
 .countExitDone {
-  top: 5vh;
+  top: 2vh;
   right: 5vw;
   width: 15vw;
   height: 15vw;
