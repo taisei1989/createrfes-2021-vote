@@ -3,12 +3,12 @@
 .topicAnswerPanel {
   position: absolute;
   z-index: 200;
-  top: 10vh;
-  left: 10%;
-  padding-top: 5vh;
-  width: 80%;
-  height: 80vh;
-  min-height: 80vh;
+  top: 2vh;
+  left: 7%;
+  padding-top: 8vh;
+  width: 86%;
+  height: 90vh;
+  min-height: 90vh;
 }
 
 .topicText {
@@ -19,9 +19,12 @@
   width: 80%;
   padding: 1vw 2vw;
   text-align: center;
-  font-size: 4vw;
+  font-size: 3vw;
   font-weight: bold;
   background-color: index.$white;
+  border: 3px solid index.$black;
+  border-radius: 10px;
+  box-shadow: 0px 5px 5px 1px rgb(0, 0, 0, 30%);
 }
 
 .answersWrapper {
@@ -42,27 +45,35 @@
   height: 100%;
   min-height: 100%;
   padding-top: 5vh;
+  border-top: 3px solid index.$black;
+  border-bottom: 3px solid index.$black;
 }
 
 .answerA {
   background-color: index.$pink;
+  border-radius: 24px 0px 0px 24px;
+  border-left: 3px solid index.$black;
 }
 
 .answerB {
   background-color: index.$blue;
+  border-radius: 0px 24px 24px 0px;
+  border-right: 3px solid index.$black;
 }
 
 .choice {
   font-weight: bold;
-  font-size: 8vw;
+  font-size: 5vw;
 }
 
 .answer {
   padding: 0 2vw;
-  font-size: 5vw;
+  font-size: 4vw;
+  font-weight: bold;
 }
 
 .result {
-  font-size: 7vw;
+  padding: 2vh 0;
+  font-size: 8vw;
   font-weight: bold;
 }
