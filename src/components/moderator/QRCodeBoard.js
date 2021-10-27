@@ -24,7 +24,7 @@ const QRCodeBoard = ({ phase }) => {
       }}
     >
       <div className={styles.qrCodeBoard} ref={elementRef}>
-        <img src="images/moderator/qr-code-board.png" alt="" />
+        <img src="images/moderator/new-qr-code-board.png" alt="" />
       </div>
     </CSSTransition>
   );

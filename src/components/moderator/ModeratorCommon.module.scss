@@ -121,9 +121,9 @@
   position: absolute;
   z-index: 700;
   bottom: 0px;
-  left: 0px;
-  width: 25vw;
-  height: 25vh;
+  left: 30px;
+  width: 15vw;
+  height: auto;
 
   img {
     display: block;
@@ -133,53 +133,33 @@
 }
 
 .qrCodeEnter {
-  left: 0px;
-
-  img {
-    height: 25vh;
-  }
+  left: 30px;
+  width: 15vw;
 }
 
 .qrCodeEnterActive {
-  left: 30px;
-  transition: left 1s;
-
-  img {
-    height: 50vh;
-    transition: height 1s;
-  }
+  left: 40px;
+  width: 25vw;
+  transition: left 1s, width 1s;
 }
 
 .qrCodeEnterDone {
-  left: 30px;
-
-  img {
-    height: 50vh;
-  }
+  left: 40px;
+  width: 25vw;
 }
 
 .qrCodeExit {
-  left: 30px;
-
-  img {
-    height: 50vh;
-  }
+  left: 40px;
+  width: 25vw;
 }
 
 .qrCodeExitActive {
-  left: 0px;
-  transition: left 1s;
-
-  img {
-    height: 30vh;
-    transition: height 1s;
-  }
+  left: 30px;
+  width: 15vw;
+  transition: left 1s, width 1s;
 }
 
 .qrCodeExitDone {
-  left: 0px;
-
-  img {
-    height: 30vh;
-  }
+  left: 30px;
+  width: 15vw;
 }
