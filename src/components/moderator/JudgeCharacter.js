@@ -19,7 +19,7 @@ const JudgeCharacter = ({ phase }) => {
 
   return (
     <div className={styles.judgeCharacter}>
-      <img className={cn} src="images/moderator/judge.png" alt="" />
+      <img className={cn} src="images/moderator/judge-wakayama.png" alt="" />
     </div>
   );
 };
