@@ -25,16 +25,20 @@ const ModeratorTimer = ({ phase }) => {
   }, []);
 
   useEffect(() => {
+    if (phase === PHASES.PREPARE) {
+      setCount(60);
+      console.log("useEffectが実装されました");
+    }
     const postData = {
       count: count,
     };
     const updates = {};
     updates["/timer/"] = postData;
     update(ref(db), updates);
-  }, [count]);
+  }, [count, phase]);
 
   useEffect(() => {
-    if (count > 0) {
+    if (phase === PHASES.VOTE && count > 0) {
       const intervalId = setInterval(() => {
         setCount(count - 1);
         console.log("setInterval を実行しました");
@@ -44,7 +48,7 @@ const ModeratorTimer = ({ phase }) => {
       };
     }
     return null;
-  }, [count]);
+  }, [count, phase]);
 
   return (
     <CSSTransition
