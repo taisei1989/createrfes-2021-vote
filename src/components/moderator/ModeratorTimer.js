@@ -27,7 +27,6 @@ const ModeratorTimer = ({ phase }) => {
   useEffect(() => {
     if (phase === PHASES.PREPARE) {
       setCount(60);
-      console.log("useEffectが実装されました");
     }
     const postData = {
       count: count,
