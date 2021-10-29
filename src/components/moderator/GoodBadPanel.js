@@ -7,7 +7,7 @@ import { IS_DEBUG } from "../../configs";
 
 const isDebug = IS_DEBUG && false;
 
-const numOfParticles = 10;
+const numOfParticles = 100;
 const numOfMaxParticles = 500;
 
 const decreaseAlpha = 0.01;
@@ -99,6 +99,12 @@ class DrowFeedback {
       const goodSprite = new PIXI.Sprite(goodTexture);
       const badSprite = new PIXI.Sprite(badTexture);
 
+      goodSprite.alpha = 0;
+      badSprite.alpha = 0;
+
+      goodSprite.visible = false;
+      badSprite.visible = false;
+
       goodSprite.anchor.set(0.5);
       badSprite.anchor.set(0.5);
 
@@ -112,7 +118,7 @@ class DrowFeedback {
     }
 
     // Tickerに登録する
-    this.pixiApp.ticker.maxFPS = 10;
+    this.pixiApp.ticker.maxFPS = 20;
     this.pixiApp.ticker.add(this.update, this);
 
     this.isUpdate = true;
@@ -142,7 +148,7 @@ class DrowFeedback {
 
     // フィードバック数に応じてスプライトを表示する
     if (this.isShow) {
-      const particleDeltaMS = this.pixiApp.ticker.deltaMS * 0.001;
+      const particleDeltaMS = this.pixiApp.ticker.deltaMS / loadInterval;
 
       this.goodParticlesReady += this.goodParticlesPerSecond * particleDeltaMS;
       this.badParticlesReady += this.badParticlesPerSecond * particleDeltaMS;
