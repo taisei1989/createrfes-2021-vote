@@ -11,6 +11,8 @@ const numOfMaxParticles = 500;
 
 const decreaseAlpha = 0.01;
 
+const interval = 1;
+
 function decreaseSpriteAlpha(sprite, alpha) {
   sprite.alpha -= alpha;
 
@@ -20,11 +22,28 @@ function decreaseSpriteAlpha(sprite, alpha) {
   }
 }
 
+function showSprite(sprite) {
+  sprite.visible = true;
+  sprite.alpha = 1;
+  sprite.position.x = Math.random() * window.innerWidth;
+  sprite.position.y = Math.random() * window.innerHeight;
+}
+
 /**
  * フィードバックを描写するための処理
  */
 class DrowFeedback {
   constructor(divElement) {
+    this.isUpdate = false;
+
+    this.goodParticlesPerSecond = 2;
+    this.goodParticlesReady = 0;
+    this.goodParticlesIndex = 0;
+
+    this.badParticlesPerSecond = 1;
+    this.badParticlesReady = 0;
+    this.badParticlesIndex = 0;
+
     this.pixiApp = new PIXI.Application({
       width: window.innerWidth,
       height: window.innerHeight,
@@ -51,8 +70,6 @@ class DrowFeedback {
       this.isLoaded = true;
       this.init();
     });
-
-    this.isUpdate = false;
   }
 
   /**
@@ -105,6 +122,38 @@ class DrowFeedback {
         decreaseSpriteAlpha(sprite, alpha);
       }
     });
+
+    // フィードバックに応じてスプライトを表示する
+    const particleDeltaMS = this.pixiApp.ticker.deltaMS * 0.001;
+
+    this.goodParticlesReady += this.goodParticlesPerSecond * particleDeltaMS;
+    this.badParticlesReady += this.badParticlesPerSecond * particleDeltaMS;
+
+    const goodParticlesToShow = Math.floor(this.goodParticlesReady);
+    const badParticlesToShow = Math.floor(this.badParticlesReady);
+
+    this.goodParticlesReady -= goodParticlesToShow;
+    this.badParticlesReady -= badParticlesToShow;
+
+    for (let i = 0; i < goodParticlesToShow; i++) {
+      const goodSprite = this.goodParticles.getChildAt(this.goodParticlesIndex);
+      showSprite(goodSprite);
+
+      this.goodParticlesIndex++;
+      if (this.goodParticlesIndex >= this.goodParticles.children.length) {
+        this.goodParticlesIndex = 0;
+      }
+    }
+
+    for (let i = 0; i < badParticlesToShow; i++) {
+      const badSprite = this.badParticles.getChildAt(this.badParticlesIndex);
+      showSprite(badSprite);
+
+      this.badParticlesIndex++;
+      if (this.badParticlesIndex >= this.badParticles.children.length) {
+        this.badParticlesIndex = 0;
+      }
+    }
   }
 }
 
