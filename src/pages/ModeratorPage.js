@@ -15,15 +15,15 @@ import { AuthContext } from "../contexts/AuthContext";
 import { Redirect } from "react-router";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
-const isDebug = CONF.IS_DEBUG && false;
-const isDebugPhase = CONF.IS_DEBUG && false;
+const isDebug = true; // CONF.IS_DEBUG && false;
+const isDebugPhase = true; // CONF.IS_DEBUG && false;
 
 /**
  * 司会者ページ
  * データベースからデータを取得する責務を負う
  */
 const ModeratorPage = () => {
-  const [phase, setPhase] = useState(PHASES.GUIDE);
+  const [phase, setPhase] = useState(PHASES.RESULT);
   const user = useContext(AuthContext);
 
   useEffect(() => {
