@@ -1,5 +1,88 @@
 @use "src/index.scss";
 
 .adminPage {
+  //background-color: index.$white;
+  width: 60vw;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 36px;
+  line-height: 1.7;
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.currentTopicPanel,
+.handlePhase,
+.setTopic,
+.ListOfTopicAndAnswer {
+  padding: 20px;
+  margin: 20px 0px;
+  border: 2px solid index.$black;
+  border-radius: 10px;
   background-color: index.$white;
+}
+
+.currentTopicPanel {
+  span {
+    font-weight: bold;
+  }
+}
+
+button {
+  background-color: index.$blue;
+  color: index.$white;
+  font-size: 14px;
+  font-weight: bolder;
+  padding: 2px 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
+/* フェーズ切り替え ----------------------------------- */
+.handlePhase {
+  div {
+    padding: 5px 0px;
+  }
+  .currentPhase {
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: bolder;
+  }
+}
+
+/* お題設定 ----------------------------------- */
+.setTopic {
+  button {
+    margin-top: 10px;
+  }
+}
+
+/* お題と回答一覧 ----------------------------------- */
+.ListOfTopicAndAnswer {
+  button {
+    margin-top: 10px;
+  }
+
+  .topicAndAnswer {
+    padding-top: 15px;
+    border-bottom: 1px solid rgb(17, 17, 17, 16%);
+  }
+
+  .removeButton {
+    background-color: index.$pink;
+  }
+}
+
+.logoutButton {
+  background-color: index.$pink;
+  margin-bottom: 5px;
 }

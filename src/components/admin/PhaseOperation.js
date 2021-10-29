@@ -2,6 +2,7 @@ import { ref, update } from "firebase/database";
 import { useEffect, useState } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
+import styles from "../../pages/AdminPage.module.scss";
 
 const PhaseOperation = () => {
   const [currentPhase, setCurrentPhase] = useState(PHASES.GUIDE);
@@ -16,9 +17,11 @@ const PhaseOperation = () => {
   }, [currentPhase]);
 
   return (
-    <div>
-      <h1>フェーズ切り替え</h1>
-      <p>現在のフェーズ：{currentPhase}</p>
+    <div className={styles.handlePhase}>
+      <h3>フェーズ切り替え</h3>
+      <div className={styles.currentPhase}>
+        <p>現在のフェーズ：{currentPhase}</p>
+      </div>
       <div>
         <label>準備フェーズ(preparing) </label>
         <button onClick={() => setCurrentPhase(PHASES.PREPARE)}>変更</button>
