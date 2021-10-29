@@ -86,6 +86,16 @@ class DrowFeedback {
       this.loadFeedback.bind(this),
       loadInterval
     );
+
+    // Resize
+    window.addEventListener(
+      "resize",
+      () => {
+        this.pixiApp.renderer.autoResize = true;
+        this.pixiApp.renderer.resize(window.innerWidth, window.innerHeight);
+      },
+      false
+    );
   }
 
   /**
