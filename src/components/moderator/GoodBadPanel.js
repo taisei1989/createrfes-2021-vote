@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { getDatabase, ref, child, get } from "firebase/database";
 import * as PIXI from "pixi.js";
 import { PHASES } from "../../interfaces";
 import styles from "./ModeratorCommon.module.scss";
@@ -35,6 +36,7 @@ function showSprite(sprite) {
 class DrowFeedback {
   constructor(divElement) {
     this.isUpdate = false;
+    this.isLoad = false;
 
     this.goodParticlesPerSecond = 2;
     this.goodParticlesReady = 0;
@@ -44,6 +46,7 @@ class DrowFeedback {
     this.badParticlesReady = 0;
     this.badParticlesIndex = 0;
 
+    // pixi app
     this.pixiApp = new PIXI.Application({
       width: window.innerWidth,
       height: window.innerHeight,
@@ -67,9 +70,20 @@ class DrowFeedback {
     this.pixiApp.loader.add("bad", "./images/moderator/fb-bad.png");
 
     this.pixiApp.loader.load(() => {
-      this.isLoaded = true;
       this.init();
+      this.isInit = true;
     });
+
+    // setup Database
+    this.isLoad = true;
+
+    const db = getDatabase();
+    this.refFeedback = ref(db, "feedbacks/");
+
+    this.intervalTimer = window.setInterval(
+      this.loadFeedback.bind(this),
+      10000
+    );
   }
 
   /**
@@ -106,6 +120,7 @@ class DrowFeedback {
    * 描写をアップデートする
    */
   update(delta) {
+    if (!this.isInit) return;
     if (!this.isUpdate) return;
 
     // スプライトを透明にするアニメーション
@@ -155,6 +170,27 @@ class DrowFeedback {
       }
     }
   }
+
+  /**
+   * 一定期間ごとにフィードバックを取得し、rateを設定する
+   */
+  loadFeedback() {
+    if (!this.isInit) return;
+    if (!this.isLoad) return;
+
+    // フィードバックを取得する
+    get(this.refFeedback)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          console.log(snapshot.val());
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 }
 
 /**
@@ -172,6 +208,7 @@ const GoodBadPanel = ({ phase }) => {
 
         const drowFeedbackIns = new DrowFeedback(divElement.current);
         setDrowFeedback(drowFeedbackIns);
+        drowFeedbackIns.loadFeedback();
       }
     }
   }, [divElement, drowFeedback]);
