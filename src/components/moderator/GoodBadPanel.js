@@ -5,7 +5,7 @@ import { FEEDBACKS, PHASES } from "../../interfaces";
 import styles from "./ModeratorCommon.module.scss";
 import { IS_DEBUG } from "../../configs";
 
-const isDebug = IS_DEBUG && true;
+const isDebug = IS_DEBUG && false;
 
 const numOfParticles = 10;
 const numOfMaxParticles = 500;

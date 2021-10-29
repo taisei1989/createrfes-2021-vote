@@ -15,8 +15,8 @@ import { AuthContext } from "../contexts/AuthContext";
 import { Redirect } from "react-router";
 
 // デバッグモードにするか。コンポーネントごとに設定できるよう記述
-const isDebug = true; // CONF.IS_DEBUG && false;
-const isDebugPhase = true; // CONF.IS_DEBUG && false;
+const isDebug = CONF.IS_DEBUG && false;
+const isDebugPhase = CONF.IS_DEBUG && false;
 
 /**
  * 司会者ページ
