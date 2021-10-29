@@ -45,12 +45,11 @@ const ResultDisplay = ({
         }
       }
 
-      const PercentOfVoteA = Math.round(
-        (numOfVoteA / (numOfVoteA + numOfVoteB)) * 100
-      );
-      const PercentOfVoteB = Math.round(
-        (numOfVoteB / (numOfVoteA + numOfVoteB)) * 100
-      );
+      let sumNumOfVote = numOfVoteA + numOfVoteB;
+
+      if (sumNumOfVote === 0) sumNumOfVote = 1;
+      const PercentOfVoteA = Math.round((numOfVoteA / sumNumOfVote) * 100);
+      const PercentOfVoteB = Math.round((numOfVoteB / sumNumOfVote) * 100);
 
       // 反映する
       setNumOfAnswers({ a: PercentOfVoteA, b: PercentOfVoteB });
