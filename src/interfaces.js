@@ -6,3 +6,8 @@ export const PHASES = Object.freeze({
   TALLY: "tallying",
   RESULT: "resulting",
 });
+
+export const FEEDBACKS = Object.freeze({
+  GOOD: "Good",
+  BAD: "Bad",
+});

@@ -23,7 +23,7 @@ const isDebugPhase = CONF.IS_DEBUG && false;
  * データベースからデータを取得する責務を負う
  */
 const ModeratorPage = () => {
-  const [phase, setPhase] = useState(PHASES.GUIDE);
+  const [phase, setPhase] = useState(PHASES.RESULT);
   const user = useContext(AuthContext);
 
   useEffect(() => {

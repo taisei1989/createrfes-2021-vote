@@ -2,6 +2,7 @@ import { onValue, ref } from "@firebase/database";
 import { useState, useEffect } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
+import GoodBadButtons from "./GoodBadButtons";
 import styles from "./ResultDisplay.module.scss";
 import ShareToTwitter from "./ShareToTwitter";
 
@@ -71,20 +72,9 @@ const ResultDisplay = ({
         <div className={styles.topicAnswerResult}>
           <div className={styles.voteResult}>{numOfAnswers.b} %</div>
         </div>
-        <div className={styles.feedbackPanel}>
-          <div>
-            <button id="goodPanel"></button>
-            <label htmlFor="goodPanel">
-              <img src="images/user/feedback-good.png" alt="feedback-good" />
-            </label>
-          </div>
-          <div>
-            <button id="badPanel"></button>
-            <label htmlFor="badPanel">
-              <img src="images/user/feedback-bad.png" alt="feedback-bad" />
-            </label>
-          </div>
-        </div>
+
+        <GoodBadButtons />
+
         <ShareToTwitter
           currentTopicText={currentTopicText}
           currentAnswerA={currentAnswerA}
