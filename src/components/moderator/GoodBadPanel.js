@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { getDatabase, ref, child, get } from "firebase/database";
 import * as PIXI from "pixi.js";
-import { PHASES } from "../../interfaces";
+import { FEEDBACKS, PHASES } from "../../interfaces";
 import styles from "./ModeratorCommon.module.scss";
 import { IS_DEBUG } from "../../configs";
 
@@ -12,7 +12,7 @@ const numOfMaxParticles = 500;
 
 const decreaseAlpha = 0.01;
 
-const interval = 1;
+const loadInterval = 1000;
 
 function decreaseSpriteAlpha(sprite, alpha) {
   sprite.alpha -= alpha;
@@ -82,8 +82,11 @@ class DrowFeedback {
 
     this.intervalTimer = window.setInterval(
       this.loadFeedback.bind(this),
-      10000
+      loadInterval
     );
+
+    this.tempNumOfGood = 0;
+    this.tempNumOfBad = 0;
   }
 
   /**
@@ -181,14 +184,39 @@ class DrowFeedback {
     // フィードバックを取得する
     get(this.refFeedback)
       .then((snapshot) => {
-        if (snapshot.exists()) {
-          console.log(snapshot.val());
-        } else {
-          console.log("No data available");
+        const feedbacks = snapshot.val();
+
+        if (feedbacks) {
+          const feedbacksValues = Object.values(feedbacks);
+
+          let numOfGood = 0;
+          let numOfBad = 0;
+
+          for (let i = 0; i < feedbacksValues.length; i++) {
+            if (feedbacksValues[i] === FEEDBACKS.GOOD) {
+              numOfGood++;
+            } else if (feedbacksValues[i] === FEEDBACKS.BAD) {
+              numOfBad++;
+            }
+          }
+
+          const numOfCreaseGood = numOfGood - this.tempNumOfGood;
+          const numOfCreaseBad = numOfBad - this.tempNumOfBad;
+
+          this.goodParticlesPerSecond = (numOfCreaseGood / loadInterval) * 1000;
+          this.badParticlesPerSecond = (numOfCreaseBad / loadInterval) * 1000;
+
+          this.tempNumOfGood = numOfGood;
+          this.tempNumOfBad = numOfBad;
+
+          if (isDebug)
+            console.log(
+              `good: ${this.goodParticlesPerSecond}, bad: ${this.badParticlesPerSecond}`
+            );
         }
       })
       .catch((error) => {
-        console.error(error);
+        if (isDebug) console.error(error);
       });
   }
 }
