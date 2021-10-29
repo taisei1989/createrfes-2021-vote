@@ -134,7 +134,7 @@ const AdminPage = () => {
           </ul>
         </div>
         <PhaseOperation />
-        <div>
+        <div className={styles.setTopic}>
           <h3>お題設定</h3>
           <form
             onSubmit={(event) => {
@@ -179,33 +179,35 @@ const AdminPage = () => {
             <button type="submit">追加する</button>
           </form>
         </div>
-        <h3>お題と回答一覧</h3>
-        {topics.map((topic) => (
-          <div key={topic.topicId}>
-            <ul>
-              <li>ID：{topic.topicId}</li>
-              <li>お題：{topic.topicText}</li>
-              <li>投票A：{topic.topicAnswerA}</li>
-              <li>投票B：{topic.topicAnswerB}</li>
-            </ul>
-            <RemoveTopic topic={topic} />
-            <button
-              onClick={() => {
-                updatedCurrentTopic(
-                  topic.topicId,
-                  topic.topicText,
-                  topic.topicAnswerA,
-                  topic.topicAnswerB
-                );
-                createVotesNode();
-              }}
-            >
-              現在のお題に設定
-            </button>
-            <p></p>
-            <br />
-          </div>
-        ))}
+        <div className={styles.ListOfTopicAndAnswer}>
+          <h3>お題と回答一覧</h3>
+          {topics.map((topic) => (
+            <div key={topic.topicId} className={styles.topicAndAnswer}>
+              <ul>
+                <li>ID：{topic.topicId}</li>
+                <li>お題：{topic.topicText}</li>
+                <li>投票A：{topic.topicAnswerA}</li>
+                <li>投票B：{topic.topicAnswerB}</li>
+              </ul>
+              <RemoveTopic topic={topic} />
+              <button
+                onClick={() => {
+                  updatedCurrentTopic(
+                    topic.topicId,
+                    topic.topicText,
+                    topic.topicAnswerA,
+                    topic.topicAnswerB
+                  );
+                  createVotesNode();
+                }}
+              >
+                現在のお題に設定
+              </button>
+              <p></p>
+              <br />
+            </div>
+          ))}
+        </div>
         <Logout />
       </div>
     );

@@ -16,11 +16,14 @@ h2 {
 h3 {
   font-size: 24px;
   line-height: 1.5;
+  margin-bottom: 15px;
   font-weight: bold;
 }
 
 .currentTopicPanel,
-.handlePhase {
+.handlePhase,
+.setTopic,
+.ListOfTopicAndAnswer {
   padding: 20px;
   margin: 20px 0px;
   border: 2px solid index.$black;
@@ -40,7 +43,7 @@ button {
   font-size: 14px;
   font-weight: bolder;
   padding: 2px 5px;
-  margin: 0 2px;
+  margin-right: 5px;
   border-radius: 5px;
 }
 
@@ -49,4 +52,37 @@ button {
   div {
     padding: 5px 0px;
   }
+  .currentPhase {
+    margin-bottom: 5px;
+    font-size: 18px;
+    font-weight: bolder;
+  }
+}
+
+/* お題設定 ----------------------------------- */
+.setTopic {
+  button {
+    margin-top: 10px;
+  }
+}
+
+/* お題と回答一覧 ----------------------------------- */
+.ListOfTopicAndAnswer {
+  button {
+    margin-top: 10px;
+  }
+
+  .topicAndAnswer {
+    padding-top: 15px;
+    border-bottom: 1px solid rgb(17, 17, 17, 16%);
+  }
+
+  .removeButton {
+    background-color: index.$pink;
+  }
+}
+
+.logoutButton {
+  background-color: index.$pink;
+  margin-bottom: 5px;
 }

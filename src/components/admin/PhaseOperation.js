@@ -19,8 +19,8 @@ const PhaseOperation = () => {
   return (
     <div className={styles.handlePhase}>
       <h3>フェーズ切り替え</h3>
-      <div>
-        <p className={styles.currentPhase}>現在のフェーズ：{currentPhase}</p>
+      <div className={styles.currentPhase}>
+        <p>現在のフェーズ：{currentPhase}</p>
       </div>
       <div>
         <label>準備フェーズ(preparing) </label>
