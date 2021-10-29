@@ -103,63 +103,83 @@ const AdminPage = () => {
   } else {
     return (
       <div className={styles.adminPage}>
-        <h2>現在のお題</h2>
-        <ul>
-          <li>ID：{currentTopic.topicId}</li>
-          <li>お題：{currentTopic.topicText}</li>
-          <li>投票A：{currentTopic.topicAnswerA}</li>
-          <li>投票B：{currentTopic.topicAnswerB}</li>
-          <li>投票結果A: {numOfVote.a}</li>
-          <li>投票結果B: {numOfVote.b}</li>
-        </ul>
-        <br />
+        <h2>管理者画面</h2>
+        <div className={styles.currentTopicPanel}>
+          <h3>現在のお題</h3>
+          <ul>
+            <li>
+              <span>ID：</span>
+              {currentTopic.topicId}
+            </li>
+            <li>
+              <span>お題：</span>
+              {currentTopic.topicText}
+            </li>
+            <li>
+              <span>投票A：</span>
+              {currentTopic.topicAnswerA}
+            </li>
+            <li>
+              <span>投票B：</span>
+              {currentTopic.topicAnswerB}
+            </li>
+            <li>
+              <span>投票結果A: </span>
+              {numOfVote.a}
+            </li>
+            <li>
+              <span>投票結果B: </span>
+              {numOfVote.b}
+            </li>
+          </ul>
+        </div>
         <PhaseOperation />
-        <br />
-        <h2>お題設定</h2>
-        <form
-          onSubmit={(event) => {
-            <AddTopic
-              event={event}
-              topic={topic}
-              answerA={answerA}
-              answerB={answerB}
-            />;
-            setTopic("");
-            setAnswerA("");
-            setAnswerB("");
-          }}
-        >
-          <div>
-            <label>お題：</label>
-            <input
-              type="text"
-              value={topic}
-              placeholder="お題を記入"
-              onChange={handleChangeTopic}
-            />
-          </div>
-          <div>
-            <label>投票A：</label>
-            <input
-              type="text"
-              value={answerA}
-              placeholder="投票Aを記入"
-              onChange={handleChangeAnswerA}
-            />
-          </div>
-          <div>
-            <label>投票B：</label>
-            <input
-              type="text"
-              value={answerB}
-              placeholder="投票Bを記入"
-              onChange={handleChangeAnswerB}
-            />
-          </div>
-          <button type="submit">追加する</button>
-        </form>
-        <br />
-        <h2>お題と回答一覧</h2>
+        <div>
+          <h3>お題設定</h3>
+          <form
+            onSubmit={(event) => {
+              <AddTopic
+                event={event}
+                topic={topic}
+                answerA={answerA}
+                answerB={answerB}
+              />;
+              setTopic("");
+              setAnswerA("");
+              setAnswerB("");
+            }}
+          >
+            <div>
+              <label>お題：</label>
+              <input
+                type="text"
+                value={topic}
+                placeholder="お題を記入"
+                onChange={handleChangeTopic}
+              />
+            </div>
+            <div>
+              <label>投票A：</label>
+              <input
+                type="text"
+                value={answerA}
+                placeholder="投票Aを記入"
+                onChange={handleChangeAnswerA}
+              />
+            </div>
+            <div>
+              <label>投票B：</label>
+              <input
+                type="text"
+                value={answerB}
+                placeholder="投票Bを記入"
+                onChange={handleChangeAnswerB}
+              />
+            </div>
+            <button type="submit">追加する</button>
+          </form>
+        </div>
+        <h3>お題と回答一覧</h3>
         {topics.map((topic) => (
           <div key={topic.topicId}>
             <ul>

@@ -1,5 +1,52 @@
 @use "src/index.scss";
 
 .adminPage {
+  //background-color: index.$white;
+  width: 60vw;
+  margin: 0 auto;
+}
+
+h2 {
+  font-size: 36px;
+  line-height: 1.7;
+  font-weight: bold;
+  padding-top: 20px;
+}
+
+h3 {
+  font-size: 24px;
+  line-height: 1.5;
+  font-weight: bold;
+}
+
+.currentTopicPanel,
+.handlePhase {
+  padding: 20px;
+  margin: 20px 0px;
+  border: 2px solid index.$black;
+  border-radius: 10px;
   background-color: index.$white;
+}
+
+.currentTopicPanel {
+  span {
+    font-weight: bold;
+  }
+}
+
+button {
+  background-color: index.$blue;
+  color: index.$white;
+  font-size: 14px;
+  font-weight: bolder;
+  padding: 2px 5px;
+  margin: 0 2px;
+  border-radius: 5px;
+}
+
+/* フェーズ切り替え ----------------------------------- */
+.handlePhase {
+  div {
+    padding: 5px 0px;
+  }
 }
