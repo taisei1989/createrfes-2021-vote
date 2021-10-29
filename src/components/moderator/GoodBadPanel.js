@@ -6,6 +6,9 @@ import { IS_DEBUG } from "../../configs";
 
 const isDebug = IS_DEBUG && true;
 
+const numOfParticles = 10;
+const numOfMaxParticles = 500;
+
 /**
  * フィードバックを描写するための処理
  */
@@ -17,7 +20,50 @@ class DrowFeedback {
       transparent: true,
     });
 
+    // エレメントにアタッチする
     divElement.appendChild(this.pixiApp.view);
+
+    this.goodParticles = new PIXI.ParticleContainer(numOfMaxParticles, {
+      alpha: true,
+    });
+    this.badParticles = new PIXI.ParticleContainer(numOfMaxParticles, {
+      alpha: true,
+    });
+
+    this.pixiApp.stage.addChild(this.goodParticles);
+    this.pixiApp.stage.addChild(this.badParticles);
+
+    this.pixiApp.loader.add("good", "./images/moderator/fb-good.png");
+    this.pixiApp.loader.add("bad", "./images/moderator/fb-bad.png");
+
+    this.pixiApp.loader.load(() => {
+      this.isLoaded = true;
+      this.init();
+    });
+  }
+
+  /**
+   * リソースのロード後、初期化する
+   */
+  init() {
+    const goodTexture = this.pixiApp.loader.resources["good"].texture;
+    const badTexture = this.pixiApp.loader.resources["bad"].texture;
+
+    for (let i = 0; i < numOfParticles; i++) {
+      const goodSprite = new PIXI.Sprite(goodTexture);
+      const badSprite = new PIXI.Sprite(badTexture);
+
+      goodSprite.anchor.set(0.5);
+      badSprite.anchor.set(0.5);
+
+      goodSprite.position.x = Math.random() * window.innerWidth;
+      goodSprite.position.y = Math.random() * window.innerHeight;
+      badSprite.position.x = Math.random() * window.innerWidth;
+      badSprite.position.y = Math.random() * window.innerHeight;
+
+      this.goodParticles.addChild(goodSprite);
+      this.badParticles.addChild(badSprite);
+    }
   }
 }
 
