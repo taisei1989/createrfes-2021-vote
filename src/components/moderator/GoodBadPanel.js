@@ -1,4 +1,5 @@
 import { PHASES } from "../../interfaces";
+import styles from "./ModeratorCommon.module.scss";
 
 /**
  * ユーザーから寄せられたGoodとBadを表示するパネル
@@ -10,9 +11,8 @@ const GoodBadPanel = ({ phase }) => {
   // PhaseがResultの時だけ表示
   if (phase === PHASES.RESULT) {
     return (
-      <div className="good-bad-panel" style={{ display: "none" }}>
-        GoodBadPanelを表示しています
-        <canvas />
+      <div className={styles.goodBadPanel}>
+        <canvas className={styles.feedbackCanvas} />
       </div>
     );
   }

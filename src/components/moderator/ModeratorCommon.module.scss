@@ -179,3 +179,19 @@
   left: 30px;
   width: 15vw;
 }
+
+/* Good Bad Panel ----------------------------------- */
+.goodBadPanel {
+  position: absolute;
+  z-index: 800;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.feedbackCanvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
