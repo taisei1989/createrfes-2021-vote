@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { getDatabase, ref, child, get } from "firebase/database";
+import { getDatabase, ref, get, remove } from "firebase/database";
 import * as PIXI from "pixi.js";
 import { FEEDBACKS, PHASES } from "../../interfaces";
 import styles from "./ModeratorCommon.module.scss";
@@ -36,6 +36,7 @@ function showSprite(sprite) {
 class DrowFeedback {
   constructor(divElement) {
     this.isUpdate = false;
+    this.isShow = false;
     this.isLoad = false;
 
     this.goodParticlesPerSecond = 2;
@@ -45,6 +46,9 @@ class DrowFeedback {
     this.badParticlesPerSecond = 1;
     this.badParticlesReady = 0;
     this.badParticlesIndex = 0;
+
+    this.tempNumOfGood = 0;
+    this.tempNumOfBad = 0;
 
     // pixi app
     this.pixiApp = new PIXI.Application({
@@ -75,8 +79,6 @@ class DrowFeedback {
     });
 
     // setup Database
-    this.isLoad = true;
-
     const db = getDatabase();
     this.refFeedback = ref(db, "feedbacks/");
 
@@ -84,9 +86,6 @@ class DrowFeedback {
       this.loadFeedback.bind(this),
       loadInterval
     );
-
-    this.tempNumOfGood = 0;
-    this.tempNumOfBad = 0;
   }
 
   /**
@@ -141,35 +140,39 @@ class DrowFeedback {
       }
     });
 
-    // フィードバックに応じてスプライトを表示する
-    const particleDeltaMS = this.pixiApp.ticker.deltaMS * 0.001;
+    // フィードバック数に応じてスプライトを表示する
+    if (this.isShow) {
+      const particleDeltaMS = this.pixiApp.ticker.deltaMS * 0.001;
 
-    this.goodParticlesReady += this.goodParticlesPerSecond * particleDeltaMS;
-    this.badParticlesReady += this.badParticlesPerSecond * particleDeltaMS;
+      this.goodParticlesReady += this.goodParticlesPerSecond * particleDeltaMS;
+      this.badParticlesReady += this.badParticlesPerSecond * particleDeltaMS;
 
-    const goodParticlesToShow = Math.floor(this.goodParticlesReady);
-    const badParticlesToShow = Math.floor(this.badParticlesReady);
+      const goodParticlesToShow = Math.floor(this.goodParticlesReady);
+      const badParticlesToShow = Math.floor(this.badParticlesReady);
 
-    this.goodParticlesReady -= goodParticlesToShow;
-    this.badParticlesReady -= badParticlesToShow;
+      this.goodParticlesReady -= goodParticlesToShow;
+      this.badParticlesReady -= badParticlesToShow;
 
-    for (let i = 0; i < goodParticlesToShow; i++) {
-      const goodSprite = this.goodParticles.getChildAt(this.goodParticlesIndex);
-      showSprite(goodSprite);
+      for (let i = 0; i < goodParticlesToShow; i++) {
+        const goodSprite = this.goodParticles.getChildAt(
+          this.goodParticlesIndex
+        );
+        showSprite(goodSprite);
 
-      this.goodParticlesIndex++;
-      if (this.goodParticlesIndex >= this.goodParticles.children.length) {
-        this.goodParticlesIndex = 0;
+        this.goodParticlesIndex++;
+        if (this.goodParticlesIndex >= this.goodParticles.children.length) {
+          this.goodParticlesIndex = 0;
+        }
       }
-    }
 
-    for (let i = 0; i < badParticlesToShow; i++) {
-      const badSprite = this.badParticles.getChildAt(this.badParticlesIndex);
-      showSprite(badSprite);
+      for (let i = 0; i < badParticlesToShow; i++) {
+        const badSprite = this.badParticles.getChildAt(this.badParticlesIndex);
+        showSprite(badSprite);
 
-      this.badParticlesIndex++;
-      if (this.badParticlesIndex >= this.badParticles.children.length) {
-        this.badParticlesIndex = 0;
+        this.badParticlesIndex++;
+        if (this.badParticlesIndex >= this.badParticles.children.length) {
+          this.badParticlesIndex = 0;
+        }
       }
     }
   }
@@ -219,6 +222,51 @@ class DrowFeedback {
         if (isDebug) console.error(error);
       });
   }
+
+  /**
+   * フィードバックを表示するように変更する
+   */
+  play() {
+    this.reset();
+
+    this.isShow = true;
+    this.isLoad = true;
+  }
+
+  /**
+   * フィードバックの表示を停止する
+   */
+  stop() {
+    this.reset();
+
+    this.isShow = false;
+    this.isLoad = false;
+  }
+
+  /**
+   * 保持しているデータをリセットする
+   */
+  reset() {
+    this.goodParticlesPerSecond = 0;
+    this.goodParticlesReady = 0;
+    this.goodParticlesIndex = 0;
+
+    this.badParticlesPerSecond = 0;
+    this.badParticlesReady = 0;
+    this.badParticlesIndex = 0;
+
+    this.tempNumOfGood = 0;
+    this.tempNumOfBad = 0;
+  }
+
+  /**
+   * データベースをリセットする
+   * フェーズが切り替わった時に
+   */
+  resetDB() {
+    // データベースをリセットする
+    remove(this.refFeedback);
+  }
 }
 
 /**
@@ -241,18 +289,19 @@ const GoodBadPanel = ({ phase }) => {
     }
   }, [divElement, drowFeedback]);
 
-  // PhaseがResultの時だけ表示
-  const divStyle =
-    phase === PHASES.RESULT ? { display: "block" } : { display: "none" };
+  useEffect(() => {
+    if (drowFeedback) {
+      if (phase === PHASES.RESULT) {
+        drowFeedback.play();
+      } else {
+        drowFeedback.resetDB();
+        drowFeedback.stop();
+      }
+    }
+  }, [phase, drowFeedback]);
 
   // render
-  return (
-    <div
-      className={styles.goodBadPanel}
-      style={divStyle}
-      ref={divElement}
-    ></div>
-  );
+  return <div className={styles.goodBadPanel} ref={divElement}></div>;
 };
 
 export default GoodBadPanel;
