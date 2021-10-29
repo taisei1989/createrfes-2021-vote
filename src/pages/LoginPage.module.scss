@@ -1,0 +1,28 @@
+@use "src/index.scss";
+
+.loginPage {
+  width: 40vw;
+  margin: 0 auto;
+
+  .loginButton {
+    margin-top: 10px;
+  }
+}
+
+h1 {
+  font-size: 24px;
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.loading {
+  font-size: 32px;
+  font-weight: bolder;
+  padding: 15px;
+  color: index.$white;
+  text-align: center;
+  text-shadow: 1px 1px 0 index.$blue, -1px 1px 0 index.$blue,
+    1px -1px 0 index.$blue, -1px -1px 0 index.$blue;
+}
