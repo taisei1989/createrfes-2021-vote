@@ -9,6 +9,17 @@ const isDebug = IS_DEBUG && true;
 const numOfParticles = 10;
 const numOfMaxParticles = 500;
 
+const decreaseAlpha = 0.01;
+
+function decreaseSpriteAlpha(sprite, alpha) {
+  sprite.alpha -= alpha;
+
+  if (sprite.alpha <= 0) {
+    sprite.alpha = 0;
+    sprite.visible = false;
+  }
+}
+
 /**
  * フィードバックを描写するための処理
  */
@@ -17,7 +28,7 @@ class DrowFeedback {
     this.pixiApp = new PIXI.Application({
       width: window.innerWidth,
       height: window.innerHeight,
-      transparent: true,
+      backgroundAlpha: 0,
     });
 
     // エレメントにアタッチする
@@ -40,6 +51,8 @@ class DrowFeedback {
       this.isLoaded = true;
       this.init();
     });
+
+    this.isUpdate = false;
   }
 
   /**
@@ -64,6 +77,34 @@ class DrowFeedback {
       this.goodParticles.addChild(goodSprite);
       this.badParticles.addChild(badSprite);
     }
+
+    // Tickerに登録する
+    this.pixiApp.ticker.maxFPS = 10;
+    this.pixiApp.ticker.add(this.update, this);
+
+    this.isUpdate = true;
+  }
+
+  /**
+   * 描写をアップデートする
+   */
+  update(delta) {
+    if (!this.isUpdate) return;
+
+    // スプライトを透明にするアニメーション
+    const alpha = decreaseAlpha * delta;
+
+    this.goodParticles.children.forEach((sprite) => {
+      if (sprite.visible) {
+        decreaseSpriteAlpha(sprite, alpha);
+      }
+    });
+
+    this.badParticles.children.forEach((sprite) => {
+      if (sprite.visible) {
+        decreaseSpriteAlpha(sprite, alpha);
+      }
+    });
   }
 }
 
