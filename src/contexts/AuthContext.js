@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../services/firebase";
+import styles from "../pages/LoginPage.module.scss";
 
 // createContextの際に初期値を代入
 export const AuthContext = createContext("");
@@ -22,7 +23,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   if (loading) {
-    return <p>loading...</p>;
+    return <p className={styles.loading}>Loading...</p>;
   } else {
     return (
       <AuthContext.Provider value={user}>

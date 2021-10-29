@@ -2,6 +2,7 @@ import { signInWithEmailAndPassword } from "@firebase/auth";
 import { auth } from "../services/firebase";
 import { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import styles from "./LoginPage.module.scss";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -30,7 +31,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div>
+    <div className={styles.loginPage}>
       <h1>ログイン画面</h1>
       <form onSubmit={handleSubmit}>
         <div>
@@ -41,7 +42,6 @@ const LoginPage = () => {
             placeholder="email"
             onChange={handleChangeEmail}
           />
-          <br />
         </div>
         <div>
           <label>パスワード：</label>
@@ -51,9 +51,8 @@ const LoginPage = () => {
             placeholder="password"
             onChange={handleChangePassword}
           />
-          <br />
         </div>
-        <div>
+        <div className={styles.loginButton}>
           <button>ログイン</button>
         </div>
       </form>
