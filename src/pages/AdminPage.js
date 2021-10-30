@@ -108,27 +108,27 @@ const AdminPage = () => {
           <h3>現在のお題</h3>
           <ul>
             <li>
-              <span>ID：</span>
+              <span>ID</span>
               {currentTopic.topicId}
             </li>
             <li>
-              <span>お題：</span>
+              <span>お題</span>
               {currentTopic.topicText}
             </li>
             <li>
-              <span>投票A：</span>
+              <span>投票A</span>
               {currentTopic.topicAnswerA}
             </li>
             <li>
-              <span>投票B：</span>
+              <span>投票B</span>
               {currentTopic.topicAnswerB}
             </li>
             <li>
-              <span>投票結果A: </span>
+              <span>投票結果A</span>
               {numOfVote.a}
             </li>
             <li>
-              <span>投票結果B: </span>
+              <span>投票結果B</span>
               {numOfVote.b}
             </li>
           </ul>
@@ -150,7 +150,7 @@ const AdminPage = () => {
             }}
           >
             <div>
-              <label>お題：</label>
+              <label>お題</label>
               <input
                 type="text"
                 value={topic}
@@ -159,7 +159,7 @@ const AdminPage = () => {
               />
             </div>
             <div>
-              <label>投票A：</label>
+              <label>投票A</label>
               <input
                 type="text"
                 value={answerA}
@@ -168,7 +168,7 @@ const AdminPage = () => {
               />
             </div>
             <div>
-              <label>投票B：</label>
+              <label>投票B</label>
               <input
                 type="text"
                 value={answerB}
