@@ -20,6 +20,16 @@ h3 {
   font-weight: bold;
 }
 
+button {
+  background-color: index.$blue;
+  color: index.$white;
+  font-size: 14px;
+  font-weight: bolder;
+  padding: 2px 5px;
+  margin-right: 5px;
+  border-radius: 5px;
+}
+
 .currentTopicPanel,
 .handlePhase,
 .setTopic,
@@ -31,20 +41,19 @@ h3 {
   background-color: index.$white;
 }
 
+/* 現在のお題 ----------------------------------- */
 .currentTopicPanel {
   span {
+    display: inline-block;
+    width: 10vw;
     font-weight: bold;
+    text-align: left;
   }
-}
-
-button {
-  background-color: index.$blue;
-  color: index.$white;
-  font-size: 14px;
-  font-weight: bolder;
-  padding: 2px 5px;
-  margin-right: 5px;
-  border-radius: 5px;
+  li {
+    width: 100%;
+    padding: 5px 3px;
+    border-bottom: 1px solid rgb(17, 17, 17, 16%);
+  }
 }
 
 /* フェーズ切り替え ----------------------------------- */
@@ -61,8 +70,26 @@ button {
 
 /* お題設定 ----------------------------------- */
 .setTopic {
+  div {
+    padding: 3px;
+  }
+
   button {
     margin-top: 10px;
+  }
+
+  input {
+    width: 80%;
+    border: 1px solid rgb(17, 17, 17, 16%);
+    border-radius: 4px;
+    margin-left: 5px;
+    padding: 2px;
+  }
+
+  label {
+    display: inline-block;
+    width: 5vw;
+    text-align: right;
   }
 }
 
@@ -75,6 +102,7 @@ button {
   .topicAndAnswer {
     padding-top: 15px;
     border-bottom: 1px solid rgb(17, 17, 17, 16%);
+    border-radius: 8px;
   }
 
   .removeButton {
