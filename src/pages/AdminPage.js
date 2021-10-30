@@ -6,7 +6,7 @@ import { Redirect } from "react-router";
 import Logout from "../components/admin/Logout";
 import PhaseOperation from "../components/admin/PhaseOperation";
 import { AuthContext } from "../contexts/AuthContext";
-import AddTopic from "../components/admin/AddTopic";
+import { addTopic } from "../components/admin/AddTopic";
 import RemoveTopic from "../components/admin/RemoveTopic";
 import { createVotesNode } from "../components/admin/createNewChildNode";
 import { updatedCurrentTopic } from "../components/admin/updatedCurrentTopic";
@@ -108,27 +108,27 @@ const AdminPage = () => {
           <h3>現在のお題</h3>
           <ul>
             <li>
-              <span>ID</span>
+              <span>ID：</span>
               {currentTopic.topicId}
             </li>
             <li>
-              <span>お題</span>
+              <span>お題：</span>
               {currentTopic.topicText}
             </li>
             <li>
-              <span>投票A</span>
+              <span>投票A：</span>
               {currentTopic.topicAnswerA}
             </li>
             <li>
-              <span>投票B</span>
+              <span>投票B：</span>
               {currentTopic.topicAnswerB}
             </li>
             <li>
-              <span>投票結果A</span>
+              <span>投票結果A: </span>
               {numOfVote.a}
             </li>
             <li>
-              <span>投票結果B</span>
+              <span>投票結果B: </span>
               {numOfVote.b}
             </li>
           </ul>
@@ -138,12 +138,7 @@ const AdminPage = () => {
           <h3>お題設定</h3>
           <form
             onSubmit={(event) => {
-              <AddTopic
-                event={event}
-                topic={topic}
-                answerA={answerA}
-                answerB={answerB}
-              />;
+              addTopic(event, topic, answerA, answerB);
               setTopic("");
               setAnswerA("");
               setAnswerB("");
