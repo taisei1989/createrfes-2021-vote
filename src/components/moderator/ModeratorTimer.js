@@ -26,7 +26,7 @@ const ModeratorTimer = ({ phase }) => {
   }, []);
 
   useEffect(() => {
-    if (phase === PHASES.PREPARE) {
+    if (phase === PHASES.VOTE) {
       setCount(COUNT);
     }
     const postData = {
