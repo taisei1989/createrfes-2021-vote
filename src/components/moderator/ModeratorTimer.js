@@ -3,11 +3,12 @@ import { useEffect, useRef, useState } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
 import { CSSTransition } from "react-transition-group";
+import { COUNT } from "../../configs";
 
 import styles from "./ModeratorCommon.module.scss";
 
 const ModeratorTimer = ({ phase }) => {
-  const [count, setCount] = useState(60);
+  const [count, setCount] = useState(COUNT);
   const showNum = phase === PHASES.VOTE;
   const showCount = phase === PHASES.VOTE;
   const elementRef = useRef(null);
@@ -26,7 +27,7 @@ const ModeratorTimer = ({ phase }) => {
 
   useEffect(() => {
     if (phase === PHASES.PREPARE) {
-      setCount(60);
+      setCount(COUNT);
     }
     const postData = {
       count: count,
