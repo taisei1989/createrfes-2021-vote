@@ -16,47 +16,49 @@ const ModeratorTimer = ({ phase }) => {
   const showCount = phase === PHASES.VOTE;
   const elementRef = useRef(null);
 
-  // VOTEフェーズに移った際にカウントのデータを一度だけ取得
   useEffect(() => {
+    // VOTEフェーズの開始時にカウントを初期化
+    if (phase === PHASES.VOTE) {
+      setCount(COUNT);
+    }
+
+    // VOTEフェーズに移った際にカウントのデータを一度だけ取得
     const timerRef = ref(db, "timer/count");
     get(timerRef)
       .then((snapshot) => {
         if (snapshot.exists()) {
           setCount(snapshot.val());
 
-          if (isDebug) {
-            console.log(`カウント: ${snapshot.val()}`);
-          }
+          if (isDebug) console.log(`カウント: ${snapshot.val()}`);
         }
       })
       .catch((error) => {
         if (isDebug) console.error(error);
       });
-  }, []);
+  }, [phase]);
 
   useEffect(() => {
-    if (phase === PHASES.VOTE) {
-      setCount(COUNT);
-    }
+    // データベースのtimer/countを毎秒更新
     const postData = {
       count: count,
     };
     const updates = {};
     updates["/timer/"] = postData;
     update(ref(db), updates);
-  }, [count, phase]);
 
-  useEffect(() => {
+    // カウントが0以上のとき毎秒カウントが１ずつ更新される
     if (phase === PHASES.VOTE && count > 0) {
-      const intervalId = setInterval(() => {
-        setCount(count - 1);
-        console.log("setInterval を実行しました");
+      let updatedCount = count - 1;
+      let intervalId = setInterval(() => {
+        setCount(updatedCount);
+
+        if (isDebug) console.log("setIntervalを実行しました");
       }, 1000);
+
       return () => {
         clearInterval(intervalId);
       };
     }
-    return null;
   }, [count, phase]);
 
   return (
