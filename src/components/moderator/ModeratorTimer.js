@@ -1,10 +1,13 @@
-import { update, onValue, ref } from "@firebase/database";
+import { update, ref, get } from "@firebase/database";
 import { useEffect, useRef, useState } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
 import { CSSTransition } from "react-transition-group";
+import { IS_DEBUG } from "../../configs";
 
 import styles from "./ModeratorCommon.module.scss";
+
+const isDebug = IS_DEBUG && true;
 
 const ModeratorTimer = ({ phase }) => {
   const [count, setCount] = useState(60);
@@ -12,16 +15,22 @@ const ModeratorTimer = ({ phase }) => {
   const showCount = phase === PHASES.VOTE;
   const elementRef = useRef(null);
 
+  // VOTEフェーズに移った際にカウントのデータを一度だけ取得
   useEffect(() => {
     const timerRef = ref(db, "timer/count");
-    const unsubscribeTime = onValue(timerRef, (snapshot) => {
-      const data = snapshot.val();
-      setCount(data);
-      console.log(data);
-    });
-    return () => {
-      unsubscribeTime();
-    };
+    get(timerRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setCount(snapshot.val());
+
+          if (isDebug) {
+            console.log(`カウント: ${snapshot.val()}`);
+          }
+        }
+      })
+      .catch((error) => {
+        if (isDebug) console.error(error);
+      });
   }, []);
 
   useEffect(() => {
