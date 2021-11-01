@@ -6,7 +6,7 @@ import { PHASES } from "../interfaces";
 import * as CONF from "../configs";
 import UserPreparationView from "../components/user/UserPreparationView";
 import styles from "./UserPage.module.scss";
-import Buttons from "../components/user/Buttons";
+import VoteButtons from "../components/user/VoteButtons";
 import UserTimer from "../components/user/UserTimer";
 import TallyVotes from "../components/user/TallyVotes";
 import ResultDisplay from "../components/user/ResultDisplay";
@@ -72,7 +72,7 @@ const UserPage = () => {
       />
       <UserPreparationView phase={phase} />
 
-      <Buttons
+      <VoteButtons
         currentTopic={currentTopic.text}
         currentAnswerA={currentTopic.answerA}
         currentAnswerB={currentTopic.answerB}
