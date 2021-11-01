@@ -1,7 +1,7 @@
 import { ref, push, child, update } from "firebase/database";
 import { db } from "../../services/firebase";
 
-const AddTopic = ({ event, topic, answerA, answerB }) => {
+export const addTopic = (event, topic, answerA, answerB) => {
   event.preventDefault();
   if (topic === "" || answerA === "" || answerB === "") {
     console.log("回答されていない箇所があります");
@@ -20,5 +20,3 @@ const AddTopic = ({ event, topic, answerA, answerB }) => {
 
   return update(ref(db), updates);
 };
-
-export default AddTopic;
