@@ -3,11 +3,16 @@ import React, { useEffect, useState } from "react";
 import { db } from "../../services/firebase";
 import { PHASES } from "../../interfaces";
 import styles from "./VoteButtons.module.scss";
-import { IS_DEBUG } from "../../configs";
+import { IS_DEBUG, VOTEA, VOTEB } from "../../configs";
 
 const isDebug = IS_DEBUG && true;
 
-const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
+const VoteButtons = ({
+  currentTopic,
+  currentAnswerA,
+  currentAnswerB,
+  phase,
+}) => {
   const [choiceAnswer, setChoiceAnswer] = useState(false);
   const [choiceAnswerKey, setchoiceAnswerKey] = useState("");
 
@@ -19,11 +24,12 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
   }, [phase]);
 
   useEffect(() => {
-    if (!choiceAnswerKey) {
-      const postData = {
-        answer: choiceAnswer,
-      };
+    const postData = {
+      answer: choiceAnswer,
+    };
 
+    if (!choiceAnswerKey) {
+      // 投票ボタンが押されていない場合、keyを新たに生成し、データベースに反映
       const newPostKey = push(child(ref(db), "votes")).key;
       setchoiceAnswerKey(newPostKey);
 
@@ -31,19 +37,18 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
       updates["/votes/" + newPostKey] = postData;
 
       update(ref(db), updates);
-    } else if (choiceAnswerKey) {
-      const postData = {
-        answer: choiceAnswer,
-      };
 
+      if (isDebug) console.log(`key: ${newPostKey} が追加されました`);
+    } else if (choiceAnswerKey) {
+      // 投票ボタンが１度でも押されている場合、keyを基に投票結果をデータベースに反映
       const updates = {};
       updates["/votes/" + choiceAnswerKey] = postData;
 
       update(ref(db), updates);
+
+      if (isDebug)
+        console.log(`key: ${choiceAnswerKey} の回答が更新されました`);
     }
-    return () => {
-      console.log("コンポーネントがアンマウントしました");
-    };
   }, [choiceAnswer, choiceAnswerKey]);
 
   const buttonCheck = phase === PHASES.TALLY || phase === PHASES.RESULT;
@@ -64,12 +69,12 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
               id="topicAnswerA"
               className={styles.visuallyHidden}
               value={choiceAnswer}
-              checked={choiceAnswer === "A"}
-              onChange={() => setChoiceAnswer("A")}
+              checked={choiceAnswer === VOTEA}
+              onChange={() => setChoiceAnswer(VOTEA)}
               disabled={buttonCheck ? true : false}
             />
             <label htmlFor="topicAnswerA">
-              {choiceAnswer === "A" ? (
+              {choiceAnswer === VOTEA ? (
                 <img
                   src="images/user/button-a-selected.png"
                   alt="選択されたボタンA"
@@ -86,12 +91,12 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
               name="topicAnswer"
               id="topicAnswerB"
               value={choiceAnswer}
-              checked={choiceAnswer === "B"}
-              onChange={() => setChoiceAnswer("B")}
+              checked={choiceAnswer === VOTEB}
+              onChange={() => setChoiceAnswer(VOTEB)}
               disabled={buttonCheck ? true : false}
             />
             <label htmlFor="topicAnswerB">
-              {choiceAnswer === "B" ? (
+              {choiceAnswer === VOTEB ? (
                 <img
                   src="images/user/button-b-selected.png"
                   alt="選択されたボタンB"
@@ -109,4 +114,4 @@ const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
   return null;
 };
 
-export default Buttons;
+export default VoteButtons;
