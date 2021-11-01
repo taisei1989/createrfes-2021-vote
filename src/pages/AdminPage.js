@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { db } from "../services/firebase";
 import { Redirect } from "react-router";
@@ -10,6 +10,9 @@ import SetCurrentTopic from "../components/admin/SetCurrentTopic";
 import ListOfTopics from "../components/admin/ListOfTopics";
 
 import styles from "./AdminPage.module.scss";
+import { IS_DEBUG } from "../configs";
+
+const isDebug = IS_DEBUG && false;
 
 const AdminPage = () => {
   const user = useContext(AuthContext);
@@ -40,8 +43,6 @@ const AdminPage = () => {
     const unsubscribeCurrent = onValue(currentTopicRef, (snapshot) => {
       const currentTopicUpdated = Object.values(snapshot.val());
 
-      // nullチェック
-      console.log(currentTopicUpdated);
       if (currentTopicUpdated) {
         setCurrentTopic({
           topicId: currentTopicUpdated[2],
@@ -49,6 +50,10 @@ const AdminPage = () => {
           topicAnswerA: currentTopicUpdated[0],
           topicAnswerB: currentTopicUpdated[1],
         });
+      }
+
+      if (isDebug) {
+        console.log(currentTopicUpdated);
       }
     });
 

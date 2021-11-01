@@ -104,18 +104,30 @@ h3 {
 
 /* お題と回答一覧 ----------------------------------- */
 .ListOfTopicAndAnswer {
-  button {
-    margin-top: 10px;
-  }
-
   .topicAndAnswer {
-    padding-top: 15px;
+    padding: 15px 5px;
     border-bottom: 1px solid rgb(17, 17, 17, 16%);
     border-radius: 8px;
   }
 
   .removeButton {
     background-color: index.$pink;
+  }
+
+  .listButtons {
+    margin-top: 5px;
+  }
+
+  span {
+    display: inline-block;
+    text-align: right;
+    font-weight: bold;
+    margin-right: 10px;
+    width: 5vw;
+  }
+
+  li {
+    padding: 3px 0px;
   }
 }
 

@@ -6,6 +6,9 @@ import { onValue, ref } from "@firebase/database";
 import { db } from "../../services/firebase";
 
 import styles from "../../pages/AdminPage.module.scss";
+import { IS_DEBUG } from "../../configs";
+
+const isDebug = IS_DEBUG && false;
 
 const ListOfTopics = () => {
   const [topics, setTopics] = useState([]);
@@ -18,6 +21,9 @@ const ListOfTopics = () => {
       const topicsUpdated = Object.values(snapshot.val());
       if (topicsUpdated) {
         setTopics(topicsUpdated);
+      }
+      if (isDebug) {
+        console.log(topicsUpdated);
       }
     });
 
@@ -32,26 +38,40 @@ const ListOfTopics = () => {
       {topics.map((topic) => (
         <div key={topic.topicId} className={styles.topicAndAnswer}>
           <ul>
-            <li>ID：{topic.topicId}</li>
-            <li>お題：{topic.topicText}</li>
-            <li>投票A：{topic.topicAnswerA}</li>
-            <li>投票B：{topic.topicAnswerB}</li>
+            <li>
+              <span>ID</span>
+              {topic.topicId}
+            </li>
+            <li>
+              <span>お題</span>
+              {topic.topicText}
+            </li>
+            <li>
+              <span>投票A</span>
+              {topic.topicAnswerA}
+            </li>
+            <li>
+              <span>投票B</span>
+              {topic.topicAnswerB}
+            </li>
           </ul>
-          <RemoveTopic topic={topic} />
-          <button
-            className={styles.addTopicButton}
-            onClick={() => {
-              updatedCurrentTopic(
-                topic.topicId,
-                topic.topicText,
-                topic.topicAnswerA,
-                topic.topicAnswerB
-              );
-              createVotesNode();
-            }}
-          >
-            現在のお題に設定
-          </button>
+          <div className={styles.listButtons}>
+            <RemoveTopic topic={topic} />
+            <button
+              className={styles.addTopicButton}
+              onClick={() => {
+                updatedCurrentTopic(
+                  topic.topicId,
+                  topic.topicText,
+                  topic.topicAnswerA,
+                  topic.topicAnswerB
+                );
+                createVotesNode();
+              }}
+            >
+              現在のお題に設定
+            </button>
+          </div>
         </div>
       ))}
     </div>
