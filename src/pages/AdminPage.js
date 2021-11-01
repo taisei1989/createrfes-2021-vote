@@ -4,12 +4,10 @@ import { db } from "../services/firebase";
 import { Redirect } from "react-router";
 import { AuthContext } from "../contexts/AuthContext";
 import { addTopic } from "../components/admin/AddTopic";
-import { createVotesNode } from "../components/admin/createNewChildNode";
-import { updatedCurrentTopic } from "../components/admin/updatedCurrentTopic";
 import Logout from "../components/admin/Logout";
 import PhaseOperation from "../components/admin/PhaseOperation";
 import SetCurrentTopic from "../components/admin/SetCurrentTopic";
-import RemoveTopic from "../components/admin/RemoveTopic";
+import ListOfTopics from "../components/admin/ListOfTopics";
 
 import styles from "./AdminPage.module.scss";
 
@@ -18,7 +16,6 @@ const AdminPage = () => {
   const [topic, setTopic] = useState("");
   const [answerA, setAnswerA] = useState("");
   const [answerB, setAnswerB] = useState("");
-  const [topics, setTopics] = useState([]);
   const [currentTopic, setCurrentTopic] = useState({
     topicId: "",
     topicText: "",
@@ -37,20 +34,12 @@ const AdminPage = () => {
   };
 
   useEffect(() => {
-    const topicRef = ref(db, "topics/");
     const currentTopicRef = ref(db, "current/");
-
-    // お題データの取得と保存
-    const unsubscribeTopic = onValue(topicRef, (snapshot) => {
-      const topicsUpdated = Object.values(snapshot.val());
-      if (topicsUpdated) {
-        setTopics(topicsUpdated);
-      }
-    });
 
     // 現在のお題データの取得と保存
     const unsubscribeCurrent = onValue(currentTopicRef, (snapshot) => {
       const currentTopicUpdated = Object.values(snapshot.val());
+
       // nullチェック
       console.log(currentTopicUpdated);
       if (currentTopicUpdated) {
@@ -65,7 +54,6 @@ const AdminPage = () => {
 
     // コンポーネントがアクティブでなくなったらクリーンナップとして接続を解除する
     return () => {
-      unsubscribeTopic();
       unsubscribeCurrent();
     };
   }, []);
@@ -124,36 +112,7 @@ const AdminPage = () => {
             追加する
           </button>
         </div>
-        <div className={styles.ListOfTopicAndAnswer}>
-          <h3>お題と回答一覧</h3>
-          {topics.map((topic) => (
-            <div key={topic.topicId} className={styles.topicAndAnswer}>
-              <ul>
-                <li>ID：{topic.topicId}</li>
-                <li>お題：{topic.topicText}</li>
-                <li>投票A：{topic.topicAnswerA}</li>
-                <li>投票B：{topic.topicAnswerB}</li>
-              </ul>
-              <RemoveTopic topic={topic} />
-              <button
-                className={styles.addTopicButton}
-                onClick={() => {
-                  updatedCurrentTopic(
-                    topic.topicId,
-                    topic.topicText,
-                    topic.topicAnswerA,
-                    topic.topicAnswerB
-                  );
-                  createVotesNode();
-                }}
-              >
-                現在のお題に設定
-              </button>
-              <p></p>
-              <br />
-            </div>
-          ))}
-        </div>
+        <ListOfTopics />
         <Logout />
       </div>
     );
