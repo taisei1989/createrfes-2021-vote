@@ -171,7 +171,9 @@ const AdminPage = () => {
                 onChange={handleChangeAnswerB}
               />
             </div>
-            <button type="submit">追加する</button>
+            <button type="submit" className={styles.addTopicButton}>
+              追加する
+            </button>
           </form>
         </div>
         <div className={styles.ListOfTopicAndAnswer}>
@@ -186,6 +188,7 @@ const AdminPage = () => {
               </ul>
               <RemoveTopic topic={topic} />
               <button
+                className={styles.addTopicButton}
                 onClick={() => {
                   updatedCurrentTopic(
                     topic.topicId,

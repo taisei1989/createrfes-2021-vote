@@ -1,5 +1,5 @@
 // デバッグモードかどうか？
 export const IS_DEBUG = true;
 
-// カウントダウンの数値
+// カウントダウンの初期数値
 export const COUNT = 90;
