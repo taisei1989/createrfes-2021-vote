@@ -1,14 +1,14 @@
-import { onValue, ref, get } from "@firebase/database";
+import { ref, get } from "@firebase/database";
 import { useEffect, useState } from "react";
-import { IS_DEBUG } from "../../configs";
+import { COUNT, IS_DEBUG } from "../../configs";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
 import styles from "./UserCommon.module.scss";
 
-const isDebug = IS_DEBUG && true;
+const isDebug = IS_DEBUG && false;
 
 const UserTimer = ({ phase }) => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(COUNT);
 
   // VOTEフェーズに移った際にカウントのデータを一度だけ取得
   useEffect(() => {
@@ -24,15 +24,9 @@ const UserTimer = ({ phase }) => {
       .catch((error) => {
         if (isDebug) console.error(error);
       });
-    /* const unsubscribeTime = onValue(timerRef, (snapshot) => {
-      setCount(snapshot.val());
-      console.log("カウントを更新しました");
-    });
-    return () => {
-      unsubscribeTime();
-    }; */
-  }, []);
+  }, [phase]);
 
+  // カウントが0以上のとき毎秒カウントが１ずつ更新される
   useEffect(() => {
     if (phase === PHASES.VOTE && count > 0) {
       let updatedCount = count - 1;
@@ -40,15 +34,15 @@ const UserTimer = ({ phase }) => {
         setCount(updatedCount);
       }, 1000);
 
-      if (isDebug) console.log("カウントが更新されました");
-
+      if (isDebug) {
+        console.log("setIntervalを実行しました");
+        console.log(`現在のカウント: ${count}`);
+      }
       return () => {
         clearInterval(intervalID);
       };
     }
   }, [count, phase]);
-
-  console.log(count);
 
   if (phase === PHASES.VOTE) {
     return (

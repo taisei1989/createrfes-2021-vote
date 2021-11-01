@@ -8,7 +8,7 @@ import { IS_DEBUG } from "../../configs";
 
 import styles from "./ModeratorCommon.module.scss";
 
-const isDebug = IS_DEBUG && true;
+const isDebug = IS_DEBUG && false;
 
 const ModeratorTimer = ({ phase }) => {
   const [count, setCount] = useState(COUNT);
@@ -17,11 +17,19 @@ const ModeratorTimer = ({ phase }) => {
   const elementRef = useRef(null);
 
   useEffect(() => {
-    // VOTEフェーズの開始時にカウントを初期化
-    if (phase === PHASES.VOTE) {
+    // RESULTフェーズの開始時にカウントを初期化
+    if (phase === PHASES.RESULT) {
       setCount(COUNT);
+      const postData = {
+        count: COUNT,
+      };
+      const updates = {};
+      updates["/timer/"] = postData;
+      update(ref(db), updates);
     }
+  }, [phase]);
 
+  useEffect(() => {
     // VOTEフェーズに移った際にカウントのデータを一度だけ取得
     const timerRef = ref(db, "timer/count");
     get(timerRef)
@@ -35,7 +43,7 @@ const ModeratorTimer = ({ phase }) => {
       .catch((error) => {
         if (isDebug) console.error(error);
       });
-  }, [phase]);
+  }, []);
 
   useEffect(() => {
     // データベースのtimer/countを毎秒更新
