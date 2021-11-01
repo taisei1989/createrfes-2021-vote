@@ -1,11 +1,14 @@
-import { update, onValue, ref } from "@firebase/database";
+import { update, ref, get } from "@firebase/database";
 import { useEffect, useRef, useState } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
 import { CSSTransition } from "react-transition-group";
 import { COUNT } from "../../configs";
+import { IS_DEBUG } from "../../configs";
 
 import styles from "./ModeratorCommon.module.scss";
+
+const isDebug = IS_DEBUG && false;
 
 const ModeratorTimer = ({ phase }) => {
   const [count, setCount] = useState(COUNT);
@@ -14,40 +17,56 @@ const ModeratorTimer = ({ phase }) => {
   const elementRef = useRef(null);
 
   useEffect(() => {
+    // RESULTフェーズの開始時にカウントを初期化
+    if (phase === PHASES.RESULT) {
+      setCount(COUNT);
+      const postData = {
+        count: COUNT,
+      };
+      const updates = {};
+      updates["/timer/"] = postData;
+      update(ref(db), updates);
+    }
+  }, [phase]);
+
+  useEffect(() => {
+    // VOTEフェーズに移った際にカウントのデータを一度だけ取得
     const timerRef = ref(db, "timer/count");
-    const unsubscribeTime = onValue(timerRef, (snapshot) => {
-      const data = snapshot.val();
-      setCount(data);
-      console.log(data);
-    });
-    return () => {
-      unsubscribeTime();
-    };
+    get(timerRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          setCount(snapshot.val());
+
+          if (isDebug) console.log(`カウント: ${snapshot.val()}`);
+        }
+      })
+      .catch((error) => {
+        if (isDebug) console.error(error);
+      });
   }, []);
 
   useEffect(() => {
-    if (phase === PHASES.VOTE) {
-      setCount(COUNT);
-    }
+    // データベースのtimer/countを毎秒更新
     const postData = {
       count: count,
     };
     const updates = {};
     updates["/timer/"] = postData;
     update(ref(db), updates);
-  }, [count, phase]);
 
-  useEffect(() => {
+    // カウントが0以上のとき毎秒カウントが１ずつ更新される
     if (phase === PHASES.VOTE && count > 0) {
-      const intervalId = setInterval(() => {
-        setCount(count - 1);
-        console.log("setInterval を実行しました");
+      let updatedCount = count - 1;
+      let intervalId = setInterval(() => {
+        setCount(updatedCount);
+
+        if (isDebug) console.log("setIntervalを実行しました");
       }, 1000);
+
       return () => {
         clearInterval(intervalId);
       };
     }
-    return null;
   }, [count, phase]);
 
   return (
