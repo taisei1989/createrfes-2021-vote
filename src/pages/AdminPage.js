@@ -2,14 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { db } from "../services/firebase";
 import { Redirect } from "react-router";
-
-import Logout from "../components/admin/Logout";
-import PhaseOperation from "../components/admin/PhaseOperation";
 import { AuthContext } from "../contexts/AuthContext";
 import { addTopic } from "../components/admin/AddTopic";
-import RemoveTopic from "../components/admin/RemoveTopic";
 import { createVotesNode } from "../components/admin/createNewChildNode";
 import { updatedCurrentTopic } from "../components/admin/updatedCurrentTopic";
+import Logout from "../components/admin/Logout";
+import PhaseOperation from "../components/admin/PhaseOperation";
+import SetCurrentTopic from "../components/admin/SetCurrentTopic";
+import RemoveTopic from "../components/admin/RemoveTopic";
+
 import styles from "./AdminPage.module.scss";
 
 const AdminPage = () => {
@@ -17,7 +18,6 @@ const AdminPage = () => {
   const [topic, setTopic] = useState("");
   const [answerA, setAnswerA] = useState("");
   const [answerB, setAnswerB] = useState("");
-  const [numOfVote, setnumOfVote] = useState({ a: 0, b: 0 });
   const [topics, setTopics] = useState([]);
   const [currentTopic, setCurrentTopic] = useState({
     topicId: "",
@@ -39,33 +39,6 @@ const AdminPage = () => {
   useEffect(() => {
     const topicRef = ref(db, "topics/");
     const currentTopicRef = ref(db, "current/");
-    const voteRef = ref(db, "votes/");
-
-    const unsubscribeVote = onValue(voteRef, (snapshot) => {
-      const votesUpdated = Object.values(snapshot.val());
-
-      // 集計結果
-      let numOfVoteA = 0;
-      let numOfVoteB = 0;
-
-      for (let i = 0; i < votesUpdated.length; i++) {
-        const answer = votesUpdated[i].answer;
-
-        // undefinedチェック
-        if (answer) {
-          if (answer === "A") {
-            numOfVoteA++;
-          } else if (answer === "B") {
-            numOfVoteB++;
-          } else {
-            console.log("不明な投票を検知しました", answer);
-          }
-        }
-      }
-
-      // 反映する
-      setnumOfVote({ a: numOfVoteA, b: numOfVoteB });
-    });
 
     // お題データの取得と保存
     const unsubscribeTopic = onValue(topicRef, (snapshot) => {
@@ -92,7 +65,6 @@ const AdminPage = () => {
 
     // コンポーネントがアクティブでなくなったらクリーンナップとして接続を解除する
     return () => {
-      unsubscribeVote();
       unsubscribeTopic();
       unsubscribeCurrent();
     };
@@ -104,77 +76,53 @@ const AdminPage = () => {
     return (
       <div className={styles.adminPage}>
         <h2>管理者画面</h2>
-        <div className={styles.currentTopicPanel}>
-          <h3>現在のお題</h3>
-          <ul>
-            <li>
-              <span>ID</span>
-              {currentTopic.topicId}
-            </li>
-            <li>
-              <span>お題</span>
-              {currentTopic.topicText}
-            </li>
-            <li>
-              <span>投票A</span>
-              {currentTopic.topicAnswerA}
-            </li>
-            <li>
-              <span>投票B</span>
-              {currentTopic.topicAnswerB}
-            </li>
-            <li>
-              <span>投票結果A</span>
-              {numOfVote.a}
-            </li>
-            <li>
-              <span>投票結果B</span>
-              {numOfVote.b}
-            </li>
-          </ul>
-        </div>
+        <SetCurrentTopic
+          id={currentTopic.topicId}
+          text={currentTopic.topicText}
+          answerA={currentTopic.topicAnswerA}
+          answerB={currentTopic.topicAnswerB}
+        />
         <PhaseOperation />
         <div className={styles.setTopic}>
           <h3>お題設定</h3>
-          <form
-            onSubmit={(event) => {
-              addTopic(event, topic, answerA, answerB);
+          <div>
+            <label>お題</label>
+            <input
+              type="text"
+              value={topic}
+              placeholder="お題を記入"
+              onChange={handleChangeTopic}
+            />
+          </div>
+          <div>
+            <label>投票A</label>
+            <input
+              type="text"
+              value={answerA}
+              placeholder="投票Aを記入"
+              onChange={handleChangeAnswerA}
+            />
+          </div>
+          <div>
+            <label>投票B</label>
+            <input
+              type="text"
+              value={answerB}
+              placeholder="投票Bを記入"
+              onChange={handleChangeAnswerB}
+            />
+          </div>
+          <button
+            onClick={() => {
+              addTopic(topic, answerA, answerB);
               setTopic("");
               setAnswerA("");
               setAnswerB("");
             }}
+            className={styles.addTopicButton}
           >
-            <div>
-              <label>お題</label>
-              <input
-                type="text"
-                value={topic}
-                placeholder="お題を記入"
-                onChange={handleChangeTopic}
-              />
-            </div>
-            <div>
-              <label>投票A</label>
-              <input
-                type="text"
-                value={answerA}
-                placeholder="投票Aを記入"
-                onChange={handleChangeAnswerA}
-              />
-            </div>
-            <div>
-              <label>投票B</label>
-              <input
-                type="text"
-                value={answerB}
-                placeholder="投票Bを記入"
-                onChange={handleChangeAnswerB}
-              />
-            </div>
-            <button type="submit" className={styles.addTopicButton}>
-              追加する
-            </button>
-          </form>
+            追加する
+          </button>
         </div>
         <div className={styles.ListOfTopicAndAnswer}>
           <h3>お題と回答一覧</h3>
