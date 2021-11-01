@@ -22,11 +22,11 @@ h3 {
 
 .addTopicButton,
 .removeButton,
-.logoutButton {
+.logoutButton,
+.changePhaseButton {
   background-color: index.$blue;
   color: index.$white;
   font-size: 14px;
-  font-weight: bolder;
   padding: 2px 5px;
   margin-right: 5px;
   border-radius: 5px;
@@ -47,9 +47,10 @@ h3 {
 .currentTopicPanel {
   span {
     display: inline-block;
-    width: 10vw;
+    width: 8vw;
     font-weight: bold;
-    text-align: left;
+    text-align: right;
+    margin-right: 15px;
   }
   li {
     width: 100%;
@@ -62,6 +63,12 @@ h3 {
 .handlePhase {
   div {
     padding: 5px 0px;
+  }
+  label {
+    display: inline-block;
+    width: 25vw;
+    text-align: right;
+    margin-right: 10px;
   }
   .currentPhase {
     margin-bottom: 5px;
