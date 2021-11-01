@@ -2,7 +2,10 @@ import { child, push, ref, update } from "@firebase/database";
 import React, { useEffect, useState } from "react";
 import { db } from "../../services/firebase";
 import { PHASES } from "../../interfaces";
-import styles from "./Buttons.module.scss";
+import styles from "./VoteButtons.module.scss";
+import { IS_DEBUG } from "../../configs";
+
+const isDebug = IS_DEBUG && true;
 
 const Buttons = ({ currentTopic, currentAnswerA, currentAnswerB, phase }) => {
   const [choiceAnswer, setChoiceAnswer] = useState(false);
