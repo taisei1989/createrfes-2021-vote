@@ -19,7 +19,7 @@ const ShareToTwitter = ({
           hashtags={["クリエイター祭り"]}
         >
           <img src="/images/user/twitter-logo.svg" alt="twitter-logo" />
-          <p className={styles.buttonText}>結果をつぶやく！</p>
+          <span className={styles.buttonText}>結果をつぶやく！</span>
         </TwitterShareButton>
       </div>
     </div>

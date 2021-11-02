@@ -22,7 +22,7 @@ const ModeratorPrepareView = ({ phase }) => {
       }}
     >
       <div className={styles.preparePanel} ref={elementRef}>
-        <img src={`ready.jpg`} alt="準備中のパネル画像" />
+        <img src={"images/moderator/prepare.jpg"} alt="準備中のパネル画像" />
       </div>
     </CSSTransition>
   );
