@@ -1,4 +1,4 @@
-import { update, ref, get } from "@firebase/database";
+import { update, ref, onValue } from "@firebase/database";
 import { useEffect, useRef, useState } from "react";
 import { PHASES } from "../../interfaces";
 import { db } from "../../services/firebase";
@@ -8,7 +8,7 @@ import { IS_DEBUG } from "../../configs";
 
 import styles from "./ModeratorCommon.module.scss";
 
-const isDebug = IS_DEBUG && false;
+const isDebug = IS_DEBUG && true;
 
 const ModeratorTimer = ({ phase }) => {
   const [count, setCount] = useState(COUNT);
@@ -17,35 +17,23 @@ const ModeratorTimer = ({ phase }) => {
   const elementRef = useRef(null);
 
   useEffect(() => {
-    // RESULTフェーズの開始時にカウントを初期化
-    if (phase === PHASES.RESULT) {
-      setCount(COUNT);
-      const postData = {
-        count: COUNT,
-      };
-      const updates = {};
-      updates["/timer/"] = postData;
-      update(ref(db), updates);
-    }
-  }, [phase]);
-
-  useEffect(() => {
-    // VOTEフェーズに移った際にカウントのデータを一度だけ取得
     const timerRef = ref(db, "timer/count");
-    get(timerRef)
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setCount(snapshot.val());
 
-          if (isDebug) console.log(`カウント: ${snapshot.val()}`);
-        }
-      })
-      .catch((error) => {
-        if (isDebug) console.error(error);
-      });
+    const unsubscribeTime = onValue(timerRef, (snapshot) => {
+      let data = snapshot.val();
+      setCount(data);
+      if (isDebug) console.log(`カウント${data}を取得しました`);
+    });
+    return () => {
+      unsubscribeTime();
+    };
   }, []);
 
   useEffect(() => {
+    if (phase === PHASES.VOTE) {
+      setCount(COUNT);
+    }
+
     // データベースのtimer/countを毎秒更新
     const postData = {
       count: count,
@@ -56,8 +44,8 @@ const ModeratorTimer = ({ phase }) => {
 
     // カウントが0以上のとき毎秒カウントが１ずつ更新される
     if (phase === PHASES.VOTE && count > 0) {
-      let updatedCount = count - 1;
-      let intervalId = setInterval(() => {
+      const intervalId = setInterval(() => {
+        let updatedCount = count - 1;
         setCount(updatedCount);
 
         if (isDebug) console.log("setIntervalを実行しました");
