@@ -34,7 +34,7 @@ const ListOfTopics = () => {
 
   return (
     <div className={styles.ListOfTopicAndAnswer}>
-      <h3>お題と回答一覧</h3>
+      <h3 className={styles.title}>お題と回答一覧</h3>
       {topics.map((topic) => (
         <div key={topic.topicId} className={styles.topicAndAnswer}>
           <ul>

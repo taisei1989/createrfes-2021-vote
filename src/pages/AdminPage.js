@@ -68,7 +68,7 @@ const AdminPage = () => {
   } else {
     return (
       <div className={styles.adminPage}>
-        <h2>管理者画面</h2>
+        <h2 className={styles.adminPageTitle}>管理者画面</h2>
         <SetCurrentTopic
           id={currentTopic.topicId}
           text={currentTopic.topicText}
@@ -77,7 +77,7 @@ const AdminPage = () => {
         />
         <PhaseOperation />
         <div className={styles.setTopic}>
-          <h3>お題設定</h3>
+          <h3 className={styles.title}>お題設定</h3>
           <div>
             <label>お題</label>
             <input

@@ -18,21 +18,10 @@ const PhaseOperation = () => {
 
   return (
     <div className={styles.handlePhase}>
-      <h3>フェーズ切り替え</h3>
-      <div className={styles.currentPhase}>
-        <p>現在のフェーズ：{currentPhase}</p>
-      </div>
+      <h3 className={styles.title}>フェーズ切り替え</h3>
+      <p className={styles.currentPhase}>現在のフェーズ：{currentPhase}</p>
+      <p className={styles.phaseName}>準備フェーズ(preparing) </p>
       <div>
-        <label>開始前のガイドフェーズ(guiding) </label>
-        <button
-          className={styles.changePhaseButton}
-          onClick={() => setCurrentPhase(PHASES.GUIDE)}
-        >
-          変更
-        </button>
-      </div>
-      <div>
-        <label>準備フェーズ(preparing) </label>
         <button
           className={styles.changePhaseButton}
           onClick={() => setCurrentPhase(PHASES.PREPARE)}
@@ -40,8 +29,8 @@ const PhaseOperation = () => {
           変更
         </button>
       </div>
+      <p className={styles.phaseName}>投票フェーズ(voting) </p>
       <div>
-        <label>投票フェーズ(voting) </label>
         <button
           className={styles.changePhaseButton}
           onClick={() => setCurrentPhase(PHASES.VOTE)}
@@ -49,8 +38,8 @@ const PhaseOperation = () => {
           変更
         </button>
       </div>
+      <p className={styles.phaseName}>集計フェーズ(tallying) </p>
       <div>
-        <label>集計フェーズ(tallying) </label>
         <button
           className={styles.changePhaseButton}
           onClick={() => setCurrentPhase(PHASES.TALLY)}
@@ -58,13 +47,22 @@ const PhaseOperation = () => {
           変更
         </button>
       </div>
+      <p className={styles.phaseName}>結果発表フェーズ(resulting) </p>
       <div>
-        <label>結果発表フェーズ(resulting) </label>
         <button
           className={styles.changePhaseButton}
           onClick={() => setCurrentPhase(PHASES.RESULT)}
         >
           変更
+        </button>
+      </div>
+      <p className={styles.phaseName}>開始前のガイドフェーズ(guiding) </p>
+      <div>
+        <button
+          className={styles.changePhaseButton}
+          onClick={() => setCurrentPhase(PHASES.GUIDE)}
+        >
+          ガイド中
         </button>
       </div>
     </div>
