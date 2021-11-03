@@ -43,33 +43,19 @@ const SetCurrentTopic = ({ id, text, answerA, answerB }) => {
 
   return (
     <div className={styles.currentTopicPanel}>
-      <h3>現在のお題</h3>
-      <ul>
-        <li>
-          <span>ID</span>
-          {id}
-        </li>
-        <li>
-          <span>お題</span>
-          {text}
-        </li>
-        <li>
-          <span>投票A</span>
-          {answerA}
-        </li>
-        <li>
-          <span>投票B</span>
-          {answerB}
-        </li>
-        <li>
-          <span>投票結果A</span>
-          {numOfVote.a}
-        </li>
-        <li>
-          <span>投票結果B</span>
-          {numOfVote.b}
-        </li>
-      </ul>
+      <h3 className={styles.title}>現在のお題</h3>
+      <p className={styles.currentTopicHeader}>ID</p>
+      <p>{id}</p>
+      <p className={styles.currentTopicHeader}>お題</p>
+      <p>{text}</p>
+      <p className={styles.currentTopicHeader}>投票A</p>
+      <p>{answerA}</p>
+      <p className={styles.currentTopicHeader}>投票B</p>
+      <p>{answerB}</p>
+      <p className={styles.currentTopicHeader}>投票結果A</p>
+      <p>{numOfVote.a}</p>
+      <p className={styles.currentTopicHeader}>投票結果B</p>
+      <p>{numOfVote.b}</p>
     </div>
   );
 };

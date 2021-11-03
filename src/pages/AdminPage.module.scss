@@ -45,17 +45,15 @@ h3 {
 
 /* 現在のお題 ----------------------------------- */
 .currentTopicPanel {
-  span {
-    display: inline-block;
-    width: 8vw;
-    font-weight: bold;
-    text-align: right;
-    margin-right: 15px;
+  display: grid;
+  grid-template-columns: 20% 80%;
+
+  .title {
+    grid-column: 1 / 3;
   }
-  li {
-    width: 100%;
-    padding: 5px 3px;
-    border-bottom: 1px solid rgb(17, 17, 17, 16%);
+  .currentTopicHeader {
+    font-weight: bold;
+    margin-right: 15px;
   }
 }
 
