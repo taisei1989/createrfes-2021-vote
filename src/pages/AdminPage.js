@@ -78,33 +78,30 @@ const AdminPage = () => {
         <PhaseOperation />
         <div className={styles.setTopic}>
           <h3 className={styles.title}>お題設定</h3>
-          <div>
-            <label>お題</label>
-            <input
-              type="text"
-              value={topic}
-              placeholder="お題を記入"
-              onChange={handleChangeTopic}
-            />
-          </div>
-          <div>
-            <label>投票A</label>
-            <input
-              type="text"
-              value={answerA}
-              placeholder="投票Aを記入"
-              onChange={handleChangeAnswerA}
-            />
-          </div>
-          <div>
-            <label>投票B</label>
-            <input
-              type="text"
-              value={answerB}
-              placeholder="投票Bを記入"
-              onChange={handleChangeAnswerB}
-            />
-          </div>
+          <p className={styles.writeName}>お題</p>
+          <input
+            type="text"
+            value={topic}
+            placeholder="お題を記入"
+            onChange={handleChangeTopic}
+            className={styles.writeTopic}
+          />
+          <p className={styles.writeName}>投票A</p>
+          <input
+            type="text"
+            value={answerA}
+            placeholder="投票Aを記入"
+            onChange={handleChangeAnswerA}
+            className={styles.writeTopic}
+          />
+          <p className={styles.writeName}>投票B</p>
+          <input
+            type="text"
+            value={answerB}
+            placeholder="投票Bを記入"
+            onChange={handleChangeAnswerB}
+            className={styles.writeTopic}
+          />
           <button
             onClick={() => {
               addTopic(topic, answerA, answerB);
