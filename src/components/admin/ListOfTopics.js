@@ -34,27 +34,17 @@ const ListOfTopics = () => {
 
   return (
     <div className={styles.ListOfTopicAndAnswer}>
-      <h3>お題と回答一覧</h3>
+      <h3 className={styles.title}>お題と回答一覧</h3>
       {topics.map((topic) => (
         <div key={topic.topicId} className={styles.topicAndAnswer}>
-          <ul>
-            <li>
-              <span>ID</span>
-              {topic.topicId}
-            </li>
-            <li>
-              <span>お題</span>
-              {topic.topicText}
-            </li>
-            <li>
-              <span>投票A</span>
-              {topic.topicAnswerA}
-            </li>
-            <li>
-              <span>投票B</span>
-              {topic.topicAnswerB}
-            </li>
-          </ul>
+          <p className={styles.topicItemName}>ID</p>
+          <p>{topic.topicId}</p>
+          <p className={styles.topicItemName}>お題</p>
+          <p>{topic.topicText}</p>
+          <p className={styles.topicItemName}>投票A</p>
+          <p>{topic.topicAnswerA}</p>
+          <p className={styles.topicItemName}>投票B</p>
+          <p>{topic.topicAnswerB}</p>
           <div className={styles.listButtons}>
             <RemoveTopic topic={topic} />
             <button
