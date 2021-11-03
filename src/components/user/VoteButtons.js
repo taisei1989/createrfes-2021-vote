@@ -73,7 +73,7 @@ const VoteButtons = ({
               className={styles.visuallyHidden}
               value={choiceAnswer}
               checked={choiceAnswer === VOTEA}
-              onChange={() => setChoiceAnswer(VOTEA)}
+              onClick={() => setChoiceAnswer(VOTEA)}
               disabled={buttonCheck ? true : false}
             />
             <label htmlFor="topicAnswerA">
@@ -95,7 +95,7 @@ const VoteButtons = ({
               id="topicAnswerB"
               value={choiceAnswer}
               checked={choiceAnswer === VOTEB}
-              onChange={() => setChoiceAnswer(VOTEB)}
+              onClick={() => setChoiceAnswer(VOTEB)}
               disabled={buttonCheck ? true : false}
             />
             <label htmlFor="topicAnswerB">
