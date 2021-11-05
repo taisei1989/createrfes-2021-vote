@@ -13,7 +13,7 @@ const VoteButtons = ({
   currentAnswerB,
   phase,
 }) => {
-  const [choiceAnswer, setChoiceAnswer] = useState(0);
+  const [choiceAnswer, setChoiceAnswer] = useState(false);
   const [choiceAnswerKey, setchoiceAnswerKey] = useState("");
 
   // preparing phase に移った際にボタンの画像が初期化される処理
@@ -23,35 +23,32 @@ const VoteButtons = ({
     }
   }, [phase]);
 
-  // 投票ボタンが押されていない場合、keyを新たに生成し、データベースに反映
   useEffect(() => {
-    const postData = {
-      answer: false,
-    };
-
-    const newPostKey = push(child(ref(db), "votes")).key;
-    setchoiceAnswerKey(newPostKey);
-
-    const updates = {};
-    updates["/votes/" + newPostKey] = postData;
-
-    update(ref(db), updates);
-
-    if (isDebug) console.log(`key: ${newPostKey} が追加されました`);
-  }, []);
-
-  useEffect(() => {
-    const postData = {
+    let postData = {
       answer: choiceAnswer,
     };
 
-    // 投票ボタンが１度でも押されている場合、keyを基に投票結果をデータベースに反映
-    const updates = {};
-    updates["/votes/" + choiceAnswerKey] = postData;
+    if (choiceAnswerKey) {
+      // 投票ボタンが１度でも押されている場合、keyを基に投票結果をデータベースに反映
+      const updates = {};
+      updates["/votes/" + choiceAnswerKey] = postData;
 
-    update(ref(db), updates);
+      update(ref(db), updates);
 
-    if (isDebug) console.log(`key: ${choiceAnswerKey} の回答が更新されました`);
+      if (isDebug)
+        console.log(`key: ${choiceAnswerKey} の回答が更新されました`);
+    } else if (!choiceAnswerKey) {
+      // 投票ボタンが押されていない場合、keyを新たに生成し、データベースに反映
+      const newPostKey = push(child(ref(db), "votes")).key;
+      setchoiceAnswerKey(newPostKey);
+
+      const updates = {};
+      updates["/votes/" + newPostKey] = postData;
+
+      update(ref(db), updates);
+
+      if (isDebug) console.log(`key: ${newPostKey} が追加されました`);
+    }
   }, [choiceAnswer, choiceAnswerKey]);
 
   const buttonCheck = phase === PHASES.TALLY || phase === PHASES.RESULT;
