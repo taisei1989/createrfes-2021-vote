@@ -11,28 +11,7 @@ input[type="radio"] {
   display: none;
 }
 
-.buttonPanelA {
-  display: block;
-  position: relative;
-  width: 50%;
-  height: auto;
-  flex-basis: 50%;
-  max-width: 220px;
-
-  p {
-    position: absolute;
-    width: 65%;
-    height: auto;
-    max-width: 140px;
-    text-align: center;
-    top: 80%;
-    left: 50%;
-    transform: translateY(-50%) translateX(-50%);
-    color: index.$white;
-    font-weight: bold;
-  }
-}
-
+.buttonPanelA,
 .buttonPanelB {
   display: block;
   position: relative;
