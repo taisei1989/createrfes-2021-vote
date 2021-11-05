@@ -13,7 +13,7 @@ const VoteButtons = ({
   currentAnswerB,
   phase,
 }) => {
-  const [choiceAnswer, setChoiceAnswer] = useState(false);
+  const [choiceAnswer, setChoiceAnswer] = useState(0);
   const [choiceAnswerKey, setchoiceAnswerKey] = useState("");
 
   // preparing phase に移った際にボタンの画像が初期化される処理
