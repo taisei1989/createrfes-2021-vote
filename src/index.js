@@ -1,13 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "destyle.css";
-import "./index.scss";
-import App from "./App";
+//import "destyle.css";
+//import "./index.scss";
+//import App from "./App";
+import FinApp from "./FinApp";
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <FinApp />
   </React.StrictMode>,
   document.getElementById("root")
 );
