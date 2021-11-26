@@ -1,84 +1,59 @@
-# クリエイター祭り 多数決システム 2021
+# クリエイター祭り2021-多数決システム
+「Adobe協賛イベントクリエイター祭り2021」というイベントのコンテンツ、クリエイター多数決にて使用する多数決システムを、pixi.jsを使用したフィードバック機能以外の開発を行いました。
 
-デプロイは firebase tools をグローバルインストールして使ってください。
+## 概要
+このアプリでは、ユーザーがリアルタイムで多数決を行うことができます。イベントの形態に合わせ、ユーザー用ページ、Youtubeライブ配信で流すための司会者用ページ、お題の設定や画面遷移操作をする管理者画面を作成しました。
 
-### `npm deploy`
+■ ユーザー用ページ
+![クリエイター多数決_ユーザー画面](https://user-images.githubusercontent.com/82256596/143524073-74ffbbc4-4ea1-4374-9c42-c3b2847de6f0.gif)
 
-ビルドしたあと、firebase Hosting にデプロイする。
+■ 司会者用ページ
+![クリエイター多数決_司会者ページの様子](https://user-images.githubusercontent.com/82256596/143524288-d2474008-83ea-42aa-991c-4207c8fd4a8f.gif)
 
-## ブランチについて
+■ 管理者画面
+<img width="1440" alt="スクリーンショット 2021-11-09 10 12 14" src="https://user-images.githubusercontent.com/82256596/143524305-eedbadb6-cfe8-494d-a61b-83dd2ad8c1d6.png">
+<img width="1440" alt="スクリーンショット 2021-11-09 10 12 31" src="https://user-images.githubusercontent.com/82256596/143524316-209a4ce5-791c-44b4-bf8a-2e005e23f3c8.png">
 
-`main`ブランチを最新に保つ。
-作業する時は、`main`ブランチから、新しくブランチを切って作業。
-作業終了後、`main`に対して、プルリクエストを投げること。
+■クリエイター祭り LP
+https://thecreative.jp/bakuhatsu2021/
 
-## Available Scripts
+## 使用技術
+- HTML/CSS
+- Javascript
+- React
+- Sass
+- PixiJS
+- Firebase
+  - Realtime Database
+  - Firebase Hosting
+  - Firebase Authentication
 
-In the project directory, you can run:
+## 主な機能
 
-### `npm run format`
+### ユーザー用画面機能
+- フェーズにおいて画面が切り替わる
+- お題と選択肢の表示
+- 投票機能
+- カウントダウン機能
+- 投票結果の%表示
+- Goodボタン、Badボタンを押すと司会者画面にフィードバックを送信する機能
+- Twitterへのシェア機能
 
-全てのファイルをフォーマットする
+### 司会者用画面機能
+- ログイン機能
+- フェーズにおいて画面が切り替わる
+- お題と２つの選択肢の表示
+- ジャッジするキャラクターの表示
+- カウントダウン機能
+- 投票結果の%表示
+- QRコードの表示
+-  準備中画面のときのみ準備中用画像の表示
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 管理者用画面
+- ログイン・ログアウト機能
+- 現在のお題の表示
+- フェーズ切り替え操作
+- お題の追加
+- お題一覧表示
+- お題削除
+- 現在のお題に設定
